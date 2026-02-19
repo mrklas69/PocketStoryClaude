@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PocketStory — World View</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0a0a18; overflow: hidden; font-family: 'Courier New', monospace; }
+    #app { width: 100vw; height: 100vh; }
+    .label {
+      color: #eee;
+      font-size: 11px;
+      padding: 2px 8px;
+      background: rgba(0,0,0,0.6);
+      border-radius: 4px;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    #legend {
+      position: fixed; top: 16px; right: 16px;
+      background: rgba(10,10,24,0.88);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 14px 18px; border-radius: 8px;
+      font-size: 12px; line-height: 2.1; color: #bbb;
+    }
+    #legend h3 { margin-bottom: 4px; font-size: 14px; color: #fff; letter-spacing: 1px; }
+    .dot {
+      display: inline-block; width: 10px; height: 10px;
+      border-radius: 50%; margin-right: 8px; vertical-align: middle;
+    }
+    #hint {
+      position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,0.25); font-size: 11px; pointer-events: none;
+    }
+  </style>
+  <script type="importmap">
+  { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  } }
+  </script>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="legend">
+    <h3>PocketStory</h3>
+    <div><span class="dot" style="background:#4488ff"></span>ENVI &mdash; Kulisy</div>
+    <div><span class="dot" style="background:#44ff88"></span>CHAR &mdash; Herci</div>
+    <div><span class="dot" style="background:#ffcc44"></span>UNIQUE &mdash; Rekvizita</div>
+    <div><span class="dot" style="background:#ff44cc"></span>SUM &mdash; Zásoby</div>
+    <div><span class="dot" style="background:#44ffff"></span>SCRIPT &mdash; Scén&aacute;ř</div>
+  </div>
+  <div id="hint">drag to rotate &nbsp;&middot;&nbsp; scroll to zoom</div>
+
+  <script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+
+const DATA = {"nodes": [{"id": "f2177b88-9f5b-4ecb-a793-a62e27b8b69d", "name": "The World", "type": "ENVI", "color": "#4488ff", "x": 0, "y": 4, "z": 0}, {"id": "2f32c2c2-5479-4b5f-aead-968b19976b84", "name": "Green Valley", "type": "ENVI", "color": "#4488ff", "x": 0.0, "y": 1.5, "z": 4.0}, {"id": "201be356-0701-440e-85d3-78bdf4794679", "name": "Harold", "type": "CHAR", "color": "#44ff88", "x": 0.0, "y": -1.0, "z": 6.4}, {"id": "63aa4c37-c5dc-4edb-a864-823cbc7d5df9", "name": "Harold's Heavy Shield", "type": "UNIQUE", "color": "#ffcc44", "x": 1.061, "y": -3.5, "z": 5.339}, {"id": "e75dc6dd-8471-4ddd-8aac-13b7712ce5dc", "name": "Apples \u00d712", "type": "SUMS", "color": "#ff44cc", "x": 0.0, "y": -3.5, "z": 7.9}, {"id": "287098e6-64fc-4279-a3a1-96ae9dade271", "name": "Fishing", "type": "SCRIPT", "color": "#44ffff", "x": -1.061, "y": -3.5, "z": 5.339}], "edges": [{"from": "f2177b88-9f5b-4ecb-a793-a62e27b8b69d", "to": "2f32c2c2-5479-4b5f-aead-968b19976b84"}, {"from": "2f32c2c2-5479-4b5f-aead-968b19976b84", "to": "201be356-0701-440e-85d3-78bdf4794679"}, {"from": "201be356-0701-440e-85d3-78bdf4794679", "to": "63aa4c37-c5dc-4edb-a864-823cbc7d5df9"}, {"from": "201be356-0701-440e-85d3-78bdf4794679", "to": "e75dc6dd-8471-4ddd-8aac-13b7712ce5dc"}, {"from": "201be356-0701-440e-85d3-78bdf4794679", "to": "287098e6-64fc-4279-a3a1-96ae9dade271"}]};
+
+// Scene
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0a18);
+scene.fog = new THREE.FogExp2(0x0a0a18, 0.035);
+
+// Camera
+const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 200);
+camera.position.set(4, 6, 14);
+
+// WebGL renderer
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(devicePixelRatio);
+renderer.setSize(innerWidth, innerHeight);
+document.getElementById('app').appendChild(renderer.domElement);
+
+// CSS2D renderer (labels)
+const labelRenderer = new CSS2DRenderer();
+labelRenderer.setSize(innerWidth, innerHeight);
+labelRenderer.domElement.style.cssText = 'position:absolute;top:0;pointer-events:none';
+document.getElementById('app').appendChild(labelRenderer.domElement);
+
+// Lights
+scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+const sun = new THREE.DirectionalLight(0xffffff, 1.4);
+sun.position.set(8, 14, 8);
+scene.add(sun);
+
+// Controls
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
+controls.target.set(1, 1, 0);
+
+// Index nodes by id
+const nodeMap = Object.fromEntries(DATA.nodes.map(n => [n.id, n]));
+
+// Edges
+const edgeMat = new THREE.LineBasicMaterial({ color: 0x334466, opacity: 0.75, transparent: true });
+DATA.edges.forEach(({ from, to }) => {
+  const a = nodeMap[from], b = nodeMap[to];
+  if (!a || !b) return;
+  const geo = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(a.x, a.y, a.z),
+    new THREE.Vector3(b.x, b.y, b.z),
+  ]);
+  scene.add(new THREE.Line(geo, edgeMat));
+});
+
+// Nodes
+const sphereGeo = new THREE.SphereGeometry(0.28, 24, 16);
+DATA.nodes.forEach(node => {
+  const color = new THREE.Color(node.color);
+  const mat = new THREE.MeshStandardMaterial({
+    color, emissive: color, emissiveIntensity: 0.18,
+    roughness: 0.35, metalness: 0.4,
+  });
+  const mesh = new THREE.Mesh(sphereGeo, mat);
+  mesh.position.set(node.x, node.y, node.z);
+  scene.add(mesh);
+
+  const div = document.createElement('div');
+  div.className = 'label';
+  div.textContent = node.name;
+  const label = new CSS2DObject(div);
+  label.position.set(0, 0.52, 0);
+  mesh.add(label);
+});
+
+// Resize
+window.addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+  labelRenderer.setSize(innerWidth, innerHeight);
+});
+
+// Animate
+(function loop() {
+  requestAnimationFrame(loop);
+  controls.update();
+  renderer.render(scene, camera);
+  labelRenderer.render(scene, camera);
+})();
+  </script>
+</body>
+</html>

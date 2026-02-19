@@ -1,0 +1,150 @@
+{
+  "name": "The Mathematical Universe",
+  "description": "A world where number sets nest inside each other, constants dwell in their smallest home, and functions roam the real line.",
+  "entities": [
+    {
+      "id": "MATH_UNIVERSE",
+      "name": "Mathematical Universe",
+      "type": "ENVI",
+      "description": "The totality of all mathematical objects. Infinite in every direction."
+    },
+    {
+      "id": "COMPLEX",
+      "name": "Complex Numbers (C)",
+      "type": "ENVI",
+      "description": "Numbers of the form a + bi. Contains all number sets below.",
+      "capacity": 50
+    },
+    {
+      "id": "REALS",
+      "name": "Real Numbers (R)",
+      "type": "ENVI",
+      "description": "The continuous number line. Home of pi, e, and most famous constants.",
+      "capacity": 40
+    },
+    {
+      "id": "RATIONALS",
+      "name": "Rational Numbers (Q)",
+      "type": "ENVI",
+      "description": "All fractions p/q. Dense on the real line, yet full of gaps.",
+      "capacity": 20
+    },
+    {
+      "id": "INTEGERS",
+      "name": "Integers (Z)",
+      "type": "ENVI",
+      "description": "Whole numbers, positive and negative. The backbone of arithmetic.",
+      "capacity": 10
+    },
+    {
+      "id": "NATURALS",
+      "name": "Natural Numbers (N)",
+      "type": "ENVI",
+      "description": "0, 1, 2, 3 ... The counting numbers. Where mathematics begins.",
+      "capacity": 5
+    },
+    {
+      "id": "FUNC_SQRT",
+      "name": "Square Root",
+      "type": "CHAR",
+      "description": "Maps non-negative reals to non-negative reals. Squeamish about negatives. Happy in the complex plane."
+    },
+    {
+      "id": "FUNC_EXP",
+      "name": "Exponential (e^x)",
+      "type": "CHAR",
+      "description": "Always positive, always growing. The most natural of all functions."
+    },
+    {
+      "id": "FUNC_SIN",
+      "name": "Sine",
+      "type": "CHAR",
+      "description": "Periodic, bounded, smooth. The universe's favorite oscillator."
+    },
+    {
+      "id": "CONST_ZERO",
+      "name": "Zero (0)",
+      "type": "UNIQUE",
+      "description": "The additive identity. Represents nothing, yet everything depends on it."
+    },
+    {
+      "id": "CONST_ONE",
+      "name": "One (1)",
+      "type": "UNIQUE",
+      "description": "The multiplicative identity. The beginning of counting."
+    },
+    {
+      "id": "CONST_PI",
+      "name": "Pi (3.14159...)",
+      "type": "UNIQUE",
+      "description": "The ratio of a circle's circumference to its diameter. Never repeats, never ends, never apologizes."
+    },
+    {
+      "id": "CONST_E",
+      "name": "Euler's Number (2.71828...)",
+      "type": "UNIQUE",
+      "description": "The base of natural logarithm. Grows the way growth itself grows."
+    },
+    {
+      "id": "CONST_PHI",
+      "name": "Golden Ratio (1.61803...)",
+      "type": "UNIQUE",
+      "description": "Appears in sunflowers, spirals, and art. The most aesthetically pleasing irrational."
+    },
+    {
+      "id": "CONST_I",
+      "name": "Imaginary Unit (i)",
+      "type": "UNIQUE",
+      "description": "Square root of -1. Exists beyond the real line. Politely ignored for centuries, now indispensable."
+    },
+    {
+      "id": "PRIME",
+      "name": "Prime Numbers",
+      "type": "SUMS",
+      "description": "The atoms of arithmetic. Infinitely many, irregularly spaced, stubbornly irreducible.",
+      "number": 999
+    }
+  ],
+  "relations": [
+    { "id": 1,  "type": "LOCATION", "ent1": "MATH_UNIVERSE", "ent2": "COMPLEX",    "number": 1 },
+    { "id": 2,  "type": "LOCATION", "ent1": "COMPLEX",       "ent2": "REALS",      "number": 1 },
+    { "id": 3,  "type": "LOCATION", "ent1": "REALS",         "ent2": "RATIONALS",  "number": 1 },
+    { "id": 4,  "type": "LOCATION", "ent1": "RATIONALS",     "ent2": "INTEGERS",   "number": 1 },
+    { "id": 5,  "type": "LOCATION", "ent1": "INTEGERS",      "ent2": "NATURALS",   "number": 1 },
+
+    { "id": 6,  "type": "LOCATION", "ent1": "NATURALS", "ent2": "CONST_ZERO", "number": 1  },
+    { "id": 7,  "type": "LOCATION", "ent1": "NATURALS", "ent2": "CONST_ONE",  "number": 1  },
+    { "id": 8,  "type": "LOCATION", "ent1": "NATURALS", "ent2": "PRIME",      "number": 8  },
+    { "id": 9,  "type": "LOCATION", "ent1": "REALS",    "ent2": "CONST_PI",   "number": 1  },
+    { "id": 10, "type": "LOCATION", "ent1": "REALS",    "ent2": "CONST_E",    "number": 1  },
+    { "id": 11, "type": "LOCATION", "ent1": "REALS",    "ent2": "CONST_PHI",  "number": 1  },
+    { "id": 12, "type": "LOCATION", "ent1": "COMPLEX",  "ent2": "CONST_I",    "number": 1  },
+
+    { "id": 13, "type": "LOCATION", "ent1": "REALS", "ent2": "FUNC_SQRT", "number": 1 },
+    { "id": 14, "type": "LOCATION", "ent1": "REALS", "ent2": "FUNC_EXP",  "number": 1 },
+    { "id": 15, "type": "LOCATION", "ent1": "REALS", "ent2": "FUNC_SIN",  "number": 1 },
+
+    { "id": 100, "type": "SKILL", "ent1": "FUNC_SQRT", "ent2": "MONOTONE",       "number": 1   },
+    { "id": 101, "type": "SKILL", "ent1": "FUNC_SQRT", "ent2": "DOMAIN_NONNEG",  "number": 1   },
+    { "id": 102, "type": "SKILL", "ent1": "FUNC_EXP",  "ent2": "MONOTONE",       "number": 1   },
+    { "id": 103, "type": "SKILL", "ent1": "FUNC_EXP",  "ent2": "RANGE_POSITIVE", "number": 1   },
+    { "id": 104, "type": "SKILL", "ent1": "FUNC_SIN",  "ent2": "PERIODIC",       "number": 6   },
+    { "id": 105, "type": "SKILL", "ent1": "FUNC_SIN",  "ent2": "AMPLITUDE",      "number": 1   },
+
+    { "id": 200, "type": "TYPE_OF", "ent1": "CONST_PI",   "ent2": "IRRATIONAL"             },
+    { "id": 201, "type": "TYPE_OF", "ent1": "CONST_PI",   "ent2": "TRANSCENDENTAL"         },
+    { "id": 202, "type": "TYPE_OF", "ent1": "CONST_E",    "ent2": "IRRATIONAL"             },
+    { "id": 203, "type": "TYPE_OF", "ent1": "CONST_E",    "ent2": "TRANSCENDENTAL"         },
+    { "id": 204, "type": "TYPE_OF", "ent1": "CONST_PHI",  "ent2": "IRRATIONAL"             },
+    { "id": 205, "type": "TYPE_OF", "ent1": "CONST_PHI",  "ent2": "ALGEBRAIC"              },
+    { "id": 206, "type": "TYPE_OF", "ent1": "CONST_I",    "ent2": "IMAGINARY"              },
+    { "id": 207, "type": "TYPE_OF", "ent1": "CONST_I",    "ent2": "ALGEBRAIC"              },
+    { "id": 208, "type": "TYPE_OF", "ent1": "CONST_ZERO", "ent2": "IDENTITY_ADDITIVE"      },
+    { "id": 209, "type": "TYPE_OF", "ent1": "CONST_ONE",  "ent2": "IDENTITY_MULTIPLICATIVE"},
+    { "id": 210, "type": "TYPE_OF", "ent1": "PRIME",      "ent2": "INDIVISIBLE"            },
+    { "id": 211, "type": "TYPE_OF", "ent1": "FUNC_SQRT",  "ent2": "OPERATION"              },
+    { "id": 212, "type": "TYPE_OF", "ent1": "FUNC_EXP",   "ent2": "OPERATION"              },
+    { "id": 213, "type": "TYPE_OF", "ent1": "FUNC_SIN",   "ent2": "OPERATION"              },
+    { "id": 214, "type": "TYPE_OF", "ent1": "FUNC_SIN",   "ent2": "TRIGONOMETRIC"          }
+  ]
+}

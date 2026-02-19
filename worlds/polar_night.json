@@ -1,0 +1,154 @@
+{
+  "name": "Chronicle of the Polar Night Dynasty",
+  "description": "The reign of King Harold and Queen Indrid, and the wandering of Princess Freya.",
+  "entities": [
+    {
+      "id": "KINGDOM",
+      "name": "Kingdom of the Polar Night",
+      "type": "ENVI",
+      "description": "A frozen realm where the sun hides for half the year. Ruled by iron will and older laws."
+    },
+    {
+      "id": "CASTLE",
+      "name": "Frostkeep Castle",
+      "type": "ENVI",
+      "description": "The ancestral seat of the Polar dynasty. Cold stone, warm fires, older secrets.",
+      "capacity": 40
+    },
+    {
+      "id": "THRONE_ROOM",
+      "name": "Throne Room",
+      "type": "ENVI",
+      "description": "Where Harold judges, rules, and occasionally naps on the throne.",
+      "capacity": 10
+    },
+    {
+      "id": "GREAT_HALL",
+      "name": "Great Hall",
+      "type": "ENVI",
+      "description": "Feasts, councils, and whispered conspiracies beneath mounted antlers.",
+      "capacity": 20
+    },
+    {
+      "id": "ROYAL_VAULT",
+      "name": "Royal Vault",
+      "type": "ENVI",
+      "description": "Sealed with the Iron Key. Contains the dynasty's wealth and a few regrets.",
+      "capacity": 8
+    },
+    {
+      "id": "FOREST",
+      "name": "Whispering Forest",
+      "type": "ENVI",
+      "description": "Ancient trees, deeper darkness than the polar night itself. Freya knows its paths.",
+      "capacity": 5
+    },
+    {
+      "id": "HAROLD",
+      "name": "King Harold",
+      "type": "CHAR",
+      "description": "Weathered, stern, and secretly afraid of spiders. Has ruled for thirty-one winters."
+    },
+    {
+      "id": "INDRID",
+      "name": "Queen Indrid",
+      "type": "CHAR",
+      "description": "Wise beyond her years. Knows three languages, six poisons, and one forbidden spell."
+    },
+    {
+      "id": "FREYA",
+      "name": "Princess Freya",
+      "type": "CHAR",
+      "description": "Seventeen, heir to the throne, currently missing from court. Probably on purpose."
+    },
+    {
+      "id": "CROWN_IRON",
+      "name": "Iron Crown of the North",
+      "type": "UNIQUE",
+      "description": "Forged from a fallen star. Heavy enough to humble any king."
+    },
+    {
+      "id": "SWORD_FROSTBITE",
+      "name": "Frostbite",
+      "type": "UNIQUE",
+      "description": "A legendary blade that never rusts. Allegedly drinks cold."
+    },
+    {
+      "id": "STAFF_INDRID",
+      "name": "Indrid's Staff",
+      "type": "UNIQUE",
+      "description": "Carved from a single piece of northern ash. Hums faintly in snowstorms."
+    },
+    {
+      "id": "FREYA_DAGGER",
+      "name": "Silver Dagger",
+      "type": "UNIQUE",
+      "description": "A gift from her father on her twelfth birthday. She uses it constantly."
+    },
+    {
+      "id": "KEY_VAULT",
+      "name": "Iron Key",
+      "type": "UNIQUE",
+      "description": "Opens the Royal Vault. Harold keeps it under his pillow, which worries everyone."
+    },
+    {
+      "id": "GOLD_COINS",
+      "name": "Gold Coins",
+      "type": "SUMS",
+      "description": "Currency of the realm. Bears Harold's displeased face on one side."
+    },
+    {
+      "id": "MANA_POTIONS",
+      "name": "Mana Potions",
+      "type": "SUMS",
+      "description": "Indrid's personal reserve. Stored in the vault. Do not drink. She will know."
+    }
+  ],
+  "relations": [
+    { "id": 1,  "type": "LOCATION", "ent1": "KINGDOM",     "ent2": "CASTLE",         "number": 1   },
+    { "id": 2,  "type": "LOCATION", "ent1": "KINGDOM",     "ent2": "FOREST",         "number": 1   },
+    { "id": 3,  "type": "LOCATION", "ent1": "CASTLE",      "ent2": "THRONE_ROOM",    "number": 1   },
+    { "id": 4,  "type": "LOCATION", "ent1": "CASTLE",      "ent2": "GREAT_HALL",     "number": 1   },
+    { "id": 5,  "type": "LOCATION", "ent1": "CASTLE",      "ent2": "ROYAL_VAULT",    "number": 1   },
+    { "id": 6,  "type": "LOCATION", "ent1": "THRONE_ROOM", "ent2": "HAROLD",         "number": 1   },
+    { "id": 7,  "type": "LOCATION", "ent1": "GREAT_HALL",  "ent2": "INDRID",         "number": 1   },
+    { "id": 8,  "type": "LOCATION", "ent1": "FOREST",      "ent2": "FREYA",          "number": 1   },
+    { "id": 9,  "type": "LOCATION", "ent1": "HAROLD",      "ent2": "CROWN_IRON",     "number": 1   },
+    { "id": 10, "type": "LOCATION", "ent1": "HAROLD",      "ent2": "SWORD_FROSTBITE","number": 1   },
+    { "id": 11, "type": "LOCATION", "ent1": "HAROLD",      "ent2": "KEY_VAULT",      "number": 1   },
+    { "id": 12, "type": "LOCATION", "ent1": "INDRID",      "ent2": "STAFF_INDRID",   "number": 1   },
+    { "id": 13, "type": "LOCATION", "ent1": "FREYA",       "ent2": "FREYA_DAGGER",   "number": 1   },
+    { "id": 14, "type": "LOCATION", "ent1": "ROYAL_VAULT", "ent2": "GOLD_COINS",     "number": 500 },
+    { "id": 15, "type": "LOCATION", "ent1": "ROYAL_VAULT", "ent2": "MANA_POTIONS",   "number": 7   },
+
+    { "id": 100, "type": "SKILL", "ent1": "HAROLD", "ent2": "HOLD",          "number": 4  },
+    { "id": 101, "type": "SKILL", "ent1": "HAROLD", "ent2": "COMMAND",       "number": 10 },
+    { "id": 102, "type": "SKILL", "ent1": "HAROLD", "ent2": "SWORDSMANSHIP", "number": 7  },
+
+    { "id": 103, "type": "SKILL", "ent1": "INDRID", "ent2": "HOLD",          "number": 2  },
+    { "id": 104, "type": "SKILL", "ent1": "INDRID", "ent2": "MAGIC",         "number": 12 },
+    { "id": 105, "type": "SKILL", "ent1": "INDRID", "ent2": "DIPLOMACY",     "number": 9  },
+
+    { "id": 106, "type": "SKILL", "ent1": "FREYA",  "ent2": "HOLD",          "number": 3  },
+    { "id": 107, "type": "SKILL", "ent1": "FREYA",  "ent2": "MOVE",          "number": 8  },
+    { "id": 108, "type": "SKILL", "ent1": "FREYA",  "ent2": "STEALTH",       "number": 6  },
+    { "id": 109, "type": "SKILL", "ent1": "FREYA",  "ent2": "ARCHERY",       "number": 5  },
+
+    { "id": 200, "type": "TYPE_OF", "ent1": "HAROLD",         "ent2": "HUMAN"                  },
+    { "id": 201, "type": "TYPE_OF", "ent1": "HAROLD",         "ent2": "ROYALTY"                },
+    { "id": 202, "type": "TYPE_OF", "ent1": "INDRID",         "ent2": "HUMAN"                  },
+    { "id": 203, "type": "TYPE_OF", "ent1": "INDRID",         "ent2": "ROYALTY"                },
+    { "id": 204, "type": "TYPE_OF", "ent1": "INDRID",         "ent2": "MAGE"                   },
+    { "id": 205, "type": "TYPE_OF", "ent1": "FREYA",          "ent2": "HUMAN"                  },
+    { "id": 206, "type": "TYPE_OF", "ent1": "FREYA",          "ent2": "ROYALTY"                },
+    { "id": 207, "type": "TYPE_OF", "ent1": "CROWN_IRON",     "ent2": "REGALIA"                },
+    { "id": 208, "type": "TYPE_OF", "ent1": "SWORD_FROSTBITE","ent2": "WEAPON"                 },
+    { "id": 209, "type": "TYPE_OF", "ent1": "STAFF_INDRID",   "ent2": "WEAPON"                 },
+    { "id": 210, "type": "TYPE_OF", "ent1": "STAFF_INDRID",   "ent2": "MAGICAL"                },
+    { "id": 211, "type": "TYPE_OF", "ent1": "FREYA_DAGGER",   "ent2": "WEAPON"                 },
+    { "id": 212, "type": "TYPE_OF", "ent1": "KEY_VAULT",      "ent2": "KEY"                    },
+    { "id": 213, "type": "TYPE_OF", "ent1": "GOLD_COINS",     "ent2": "CURRENCY"               },
+    { "id": 214, "type": "TYPE_OF", "ent1": "MANA_POTIONS",   "ent2": "CONSUMABLE"             },
+    { "id": 215, "type": "TYPE_OF", "ent1": "MANA_POTIONS",   "ent2": "MAGICAL"                }
+  ]
+}
