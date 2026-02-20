@@ -9,12 +9,6 @@
   },
   "entities": [
     {
-      "id": "COSMOS",
-      "name": "The Cosmos",
-      "type": "ENVI",
-      "description": "The totality of everything that is, was, or could be. Infinite in all directions. Mostly empty. Not for long."
-    },
-    {
       "id": "HEAVEN",
       "name": "Heaven",
       "type": "ENVI",
@@ -36,6 +30,12 @@
       "rank": 100
     },
     {
+      "id": "PRIMITIVO_ES",
+      "name": "ES — Gianfranco Fino",
+      "type": "SUMS",
+      "description": "Primitivo di Manduria. A miracle from the sun-scorched heel of Italy — dark as night, dense as prayer, with tannins like aged oak and a finish that outlasts any sermon. Gianfranco Fino's ES is considered by many to be the finest expression of Primitivo on earth. Felix found a bottle. He has not shared it with God."
+    },
+    {
       "id": "FELIX",
       "name": "Felix",
       "type": "CHAR",
@@ -46,20 +46,6 @@
     }
   ],
   "relations": [
-    {
-      "id": 1,
-      "type": "LOCATION",
-      "ent1": "COSMOS",
-      "ent2": "HEAVEN",
-      "number": 1
-    },
-    {
-      "id": 2,
-      "type": "LOCATION",
-      "ent1": "COSMOS",
-      "ent2": "EARTH",
-      "number": 1
-    },
     {
       "id": 3,
       "type": "LOCATION",
@@ -158,6 +144,14 @@
       "ent1": "DivineRealms",
       "ent2": "STASIS",
       "number": 0
+    },
+    {
+      "id": 400,
+      "type": "PRODUCE",
+      "ent1": "EARTH",
+      "ent2": "PRIMITIVO_ES",
+      "lambda": 0.05,
+      "number": 2
     }
   ]
 }

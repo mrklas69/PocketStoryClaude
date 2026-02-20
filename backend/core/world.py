@@ -317,6 +317,8 @@ def _relation_to_dict(r: Relation) -> dict:
         d["number"] = r.number
     if r.lambda_ != 0.0:
         d["lambda"] = r.lambda_
+    if r.hp is not None:
+        d["hp"] = r.hp
     return d
 
 
@@ -328,4 +330,5 @@ def _dict_to_relation(d: dict) -> Relation:
         ent2=d.get("ent2"),
         number=d.get("number", 1),
         lambda_=d.get("lambda", 0.0),
+        hp=d.get("hp"),
     )

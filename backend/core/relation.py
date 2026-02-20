@@ -4,8 +4,8 @@ from typing import Optional
 
 class RelationType(Enum):
     LOCATION = "LOCATION"  # ENT1 contains ENT2; NUMBER = current quantity (dynamic state)
-    SKILL    = "SKILL"     # ENT1 has skill ENT2 at level/capacity NUMBER
     TYPE_OF  = "TYPE_OF"   # ENT1 belongs to category ENT2 (string code)
+    SKILL    = "SKILL"     # ENT1 has skill ENT2 at level/capacity NUMBER
     BEHAVIOR = "BEHAVIOR"  # ENT1 (entity or category) has behavior ENT2; NUMBER = intensity/rate
     PRODUCE  = "PRODUCE"   # ENT1 produces ENT2 each tick; NUMBER = fixed yield OR LAMBDA = Poisson parameter
 
@@ -19,6 +19,7 @@ class Relation:
         ent2: Optional[str] = None,
         number: int = 1,
         lambda_: float = 0.0,
+        hp: Optional[int] = None,
     ):
         self.id: int = id
         self.type: RelationType = type
@@ -26,6 +27,7 @@ class Relation:
         self.ent2: Optional[str] = ent2  # None for unary relations
         self.number: int = number
         self.lambda_: float = lambda_    # Poisson λ for stochastic production
+        self.hp: Optional[int] = hp      # LOCATION only: current freshness/durability of this stack (SUMS)
 
     def __repr__(self) -> str:
-        return f"Relation({self.type.value}, id={self.id}, {self.ent1!r} → {self.ent2!r}, n={self.number})"
+        return f"Relation({self.type.value}, id={self.id}, {self.ent1!r} → {self.ent2!r}, n={self.number}, λ={self.lambda_})"

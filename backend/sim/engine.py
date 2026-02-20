@@ -101,21 +101,31 @@ def _process_produce(world: World) -> list[str]:
             continue
 
         if loc is not None:
+            # HP: blend existing stack with freshly produced items (weighted average).
+            if item is not None and item.hp_max is not None and loc.hp is not None:
+                total = current + amount
+                loc.hp = round((current * loc.hp + amount * item.hp_max) / total)
             loc.number += amount
         else:
             new_id = max(world.relations.keys(), default=0) + 1
+            init_hp = item.hp_max if (item is not None and item.hp_max is not None) else None
             world.relations[new_id] = Relation(
                 id=new_id,
                 type=RelationType.LOCATION,
                 ent1=producer.id,
                 ent2=r.ent2,
                 number=amount,
+                hp=init_hp,
             )
         log.append(f"{producer.name}: +{amount} {item.name}")
     return log
 
 
-def _collect_behaviors(world: World, entity_id: str) -> list[tuple[str, int]]:
+def _collect_behaviors(
+    world: World,
+    entity_id: str,
+    location_id: str | None = None,
+) -> list[tuple[str, int]]:
     """
     Return all (behavior_name, rate) pairs active for entity_id.
 
@@ -125,6 +135,10 @@ def _collect_behaviors(world: World, entity_id: str) -> list[tuple[str, int]]:
       3. Location-direct — BEHAVIOR on the specific ENVI the entity currently occupies.
       4. Location-category cascade — BEHAVIOR on TYPE_OF categories of that ENVI
          (e.g. TYPE_OF(D1, HOME_SQUARE) + BEHAVIOR(HOME_SQUARE, RECHARGE, -5)).
+
+    location_id: if provided, use this entity as the location instead of calling
+                 world.location_of(). Used by _process_sums_hp to handle per-stack
+                 HP for SUMS entities with multiple LOCATION relations.
     """
     behaviors: list[tuple[str, int]] = []
 
@@ -145,7 +159,7 @@ def _collect_behaviors(world: World, entity_id: str) -> list[tuple[str, int]]:
 
     # 3 + 4. Location-based: behaviors on the entity's current ENVI,
     #         and on the TYPE_OF categories of that ENVI.
-    location = world.location_of(entity_id)
+    location = world.get(location_id) if location_id is not None else world.location_of(entity_id)
     if location is not None:
         for r in world.relations.values():
             if r.type == RelationType.BEHAVIOR and r.ent1 == location.id:
@@ -160,6 +174,46 @@ def _collect_behaviors(world: World, entity_id: str) -> list[tuple[str, int]]:
                     behaviors.append((r.ent2, r.number))
 
     return behaviors
+
+
+def _process_sums_hp(world: World) -> list[str]:
+    """Apply BEHAVIOR-based HP drain to per-LOCATION stacks of SUMS entities.
+
+    Iterates all LOCATION relations that carry an hp value (freshness/durability).
+    When hp reaches 0, the stack is wiped (number set to 0).
+    Only LOCATION relations pointing to SUMS entities are processed here;
+    CHAR/UNIQUE HP is handled in the main entity loop in tick().
+    """
+    log: list[str] = []
+    for loc_rel in list(world.relations.values()):
+        if loc_rel.type != RelationType.LOCATION:
+            continue
+        if loc_rel.hp is None:
+            continue
+        item = world.get(loc_rel.ent2)
+        if item is None or item.type != EntityType.SUMS:
+            continue
+
+        behaviors = _collect_behaviors(world, loc_rel.ent2, location_id=loc_rel.ent1)
+        if not behaviors:
+            continue
+
+        total_drain = sum(rate for _, rate in behaviors)
+        if total_drain == 0:
+            continue
+
+        old_hp = loc_rel.hp
+        hp_max = item.hp_max if item.hp_max is not None else old_hp
+        loc_rel.hp = max(0, min(hp_max, loc_rel.hp - total_drain))
+
+        if loc_rel.hp != old_hp:
+            causes = "+".join(name for name, _ in behaviors)
+            if loc_rel.hp == 0:
+                loc_rel.number = 0
+                log.append(f"{item.name}: HP {old_hp} -> 0  [{causes}] [WIPED]")
+            else:
+                log.append(f"{item.name}: HP {old_hp} -> {loc_rel.hp}  [{causes}]")
+    return log
 
 
 def _in_graveyard(world: World, entity_id: str) -> bool:
@@ -181,10 +235,13 @@ def tick(world: World) -> list[str]:
     log: list[str] = []
 
     log += _process_produce(world)
+    log += _process_sums_hp(world)
 
     for entity in list(world.entities.values()):
         if entity.hp is None:
             continue  # Entity has no HP — skip
+        if entity.type == EntityType.SUMS:
+            continue  # SUMS HP is per-LOCATION; handled by _process_sums_hp
 
         # Graveyard rule: any entity inside a GRAVEYARD-typed ENVI loses all HP instantly.
         if entity.hp > 0 and _in_graveyard(world, entity.id):

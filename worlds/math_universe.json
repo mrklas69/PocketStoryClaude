@@ -123,7 +123,6 @@
       "type": "SUMS",
       "description": "The atoms of arithmetic. Infinitely many, irregularly spaced, stubbornly irreducible.",
       "number": 999,
-      "hp": 100,
       "hp_max": 100
     },
     {
@@ -206,7 +205,8 @@
       "type": "LOCATION",
       "ent1": "NATURALS",
       "ent2": "PRIME",
-      "number": 8
+      "number": 8,
+      "hp": 100
     },
     {
       "id": 9,
@@ -430,6 +430,13 @@
       "ent1": "Indivisibles",
       "ent2": "SIEVE_EROSION",
       "number": 2
+    },
+    {
+      "id": 400,
+      "type": "PRODUCE",
+      "ent1": "NATURALS",
+      "ent2": "PRIME",
+      "number": 1
     }
   ]
 }
