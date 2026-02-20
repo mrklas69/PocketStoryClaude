@@ -14,7 +14,7 @@ from rich.text import Text
 from backend.core.entity import Entity, EntityType
 from backend.core.relation import RelationType
 from backend.core.world import World
-from backend.sim.tick import tick
+from backend.sim.engine import tick
 
 console = Console()
 
