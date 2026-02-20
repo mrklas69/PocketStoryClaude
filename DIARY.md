@@ -510,3 +510,47 @@ Design discussion and refinements:
 **Next session:** `World.move()`, `World.remove()`, and `proto_id` for SUMS.
 
 ---
+
+## 2026-02-21 (pokračování — TRIGGER + dialog Felixe a Boha)
+
+**Duration:** ~2 hours
+**With:** Claude (claude-sonnet-4-6)
+
+Implementace dialogového systému + úklid konzole.
+
+**TRIGGER mechanic (nový RelationType):**
+- `RelationType.TRIGGER`: `ent1` = mluvčí/subjekt, `ent2` = dialogová UNIQUE entita (text v `description`), `number` = mód, `lambda_` = sigma nebo pravděpodobnost
+- Tři módy:
+  - `number > 0` — HP-threshold, fire-once: spustí se když `ent1.hp <= number`; pravděpodobnost = normální CDF `Φ((threshold − hp) / sigma)`; fired IDs v `meta.vars["triggers_fired"]`
+  - `number == 0` — ambient, opakovatelný: Bernoulli `p = lambda_` per tick, bez HP podmínky
+  - `number == -1` — resurrekt: spustí se při `hp == 0`, resetuje `hp → hp_max`, vymaže fired IDs pro daný subjekt (arc se opakuje v příštím životě)
+- `_get_dialogue(world, entity_id)` — přečte description z dialogové UNIQUE entity
+- `_process_triggers(world)` — voláno na konci `tick()` (po behavior loopu)
+
+**worlds/genesis.json — dialogy Felixe a Boha:**
+- 11 nových UNIQUE dialogových entit (bez LOCATION = archetype / dialogue script)
+- Felix: 4 threshold linky (HP 45/30/15/5 se sigma 8/5/4/2), 1 resurrekt, 3 ambient
+- Bůh: 3 ambient linky (`lambda = 0.02` každá)
+- Resurrekt scéna: `"Felix: [barely a whisper] Is this...? / God: Now. Let us begin."`
+- Felix drainuje 7 HP/tick (DESPAIR 5 + EMPTINESS 2), první arc ~8 ticků
+
+**Výsledek v logu (ukázka 24 ticků):**
+```
+[tick  3] Felix: "I miss making stars..."  [HP 29 <= 45]
+[tick  5] Felix: "Maybe He was right..."  [HP 15 <= 15]
+[tick  8] Felix: HP 1 -> 0  [DEAD]
+[tick  8] [RESURRECT] Felix 0 -> 100 HP | "Felix: Is this...? / God: Now. Let us begin."
+[tick 17] God: "Patience is not a virtue when you invented time."
+[tick 17] Felix: "I miss making stars..."  — druhý arc
+```
+
+**Console úpravy:**
+- UNIQUE rooty vždy skryté ze stromu (i v `--full` — bylo jen v normálním módu)
+- Stats v `--full` rozděleny: umístěné UNIQUE → `UNIQUE: N`; archetype/dialogue (bez LOCATION) → `arch: N`; příklad genesis: `CHAR: 2  ENVI: 2  SUMS: 1  arch: 11`
+- Dialogové řádky v event logu: `reverse` styling pro řádky s uvozovkami nebo `[RESURRECT]` — vizuálně vyčnívají nad dim HP eventy
+
+**Git commits:**
+- `a0dd573` — TRIGGER system + genesis dialogy + console arch stats + always hide UNIQUE roots
+- `f6c2409` — reverse video pro dialogue lines v event logu
+
+**Next session:** Intent system; World.resolve_attr() prototype inheritance; konzolový chess prototype
