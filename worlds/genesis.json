@@ -106,56 +106,56 @@
       "id": 200,
       "type": "TYPE_OF",
       "ent1": "GOD",
-      "ent2": "DIVINE"
+      "ent2": "Divines"
     },
     {
       "id": 201,
       "type": "TYPE_OF",
       "ent1": "GOD",
-      "ent2": "ETERNAL"
+      "ent2": "Eternals"
     },
     {
       "id": 202,
       "type": "TYPE_OF",
       "ent1": "FELIX",
-      "ent2": "FALLEN_ANGEL"
+      "ent2": "FallenAngels"
     },
     {
       "id": 203,
       "type": "TYPE_OF",
       "ent1": "FELIX",
-      "ent2": "ANGEL"
+      "ent2": "Angels"
     },
     {
       "id": 204,
       "type": "TYPE_OF",
       "ent1": "HEAVEN",
-      "ent2": "DIVINE_REALM"
+      "ent2": "DivineRealms"
     },
     {
       "id": 205,
       "type": "TYPE_OF",
       "ent1": "EARTH",
-      "ent2": "MORTAL_REALM"
+      "ent2": "MortalRealms"
     },
     {
       "id": 300,
       "type": "BEHAVIOR",
-      "ent1": "FALLEN_ANGEL",
+      "ent1": "FallenAngels",
       "ent2": "DESPAIR",
       "number": 5
     },
     {
       "id": 301,
       "type": "BEHAVIOR",
-      "ent1": "MORTAL_REALM",
+      "ent1": "MortalRealms",
       "ent2": "EMPTINESS",
       "number": 2
     },
     {
       "id": 302,
       "type": "BEHAVIOR",
-      "ent1": "DIVINE_REALM",
+      "ent1": "DivineRealms",
       "ent2": "STASIS",
       "number": 0
     }

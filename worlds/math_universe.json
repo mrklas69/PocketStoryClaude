@@ -127,25 +127,25 @@
       "hp_max": 100
     },
     {
-      "id": "IRRATIONAL",
+      "id": "Irrationals",
       "name": "Irrational",
       "type": "UNIQUE",
       "description": "Cannot be expressed as a ratio of integers. Infinite, non-repeating — fills the gaps between rationals."
     },
     {
-      "id": "OPERATION",
+      "id": "Operations",
       "name": "Operation",
       "type": "UNIQUE",
       "description": "A mapping that transforms mathematical objects according to defined rules."
     },
     {
-      "id": "TRANSCENDENTAL",
+      "id": "Transcendentals",
       "name": "Transcendental",
       "type": "UNIQUE",
       "description": "Not the root of any polynomial with rational coefficients. Escapes algebraic capture."
     },
     {
-      "id": "ALGEBRAIC",
+      "id": "Algebraics",
       "name": "Algebraic",
       "type": "UNIQUE",
       "description": "A root of a polynomial equation with rational coefficients. Lives between integers and transcendentals."
@@ -303,131 +303,131 @@
       "id": 200,
       "type": "TYPE_OF",
       "ent1": "CONST_PI",
-      "ent2": "IRRATIONAL"
+      "ent2": "Irrationals"
     },
     {
       "id": 201,
       "type": "TYPE_OF",
       "ent1": "CONST_PI",
-      "ent2": "TRANSCENDENTAL"
+      "ent2": "Transcendentals"
     },
     {
       "id": 202,
       "type": "TYPE_OF",
       "ent1": "CONST_E",
-      "ent2": "IRRATIONAL"
+      "ent2": "Irrationals"
     },
     {
       "id": 203,
       "type": "TYPE_OF",
       "ent1": "CONST_E",
-      "ent2": "TRANSCENDENTAL"
+      "ent2": "Transcendentals"
     },
     {
       "id": 204,
       "type": "TYPE_OF",
       "ent1": "CONST_PHI",
-      "ent2": "IRRATIONAL"
+      "ent2": "Irrationals"
     },
     {
       "id": 205,
       "type": "TYPE_OF",
       "ent1": "CONST_PHI",
-      "ent2": "ALGEBRAIC"
+      "ent2": "Algebraics"
     },
     {
       "id": 206,
       "type": "TYPE_OF",
       "ent1": "CONST_I",
-      "ent2": "IMAGINARY"
+      "ent2": "Imaginaries"
     },
     {
       "id": 207,
       "type": "TYPE_OF",
       "ent1": "CONST_I",
-      "ent2": "ALGEBRAIC"
+      "ent2": "Algebraics"
     },
     {
       "id": 208,
       "type": "TYPE_OF",
       "ent1": "CONST_ZERO",
-      "ent2": "IDENTITY_ADDITIVE"
+      "ent2": "AdditiveIdentities"
     },
     {
       "id": 209,
       "type": "TYPE_OF",
       "ent1": "CONST_ONE",
-      "ent2": "IDENTITY_MULTIPLICATIVE"
+      "ent2": "MultiplicativeIdentities"
     },
     {
       "id": 210,
       "type": "TYPE_OF",
       "ent1": "PRIME",
-      "ent2": "INDIVISIBLE"
+      "ent2": "Indivisibles"
     },
     {
       "id": 211,
       "type": "TYPE_OF",
       "ent1": "FUNC_SQRT",
-      "ent2": "OPERATION"
+      "ent2": "Operations"
     },
     {
       "id": 212,
       "type": "TYPE_OF",
       "ent1": "FUNC_EXP",
-      "ent2": "OPERATION"
+      "ent2": "Operations"
     },
     {
       "id": 213,
       "type": "TYPE_OF",
       "ent1": "FUNC_SIN",
-      "ent2": "OPERATION"
+      "ent2": "Operations"
     },
     {
       "id": 214,
       "type": "TYPE_OF",
       "ent1": "FUNC_SIN",
-      "ent2": "TRIGONOMETRIC"
+      "ent2": "Trigonometrics"
     },
     {
       "id": 300,
       "type": "BEHAVIOR",
-      "ent1": "TRANSCENDENTAL",
+      "ent1": "Transcendentals",
       "ent2": "PROOF_EROSION",
       "number": 3
     },
     {
       "id": 301,
       "type": "BEHAVIOR",
-      "ent1": "IRRATIONAL",
+      "ent1": "Irrationals",
       "ent2": "APPROXIMATION_DRIFT",
       "number": 2
     },
     {
       "id": 302,
       "type": "BEHAVIOR",
-      "ent1": "IMAGINARY",
+      "ent1": "Imaginaries",
       "ent2": "EXISTENCE_DOUBT",
       "number": 2
     },
     {
       "id": 303,
       "type": "BEHAVIOR",
-      "ent1": "OPERATION",
+      "ent1": "Operations",
       "ent2": "DOMAIN_DRIFT",
       "number": 1
     },
     {
       "id": 304,
       "type": "BEHAVIOR",
-      "ent1": "TRIGONOMETRIC",
+      "ent1": "Trigonometrics",
       "ent2": "OSCILLATION_LOSS",
       "number": 1
     },
     {
       "id": 305,
       "type": "BEHAVIOR",
-      "ent1": "INDIVISIBLE",
+      "ent1": "Indivisibles",
       "ent2": "SIEVE_EROSION",
       "number": 2
     }

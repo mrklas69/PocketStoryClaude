@@ -137,25 +137,25 @@
       "capacity": 100
     },
     {
-      "id": "HUMAN",
+      "id": "Humans",
       "name": "Human",
       "type": "UNIQUE",
       "description": "A mortal inhabitant of the Polar Night realm. Subject to cold, time, and dynasty."
     },
     {
-      "id": "ROYALTY",
+      "id": "Royalties",
       "name": "Royalty",
       "type": "UNIQUE",
       "description": "A member of the reigning dynasty. Carries the weight of blood, duty, and legacy."
     },
     {
-      "id": "WEAPON",
+      "id": "Weapons",
       "name": "Weapon",
       "type": "UNIQUE",
       "description": "An instrument of force. Each carries its own history of hands and wounds."
     },
     {
-      "id": "MAGICAL",
+      "id": "Magicals",
       "name": "Magical",
       "type": "UNIQUE",
       "description": "Imbued with arcane energy. Responds to mana and the will of its bearer."
@@ -362,121 +362,121 @@
       "id": 200,
       "type": "TYPE_OF",
       "ent1": "HAROLD",
-      "ent2": "HUMAN"
+      "ent2": "Humans"
     },
     {
       "id": 201,
       "type": "TYPE_OF",
       "ent1": "HAROLD",
-      "ent2": "ROYALTY"
+      "ent2": "Royalties"
     },
     {
       "id": 202,
       "type": "TYPE_OF",
       "ent1": "INDRID",
-      "ent2": "HUMAN"
+      "ent2": "Humans"
     },
     {
       "id": 203,
       "type": "TYPE_OF",
       "ent1": "INDRID",
-      "ent2": "ROYALTY"
+      "ent2": "Royalties"
     },
     {
       "id": 204,
       "type": "TYPE_OF",
       "ent1": "INDRID",
-      "ent2": "MAGE"
+      "ent2": "Mages"
     },
     {
       "id": 205,
       "type": "TYPE_OF",
       "ent1": "FREYA",
-      "ent2": "HUMAN"
+      "ent2": "Humans"
     },
     {
       "id": 206,
       "type": "TYPE_OF",
       "ent1": "FREYA",
-      "ent2": "ROYALTY"
+      "ent2": "Royalties"
     },
     {
       "id": 207,
       "type": "TYPE_OF",
       "ent1": "CROWN_IRON",
-      "ent2": "REGALIA"
+      "ent2": "Regalia"
     },
     {
       "id": 208,
       "type": "TYPE_OF",
       "ent1": "SWORD_FROSTBITE",
-      "ent2": "WEAPON"
+      "ent2": "Weapons"
     },
     {
       "id": 209,
       "type": "TYPE_OF",
       "ent1": "STAFF_INDRID",
-      "ent2": "WEAPON"
+      "ent2": "Weapons"
     },
     {
       "id": 210,
       "type": "TYPE_OF",
       "ent1": "STAFF_INDRID",
-      "ent2": "MAGICAL"
+      "ent2": "Magicals"
     },
     {
       "id": 211,
       "type": "TYPE_OF",
       "ent1": "FREYA_DAGGER",
-      "ent2": "WEAPON"
+      "ent2": "Weapons"
     },
     {
       "id": 212,
       "type": "TYPE_OF",
       "ent1": "KEY_VAULT",
-      "ent2": "KEY"
+      "ent2": "Keys"
     },
     {
       "id": 213,
       "type": "TYPE_OF",
       "ent1": "GOLD_COINS",
-      "ent2": "CURRENCY"
+      "ent2": "Currencies"
     },
     {
       "id": 214,
       "type": "TYPE_OF",
       "ent1": "MANA_POTIONS",
-      "ent2": "CONSUMABLE"
+      "ent2": "Consumables"
     },
     {
       "id": 215,
       "type": "TYPE_OF",
       "ent1": "MANA_POTIONS",
-      "ent2": "MAGICAL"
+      "ent2": "Magicals"
     },
     {
       "id": 216,
       "type": "TYPE_OF",
       "ent1": "BYGUL",
-      "ent2": "CAT"
+      "ent2": "Cats"
     },
     {
       "id": 217,
       "type": "TYPE_OF",
       "ent1": "BYGUL",
-      "ent2": "ANIMAL"
+      "ent2": "Animals"
     },
     {
       "id": 218,
       "type": "TYPE_OF",
       "ent1": "WILDFIRE_OIL",
-      "ent2": "WEAPON"
+      "ent2": "Weapons"
     },
     {
       "id": 219,
       "type": "TYPE_OF",
       "ent1": "WILDFIRE_OIL",
-      "ent2": "ALCHEMICAL_WEAPON"
+      "ent2": "AlchemicalWeapons"
     },
     {
       "id": 400,
@@ -488,14 +488,14 @@
     {
       "id": 300,
       "type": "BEHAVIOR",
-      "ent1": "HUMAN",
+      "ent1": "Humans",
       "ent2": "HUNGER",
       "number": 2
     },
     {
       "id": 301,
       "type": "BEHAVIOR",
-      "ent1": "ANIMAL",
+      "ent1": "Animals",
       "ent2": "HUNGER",
       "number": 1
     }

@@ -855,43 +855,43 @@
       "number": 1
     },
     {
-      "id": "PIECE",
+      "id": "Pieces",
       "name": "Piece",
       "type": "UNIQUE",
       "description": "Any chess piece — a living participant in the battle, subject to endurance, capture, and resource constraints."
     },
     {
-      "id": "KING",
+      "id": "Kings",
       "name": "King",
       "type": "UNIQUE",
       "description": "The sovereign. Moves one step in any direction. Its fall ends the game — protect it at all costs."
     },
     {
-      "id": "QUEEN",
+      "id": "Queens",
       "name": "Queen",
       "type": "UNIQUE",
       "description": "The supreme commander. Ranges freely in all 8 directions, any distance. The most powerful piece on the board."
     },
     {
-      "id": "ROOK",
+      "id": "Rooks",
       "name": "Rook",
       "type": "UNIQUE",
       "description": "The fortress tower. Commands open files and ranks with orthogonal reach. Strongest in the endgame."
     },
     {
-      "id": "KNIGHT",
+      "id": "Knights",
       "name": "Knight",
       "type": "UNIQUE",
       "description": "The leaping warrior. Ignores all pieces in its path; strikes in an L-shaped arc. Unpredictable and nimble."
     },
     {
-      "id": "ARCHER",
+      "id": "Archers",
       "name": "Archer",
       "type": "UNIQUE",
       "description": "The diagonal ranger. Commands the long diagonals and never leaves its colour. Requires arrows to fight."
     },
     {
-      "id": "PAWN",
+      "id": "Pawns",
       "name": "Pawn",
       "type": "UNIQUE",
       "description": "The foot soldier. Slow, expendable — but every pawn carries a queen within."
@@ -1302,595 +1302,595 @@
       "id": 200,
       "type": "TYPE_OF",
       "ent1": "WHITE_QUEEN",
-      "ent2": "QUEEN"
+      "ent2": "Queens"
     },
     {
       "id": 201,
       "type": "TYPE_OF",
       "ent1": "WHITE_QUEEN",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 202,
       "type": "TYPE_OF",
       "ent1": "WHITE_QUEEN",
-      "ent2": "WHITE_PIECE"
+      "ent2": "WhitePieces"
     },
     {
       "id": 203,
       "type": "TYPE_OF",
       "ent1": "WHITE_ARCHER_LIGHT",
-      "ent2": "ARCHER"
+      "ent2": "Archers"
     },
     {
       "id": 204,
       "type": "TYPE_OF",
       "ent1": "WHITE_ARCHER_LIGHT",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 205,
       "type": "TYPE_OF",
       "ent1": "WHITE_ARCHER_LIGHT",
-      "ent2": "WHITE_PIECE"
+      "ent2": "WhitePieces"
     },
     {
       "id": 206,
       "type": "TYPE_OF",
       "ent1": "WHITE_H_ROOK",
-      "ent2": "ROOK"
+      "ent2": "Rooks"
     },
     {
       "id": 207,
       "type": "TYPE_OF",
       "ent1": "WHITE_H_ROOK",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 208,
       "type": "TYPE_OF",
       "ent1": "WHITE_H_ROOK",
-      "ent2": "WHITE_PIECE"
+      "ent2": "WhitePieces"
     },
     {
       "id": 209,
       "type": "TYPE_OF",
       "ent1": "BLACK_H_PAWN",
-      "ent2": "PAWN"
+      "ent2": "Pawns"
     },
     {
       "id": 210,
       "type": "TYPE_OF",
       "ent1": "BLACK_H_PAWN",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 211,
       "type": "TYPE_OF",
       "ent1": "BLACK_H_PAWN",
-      "ent2": "BLACK_PIECE"
+      "ent2": "BlackPieces"
     },
     {
       "id": 212,
       "type": "TYPE_OF",
       "ent1": "MOVE_COUNT",
-      "ent2": "GAME_STAT"
+      "ent2": "GameStats"
     },
     {
       "id": 213,
       "type": "TYPE_OF",
       "ent1": "WHITE_LEGAL_MOVES",
-      "ent2": "GAME_STAT"
+      "ent2": "GameStats"
     },
     {
       "id": 214,
       "type": "TYPE_OF",
       "ent1": "BLACK_THREATS",
-      "ent2": "GAME_STAT"
+      "ent2": "GameStats"
     },
     {
       "id": 215,
       "type": "TYPE_OF",
       "ent1": "WHITE_KING",
-      "ent2": "KING"
+      "ent2": "Kings"
     },
     {
       "id": 216,
       "type": "TYPE_OF",
       "ent1": "WHITE_KING",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 217,
       "type": "TYPE_OF",
       "ent1": "WHITE_KING",
-      "ent2": "WHITE_PIECE"
+      "ent2": "WhitePieces"
     },
     {
       "id": 218,
       "type": "TYPE_OF",
       "ent1": "WHITE_A_ROOK",
-      "ent2": "ROOK"
+      "ent2": "Rooks"
     },
     {
       "id": 219,
       "type": "TYPE_OF",
       "ent1": "WHITE_A_ROOK",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 220,
       "type": "TYPE_OF",
       "ent1": "WHITE_A_ROOK",
-      "ent2": "WHITE_PIECE"
+      "ent2": "WhitePieces"
     },
     {
       "id": 221,
       "type": "TYPE_OF",
       "ent1": "WHITE_B_KNIGHT",
-      "ent2": "KNIGHT"
+      "ent2": "Knights"
     },
     {
       "id": 222,
       "type": "TYPE_OF",
       "ent1": "WHITE_B_KNIGHT",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 223,
       "type": "TYPE_OF",
       "ent1": "WHITE_B_KNIGHT",
-      "ent2": "WHITE_PIECE"
+      "ent2": "WhitePieces"
     },
     {
       "id": 224,
       "type": "TYPE_OF",
       "ent1": "WHITE_C_ARCHER",
-      "ent2": "ARCHER"
+      "ent2": "Archers"
     },
     {
       "id": 225,
       "type": "TYPE_OF",
       "ent1": "WHITE_C_ARCHER",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 226,
       "type": "TYPE_OF",
       "ent1": "WHITE_C_ARCHER",
-      "ent2": "WHITE_PIECE"
+      "ent2": "WhitePieces"
     },
     {
       "id": 227,
       "type": "TYPE_OF",
       "ent1": "WHITE_G_KNIGHT",
-      "ent2": "KNIGHT"
+      "ent2": "Knights"
     },
     {
       "id": 228,
       "type": "TYPE_OF",
       "ent1": "WHITE_G_KNIGHT",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 229,
       "type": "TYPE_OF",
       "ent1": "WHITE_G_KNIGHT",
-      "ent2": "WHITE_PIECE"
+      "ent2": "WhitePieces"
     },
     {
       "id": 230,
       "type": "TYPE_OF",
       "ent1": "WHITE_A_PAWN",
-      "ent2": "PAWN"
+      "ent2": "Pawns"
     },
     {
       "id": 231,
       "type": "TYPE_OF",
       "ent1": "WHITE_A_PAWN",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 232,
       "type": "TYPE_OF",
       "ent1": "WHITE_A_PAWN",
-      "ent2": "WHITE_PIECE"
+      "ent2": "WhitePieces"
     },
     {
       "id": 233,
       "type": "TYPE_OF",
       "ent1": "WHITE_B_PAWN",
-      "ent2": "PAWN"
+      "ent2": "Pawns"
     },
     {
       "id": 234,
       "type": "TYPE_OF",
       "ent1": "WHITE_B_PAWN",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 235,
       "type": "TYPE_OF",
       "ent1": "WHITE_B_PAWN",
-      "ent2": "WHITE_PIECE"
+      "ent2": "WhitePieces"
     },
     {
       "id": 236,
       "type": "TYPE_OF",
       "ent1": "WHITE_C_PAWN",
-      "ent2": "PAWN"
+      "ent2": "Pawns"
     },
     {
       "id": 237,
       "type": "TYPE_OF",
       "ent1": "WHITE_C_PAWN",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 238,
       "type": "TYPE_OF",
       "ent1": "WHITE_C_PAWN",
-      "ent2": "WHITE_PIECE"
+      "ent2": "WhitePieces"
     },
     {
       "id": 239,
       "type": "TYPE_OF",
       "ent1": "WHITE_D_PAWN",
-      "ent2": "PAWN"
+      "ent2": "Pawns"
     },
     {
       "id": 240,
       "type": "TYPE_OF",
       "ent1": "WHITE_D_PAWN",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 241,
       "type": "TYPE_OF",
       "ent1": "WHITE_D_PAWN",
-      "ent2": "WHITE_PIECE"
+      "ent2": "WhitePieces"
     },
     {
       "id": 242,
       "type": "TYPE_OF",
       "ent1": "WHITE_E_PAWN",
-      "ent2": "PAWN"
+      "ent2": "Pawns"
     },
     {
       "id": 243,
       "type": "TYPE_OF",
       "ent1": "WHITE_E_PAWN",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 244,
       "type": "TYPE_OF",
       "ent1": "WHITE_E_PAWN",
-      "ent2": "WHITE_PIECE"
+      "ent2": "WhitePieces"
     },
     {
       "id": 245,
       "type": "TYPE_OF",
       "ent1": "WHITE_F_PAWN",
-      "ent2": "PAWN"
+      "ent2": "Pawns"
     },
     {
       "id": 246,
       "type": "TYPE_OF",
       "ent1": "WHITE_F_PAWN",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 247,
       "type": "TYPE_OF",
       "ent1": "WHITE_F_PAWN",
-      "ent2": "WHITE_PIECE"
+      "ent2": "WhitePieces"
     },
     {
       "id": 248,
       "type": "TYPE_OF",
       "ent1": "WHITE_G_PAWN",
-      "ent2": "PAWN"
+      "ent2": "Pawns"
     },
     {
       "id": 249,
       "type": "TYPE_OF",
       "ent1": "WHITE_G_PAWN",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 250,
       "type": "TYPE_OF",
       "ent1": "WHITE_G_PAWN",
-      "ent2": "WHITE_PIECE"
+      "ent2": "WhitePieces"
     },
     {
       "id": 251,
       "type": "TYPE_OF",
       "ent1": "WHITE_H_PAWN",
-      "ent2": "PAWN"
+      "ent2": "Pawns"
     },
     {
       "id": 252,
       "type": "TYPE_OF",
       "ent1": "WHITE_H_PAWN",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 253,
       "type": "TYPE_OF",
       "ent1": "WHITE_H_PAWN",
-      "ent2": "WHITE_PIECE"
+      "ent2": "WhitePieces"
     },
     {
       "id": 254,
       "type": "TYPE_OF",
       "ent1": "BLACK_KING",
-      "ent2": "KING"
+      "ent2": "Kings"
     },
     {
       "id": 255,
       "type": "TYPE_OF",
       "ent1": "BLACK_KING",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 256,
       "type": "TYPE_OF",
       "ent1": "BLACK_KING",
-      "ent2": "BLACK_PIECE"
+      "ent2": "BlackPieces"
     },
     {
       "id": 257,
       "type": "TYPE_OF",
       "ent1": "BLACK_QUEEN",
-      "ent2": "QUEEN"
+      "ent2": "Queens"
     },
     {
       "id": 258,
       "type": "TYPE_OF",
       "ent1": "BLACK_QUEEN",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 259,
       "type": "TYPE_OF",
       "ent1": "BLACK_QUEEN",
-      "ent2": "BLACK_PIECE"
+      "ent2": "BlackPieces"
     },
     {
       "id": 260,
       "type": "TYPE_OF",
       "ent1": "BLACK_A_ROOK",
-      "ent2": "ROOK"
+      "ent2": "Rooks"
     },
     {
       "id": 261,
       "type": "TYPE_OF",
       "ent1": "BLACK_A_ROOK",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 262,
       "type": "TYPE_OF",
       "ent1": "BLACK_A_ROOK",
-      "ent2": "BLACK_PIECE"
+      "ent2": "BlackPieces"
     },
     {
       "id": 263,
       "type": "TYPE_OF",
       "ent1": "BLACK_B_KNIGHT",
-      "ent2": "KNIGHT"
+      "ent2": "Knights"
     },
     {
       "id": 264,
       "type": "TYPE_OF",
       "ent1": "BLACK_B_KNIGHT",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 265,
       "type": "TYPE_OF",
       "ent1": "BLACK_B_KNIGHT",
-      "ent2": "BLACK_PIECE"
+      "ent2": "BlackPieces"
     },
     {
       "id": 266,
       "type": "TYPE_OF",
       "ent1": "BLACK_C_ARCHER",
-      "ent2": "ARCHER"
+      "ent2": "Archers"
     },
     {
       "id": 267,
       "type": "TYPE_OF",
       "ent1": "BLACK_C_ARCHER",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 268,
       "type": "TYPE_OF",
       "ent1": "BLACK_C_ARCHER",
-      "ent2": "BLACK_PIECE"
+      "ent2": "BlackPieces"
     },
     {
       "id": 269,
       "type": "TYPE_OF",
       "ent1": "BLACK_F_ARCHER",
-      "ent2": "ARCHER"
+      "ent2": "Archers"
     },
     {
       "id": 270,
       "type": "TYPE_OF",
       "ent1": "BLACK_F_ARCHER",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 271,
       "type": "TYPE_OF",
       "ent1": "BLACK_F_ARCHER",
-      "ent2": "BLACK_PIECE"
+      "ent2": "BlackPieces"
     },
     {
       "id": 272,
       "type": "TYPE_OF",
       "ent1": "BLACK_G_KNIGHT",
-      "ent2": "KNIGHT"
+      "ent2": "Knights"
     },
     {
       "id": 273,
       "type": "TYPE_OF",
       "ent1": "BLACK_G_KNIGHT",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 274,
       "type": "TYPE_OF",
       "ent1": "BLACK_G_KNIGHT",
-      "ent2": "BLACK_PIECE"
+      "ent2": "BlackPieces"
     },
     {
       "id": 275,
       "type": "TYPE_OF",
       "ent1": "BLACK_H_ROOK",
-      "ent2": "ROOK"
+      "ent2": "Rooks"
     },
     {
       "id": 276,
       "type": "TYPE_OF",
       "ent1": "BLACK_H_ROOK",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 277,
       "type": "TYPE_OF",
       "ent1": "BLACK_H_ROOK",
-      "ent2": "BLACK_PIECE"
+      "ent2": "BlackPieces"
     },
     {
       "id": 278,
       "type": "TYPE_OF",
       "ent1": "BLACK_A_PAWN",
-      "ent2": "PAWN"
+      "ent2": "Pawns"
     },
     {
       "id": 279,
       "type": "TYPE_OF",
       "ent1": "BLACK_A_PAWN",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 280,
       "type": "TYPE_OF",
       "ent1": "BLACK_A_PAWN",
-      "ent2": "BLACK_PIECE"
+      "ent2": "BlackPieces"
     },
     {
       "id": 281,
       "type": "TYPE_OF",
       "ent1": "BLACK_B_PAWN",
-      "ent2": "PAWN"
+      "ent2": "Pawns"
     },
     {
       "id": 282,
       "type": "TYPE_OF",
       "ent1": "BLACK_B_PAWN",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 283,
       "type": "TYPE_OF",
       "ent1": "BLACK_B_PAWN",
-      "ent2": "BLACK_PIECE"
+      "ent2": "BlackPieces"
     },
     {
       "id": 284,
       "type": "TYPE_OF",
       "ent1": "BLACK_C_PAWN",
-      "ent2": "PAWN"
+      "ent2": "Pawns"
     },
     {
       "id": 285,
       "type": "TYPE_OF",
       "ent1": "BLACK_C_PAWN",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 286,
       "type": "TYPE_OF",
       "ent1": "BLACK_C_PAWN",
-      "ent2": "BLACK_PIECE"
+      "ent2": "BlackPieces"
     },
     {
       "id": 287,
       "type": "TYPE_OF",
       "ent1": "BLACK_D_PAWN",
-      "ent2": "PAWN"
+      "ent2": "Pawns"
     },
     {
       "id": 288,
       "type": "TYPE_OF",
       "ent1": "BLACK_D_PAWN",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 289,
       "type": "TYPE_OF",
       "ent1": "BLACK_D_PAWN",
-      "ent2": "BLACK_PIECE"
+      "ent2": "BlackPieces"
     },
     {
       "id": 290,
       "type": "TYPE_OF",
       "ent1": "BLACK_E_PAWN",
-      "ent2": "PAWN"
+      "ent2": "Pawns"
     },
     {
       "id": 291,
       "type": "TYPE_OF",
       "ent1": "BLACK_E_PAWN",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 292,
       "type": "TYPE_OF",
       "ent1": "BLACK_E_PAWN",
-      "ent2": "BLACK_PIECE"
+      "ent2": "BlackPieces"
     },
     {
       "id": 293,
       "type": "TYPE_OF",
       "ent1": "BLACK_F_PAWN",
-      "ent2": "PAWN"
+      "ent2": "Pawns"
     },
     {
       "id": 294,
       "type": "TYPE_OF",
       "ent1": "BLACK_F_PAWN",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 295,
       "type": "TYPE_OF",
       "ent1": "BLACK_F_PAWN",
-      "ent2": "BLACK_PIECE"
+      "ent2": "BlackPieces"
     },
     {
       "id": 296,
       "type": "TYPE_OF",
       "ent1": "BLACK_G_PAWN",
-      "ent2": "PAWN"
+      "ent2": "Pawns"
     },
     {
       "id": 297,
       "type": "TYPE_OF",
       "ent1": "BLACK_G_PAWN",
-      "ent2": "PIECE"
+      "ent2": "Pieces"
     },
     {
       "id": 298,
       "type": "TYPE_OF",
       "ent1": "BLACK_G_PAWN",
-      "ent2": "BLACK_PIECE"
+      "ent2": "BlackPieces"
     }
   ]
 }

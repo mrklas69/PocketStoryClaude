@@ -140,7 +140,7 @@ def _in_graveyard(world: World, entity_id: str) -> bool:
     if location is None:
         return False
     return any(
-        r.type == RelationType.TYPE_OF and r.ent1 == location.id and r.ent2 == "GRAVEYARD"
+        r.type == RelationType.TYPE_OF and r.ent1 == location.id and r.ent2 == "Graveyards"
         for r in world.relations.values()
     )
 
