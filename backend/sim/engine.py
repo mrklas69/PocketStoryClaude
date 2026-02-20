@@ -23,6 +23,7 @@ import math
 import random
 
 from backend.core.world import World
+from backend.core.entity import EntityType
 from backend.core.relation import Relation, RelationType
 
 
@@ -40,31 +41,58 @@ def _process_produce(world: World) -> list[str]:
     """Apply all PRODUCE relations.
 
     Either/or yield mode:
-      - lambda > 0  → stochastic: draw from Poisson(lambda), capped at max_yield
+      - lambda > 0  → stochastic: draw from Poisson(lambda), capped at number
       - lambda == 0 → deterministic: fixed yield equal to number
     Stock cap (optional): if both producer.capacity and item.capacity are set,
     total stock is capped at producer.capacity × item.capacity.
+
+    Type-based producer: if ent1 is not a known entity ID, it is treated as a
+    TYPE_OF category name. All ENVI entities of that type are found; those
+    occupied by at least one CHAR are excluded. One empty ENVI is chosen at
+    random to receive the produced items this tick.
     """
     log: list[str] = []
     produce_rels = [r for r in world.relations.values() if r.type == RelationType.PRODUCE]
     for r in produce_rels:
-        amount = _poisson(r.lambda_) if r.lambda_ > 0 else r.number
+        amount = _poisson(r.lambda_, r.number) if r.lambda_ > 0 else r.number
         if amount == 0:
             continue
 
-        producer = world.get(r.ent1)
         item = world.get(r.ent2)
 
-        # Find existing LOCATION(ent1 → ent2) to read current stock.
+        # Resolve producer: direct entity or type-based (pick random empty ENVI).
+        # UNIQUE entities are archetypes/type-names — treat them as type-based producers.
+        producer = world.get(r.ent1)
+        if producer is None or producer.type == EntityType.UNIQUE:
+            # Type-based: find all ENVI entities with TYPE_OF(x, r.ent1).
+            candidates = [
+                world.get(rel.ent1) for rel in world.relations.values()
+                if rel.type == RelationType.TYPE_OF and rel.ent2 == r.ent1
+                and world.get(rel.ent1) is not None
+                and world.get(rel.ent1).type == EntityType.ENVI
+            ]
+            # Exclude ENVIs that already hold a CHAR child (occupied squares).
+            occupied = {
+                rel.ent1 for rel in world.relations.values()
+                if rel.type == RelationType.LOCATION
+                and world.get(rel.ent2) is not None
+                and world.get(rel.ent2).type == EntityType.CHAR
+            }
+            candidates = [e for e in candidates if e.id not in occupied]
+            if not candidates:
+                continue
+            producer = random.choice(candidates)
+
+        # Find existing LOCATION(producer.id → ent2) to read current stock.
         loc = next(
             (l for l in world.relations.values()
-             if l.type == RelationType.LOCATION and l.ent1 == r.ent1 and l.ent2 == r.ent2),
+             if l.type == RelationType.LOCATION and l.ent1 == producer.id and l.ent2 == r.ent2),
             None,
         )
         current = loc.number if loc is not None else 0
 
         # Cap: producer.capacity × item.capacity (only when both are defined).
-        if (producer is not None and item is not None
+        if (item is not None
                 and producer.capacity is not None and item.capacity is not None):
             stock_cap = producer.capacity * item.capacity
             amount = min(amount, stock_cap - current)
@@ -79,7 +107,7 @@ def _process_produce(world: World) -> list[str]:
             world.relations[new_id] = Relation(
                 id=new_id,
                 type=RelationType.LOCATION,
-                ent1=r.ent1,
+                ent1=producer.id,
                 ent2=r.ent2,
                 number=amount,
             )

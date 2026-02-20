@@ -483,7 +483,8 @@
       "type": "PRODUCE",
       "ent1": "FOREST",
       "ent2": "WOOD",
-      "lambda": 0.4
+      "lambda": 0.4,
+      "number": 4
     },
     {
       "id": 300,
