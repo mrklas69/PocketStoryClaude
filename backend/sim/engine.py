@@ -209,7 +209,7 @@ def _process_sums_hp(world: World) -> list[str]:
         if loc_rel.hp != old_hp:
             causes = "+".join(name for name, _ in behaviors)
             if loc_rel.hp == 0:
-                loc_rel.number = 0
+                del world.relations[loc_rel.id]
                 log.append(f"{item.name}: HP {old_hp} -> 0  [{causes}] [WIPED]")
             else:
                 log.append(f"{item.name}: HP {old_hp} -> {loc_rel.hp}  [{causes}]")
