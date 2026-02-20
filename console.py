@@ -36,7 +36,7 @@ def _hp_bar(hp: int, hp_max: int) -> str:
     filled = round(ratio * HP_BAR_WIDTH)
     bar    = "#" * filled + "." * (HP_BAR_WIDTH - filled)
     colour = "green" if ratio > 0.5 else ("yellow" if ratio > 0.25 else "red")
-    return f"[{colour}][{bar}][/] {hp}/{hp_max}"
+    return f"[{colour}]{bar}[/] {hp}/{hp_max}"
 
 
 def _signed(n: int) -> str:
