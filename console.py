@@ -136,7 +136,7 @@ def build_display(world: World, tick_num: int, log: deque, full: bool) -> Group:
         tree = Tree(label(roots[0], full=full))
         add_children(world, roots[0].id, tree, full)
     else:
-        tree = Tree("[bold]World[/]")
+        tree = Tree("[bold]PocketWorld[/]")
         for root in roots:
             subtree = tree.add(label(root, full=full))
             add_children(world, root.id, subtree, full)
