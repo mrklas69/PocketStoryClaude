@@ -1,14 +1,35 @@
 import json
+from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Any
 
 from .entity import Entity, EntityType, can_contain
 from .relation import Relation, RelationType
+
+
+@dataclass
+class WorldManifest:
+    """Static metadata about a world — who made it, what it is."""
+    author: str = ""
+    created: str = ""        # ISO date, e.g. "2026-02-20"
+    version: int = 1
+    lore: str = ""           # longer narrative / flavour text
+
+
+@dataclass
+class WorldMeta:
+    """Runtime state of a world — persisted in the 'meta' JSON block."""
+    tick: int = 0
+    turn: str | None = None          # active player/side; None = not turn-based
+    vars: dict[str, Any] = field(default_factory=dict)  # world-specific variables
 
 
 class World:
     def __init__(self, name: str, description: str = ""):
         self.name: str = name
         self.description: str = description
+        self.manifest: WorldManifest = WorldManifest()
+        self.meta: WorldMeta = WorldMeta()
         self.entities: dict[str, Entity] = {}
         self.relations: dict[int, Relation] = {}
 
@@ -194,9 +215,19 @@ class World:
     # ── Serialization ───────────────────────────────────────────────────────
 
     def save(self, path: str | Path) -> None:
+        manifest: dict[str, Any] = {"author": self.manifest.author, "created": self.manifest.created, "version": self.manifest.version}
+        if self.manifest.lore:
+            manifest["lore"] = self.manifest.lore
+        meta: dict[str, Any] = {"tick": self.meta.tick}
+        if self.meta.turn is not None:
+            meta["turn"] = self.meta.turn
+        if self.meta.vars:
+            meta["vars"] = self.meta.vars
         data = {
             "name": self.name,
             "description": self.description,
+            "manifest": manifest,
+            "meta": meta,
             "entities":  [_entity_to_dict(e)  for e in self.entities.values()],
             "relations": [_relation_to_dict(r) for r in self.relations.values()],
         }
@@ -209,6 +240,17 @@ class World:
     def load(cls, path: str | Path) -> "World":
         data = json.loads(Path(path).read_text(encoding="utf-8"))
         world = cls(data["name"], data.get("description", ""))
+
+        mf = data.get("manifest", {})
+        world.manifest.author  = mf.get("author", "")
+        world.manifest.created = mf.get("created", "")
+        world.manifest.version = mf.get("version", 1)
+        world.manifest.lore    = mf.get("lore", "")
+
+        m = data.get("meta", {})
+        world.meta.tick = m.get("tick", 0)
+        world.meta.turn = m.get("turn")
+        world.meta.vars = m.get("vars", {})
 
         ids = [e["id"] for e in data["entities"]]
         if len(ids) != len(set(ids)):

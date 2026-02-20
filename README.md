@@ -35,4 +35,12 @@ The project is strictly layered:
 
 ---
 
-*Development diary and task list: see [DIARY.md](DIARY.md) and [TODO.md](TODO.md)*
+## Project docs
+
+| File | Purpose |
+|---|---|
+| [TODO.md](TODO.md) | Active tasks |
+| [IDEAS.md](IDEAS.md) | Raw ideas, not yet tasks |
+| [DONE.md](DONE.md) | Archive of completed work |
+| [GLOSSARY.md](GLOSSARY.md) | Canonical terminology |
+| [DIARY.md](DIARY.md) | Session log |

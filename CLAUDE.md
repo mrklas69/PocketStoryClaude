@@ -8,8 +8,16 @@
 
 ## Project
 PocketStory is a small simulated world — a blend of Tamagotchi and light strategy game.
-Čtyři řídící dokumenty: README.md, CLAUDE.md, TODO.md, DIARY.md
 Early concept phase.
+
+Řídící dokumenty:
+- `README.md` — project overview
+- `CLAUDE.md` — instructions for Claude
+- `GLOSSARY.md` — canonical terminology
+- `TODO.md` — active tasks (`[ ]` and `[~]` only)
+- `IDEAS.md` — free-form ideas, not yet tasks
+- `DONE.md` — archive of completed tasks
+- `DIARY.md` — session log
 
 ## Code Style
 > TBD — will be filled in as the tech stack is decided.
@@ -18,11 +26,13 @@ Early concept phase.
 - Keep solutions simple and focused. No over-engineering.
 - Discuss ideas before writing code.
 - Track time and progress in DIARY.md.
-- Track ideas and tasks in TODO.md.
+- Track raw ideas in IDEAS.md; promote to TODO.md only when ready to act.
+- Completed tasks move from TODO.md to DONE.md.
 - Proofread user's English and correct typos/mistakes, especially in code identifiers, class names, and documentation.
 
 ## Workflow
 1. Discuss concept or task in chat
-2. Update TODO.md if needed
+2. Raw ideas → IDEAS.md; concrete tasks → TODO.md
 3. Write code
-4. Log session in DIARY.md
+4. Move completed tasks to DONE.md
+5. Log session in DIARY.md

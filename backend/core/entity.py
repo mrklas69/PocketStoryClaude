@@ -4,10 +4,10 @@ from typing import Optional
 
 
 class EntityType(Enum):
-    ENVI   = "ENVI"    # Prostředí, kontejnery (obsahují enatity) NUMBER = max. počet slotů ~ Kulisy
-    CHAR   = "CHAR"    # Hráči, NPC, démoni (autonomní entitiy) ~ Herci
+    CHAR   = "CHAR"    # Hráči, NPC, démoni (autonomní entity) ~ Herci
+    ENVI   = "ENVI"    # Prostředí, kontejnery (obsahují entity) NUMBER = max. počet slotů ~ Kulisy
     UNIQUE = "UNIQUE"  # Unikátní objekty, předměty — unique item (cannot stack) CAPACITY = 1 ~ Rekvizity
-    SUMS   = "SUMS"    # Hromadné objekty, zdroje (lze stackovat) CAPACITY = max. počet slotů v jednom stacku ~ Rekvizity
+    SUMS   = "SUMS"    # Hromadné objekty, zdroje (lze stackovat) CAPACITY = max. počet slotů v jednom stacku ~ Zásoby
 
 
 # Containment rules: which entity types can be children of which

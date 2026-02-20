@@ -3,9 +3,11 @@ import time
 from pathlib import Path
 from collections import deque
 
+from rich.columns import Columns
 from rich.console import Console, Group
 from rich.live import Live
 from rich.panel import Panel
+from rich.rule import Rule
 from rich.tree import Tree
 from rich.text import Text
 
@@ -17,11 +19,13 @@ from backend.sim.tick import tick
 console = Console()
 
 TYPE_STYLE = {
-    EntityType.ENVI:   "[bold blue]ENVI[/]",
     EntityType.CHAR:   "[bold cyan]CHAR[/]",
+    EntityType.ENVI:   "[bold blue]ENVI[/]",
     EntityType.UNIQUE: "[bold magenta]UNIQUE[/]",
     EntityType.SUMS:   "[bold white]SUMS[/]",
 }
+
+_TYPE_ORDER = [t.value for t in EntityType]  # canonical display order: CHAR, ENVI, UNIQUE, SUMS
 
 HP_BAR_WIDTH = 10
 LOG_LINES    = 8
@@ -80,6 +84,47 @@ def add_children(world: World, parent_id: str, node: Tree, full: bool) -> None:
         add_children(world, child.id, child_node, full)
 
 
+def _build_manifest_panel(world: World) -> Panel:
+    """Header panel shown only in --full mode."""
+    mf = world.manifest
+    m  = world.meta
+
+    # Stats computed on the fly
+    from collections import Counter
+    type_counts = Counter(e.type.value for e in world.entities.values())
+    rel_counts  = Counter(r.type.value for r in world.relations.values())
+
+    stats = "  ".join(
+        f"[dim]{k}:[/] {v}"
+        for k, v in sorted(type_counts.items(), key=lambda x: _TYPE_ORDER.index(x[0]) if x[0] in _TYPE_ORDER else 99)
+    ) + "   " + "  ".join(
+        f"[dim]{k}:[/] {v}"
+        for k, v in sorted(rel_counts.items())
+    )
+
+    lines: list = []
+    if mf.author or mf.created:
+        meta_line = Text()
+        if mf.author:
+            meta_line.append(f"by {mf.author}", style="bold")
+        if mf.created:
+            meta_line.append(f"  {mf.created}", style="dim")
+        meta_line.append(f"  v{mf.version}", style="dim")
+        if m.turn:
+            meta_line.append(f"  turn: {m.turn}", style="yellow")
+        lines.append(meta_line)
+    if mf.lore:
+        lines.append(Text(mf.lore, style="italic dim"))
+    lines.append(Text.from_markup(stats))
+
+    return Panel(
+        Group(*lines),
+        title=f"[bold]{world.name}[/]",
+        subtitle=f"[dim]{world.description}[/]" if world.description else "",
+        border_style="cyan",
+    )
+
+
 def build_display(world: World, tick_num: int, log: deque, full: bool) -> Group:
     """Build the full renderable for one Live refresh."""
     # ── World tree ───────────────────────────────────────────────
@@ -100,7 +145,7 @@ def build_display(world: World, tick_num: int, log: deque, full: bool) -> Group:
     world_panel = Panel(
         tree,
         title=f"[bold]{world.name}[/]  [dim]tick {tick_num}[/]",
-        subtitle=f"[dim]{world.description}[/]" if world.description else "",
+        subtitle=f"[dim]{world.description}[/]" if world.description and not full else "",
         border_style="blue",
     )
 
@@ -112,6 +157,8 @@ def build_display(world: World, tick_num: int, log: deque, full: bool) -> Group:
 
     log_panel = Panel(log_text, title="[dim]Event log[/]", border_style="dim")
 
+    if full:
+        return Group(_build_manifest_panel(world), world_panel, log_panel)
     return Group(world_panel, log_panel)
 
 

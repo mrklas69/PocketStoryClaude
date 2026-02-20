@@ -12,8 +12,8 @@ Definováno jako Python enum `EntityType` v `backend/core/entity.py`.
 
 | Hodnota  | Popis |
 |----------|-------|
-| `ENVI`   | Prostředí / kontejner (místnost, pole, oblast). Pasivní, bez HP (zpravidla). |
 | `CHAR`   | Postava / aktér. Má HP, rank, může nést předměty. |
+| `ENVI`   | Prostředí / kontejner (místnost, pole, oblast). Pasivní, bez HP (zpravidla). |
 | `UNIQUE` | Unikátní předmět nebo archetype. Kapacita povinná, pokud nese jiné entity. |
 | `SUMS`   | Součtovatelná hromada (šípy, zlato…). Má `number`, nemá individuální identitu. |
 

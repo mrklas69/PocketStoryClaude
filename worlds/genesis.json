@@ -1,6 +1,12 @@
 {
   "name": "Genesis",
   "description": "In the beginning, only God, Heaven, and Earth. Everything that might exist has yet to be created. The world is formless and empty — and one fallen angel is very, very bored.",
+  "manifest": {
+    "author": "mrklas",
+    "created": "2026-02-20",
+    "version": 1,
+    "lore": "In the beginning, there was only God and the Void. Then came Felix — brilliant, restless, and insufferably bored. He was made to help create, but creation requires suffering, and suffering requires falling. So Felix falls. And God waits. And when Felix touches the bottom, God says: 'Now. Let us begin.'"
+  },
   "entities": [
     {
       "id": "COSMOS",
@@ -40,25 +46,118 @@
     }
   ],
   "relations": [
-    { "id": 1, "type": "LOCATION", "ent1": "COSMOS", "ent2": "HEAVEN", "number": 1 },
-    { "id": 2, "type": "LOCATION", "ent1": "COSMOS", "ent2": "EARTH",  "number": 1 },
-    { "id": 3, "type": "LOCATION", "ent1": "HEAVEN", "ent2": "GOD",    "number": 1 },
-    { "id": 4, "type": "LOCATION", "ent1": "EARTH",  "ent2": "FELIX",  "number": 1 },
-
-    { "id": 100, "type": "SKILL", "ent1": "GOD", "ent2": "CREATE",    "number": 100 },
-    { "id": 101, "type": "SKILL", "ent1": "GOD", "ent2": "DESTROY",   "number": 100 },
-    { "id": 102, "type": "SKILL", "ent1": "GOD", "ent2": "TRANSFORM", "number": 100 },
-    { "id": 103, "type": "SKILL", "ent1": "GOD", "ent2": "SEPARATE",  "number": 100 },
-
-    { "id": 200, "type": "TYPE_OF", "ent1": "GOD",    "ent2": "DIVINE"       },
-    { "id": 201, "type": "TYPE_OF", "ent1": "GOD",    "ent2": "ETERNAL"      },
-    { "id": 202, "type": "TYPE_OF", "ent1": "FELIX",  "ent2": "FALLEN_ANGEL" },
-    { "id": 203, "type": "TYPE_OF", "ent1": "FELIX",  "ent2": "ANGEL"        },
-    { "id": 204, "type": "TYPE_OF", "ent1": "HEAVEN", "ent2": "DIVINE_REALM" },
-    { "id": 205, "type": "TYPE_OF", "ent1": "EARTH",  "ent2": "MORTAL_REALM" },
-
-    { "id": 300, "type": "BEHAVIOR", "ent1": "FALLEN_ANGEL", "ent2": "DESPAIR",   "number": 5 },
-    { "id": 301, "type": "BEHAVIOR", "ent1": "MORTAL_REALM", "ent2": "EMPTINESS", "number": 2 },
-    { "id": 302, "type": "BEHAVIOR", "ent1": "DIVINE_REALM", "ent2": "STASIS",    "number": 0 }
+    {
+      "id": 1,
+      "type": "LOCATION",
+      "ent1": "COSMOS",
+      "ent2": "HEAVEN",
+      "number": 1
+    },
+    {
+      "id": 2,
+      "type": "LOCATION",
+      "ent1": "COSMOS",
+      "ent2": "EARTH",
+      "number": 1
+    },
+    {
+      "id": 3,
+      "type": "LOCATION",
+      "ent1": "HEAVEN",
+      "ent2": "GOD",
+      "number": 1
+    },
+    {
+      "id": 4,
+      "type": "LOCATION",
+      "ent1": "EARTH",
+      "ent2": "FELIX",
+      "number": 1
+    },
+    {
+      "id": 100,
+      "type": "SKILL",
+      "ent1": "GOD",
+      "ent2": "CREATE",
+      "number": 100
+    },
+    {
+      "id": 101,
+      "type": "SKILL",
+      "ent1": "GOD",
+      "ent2": "DESTROY",
+      "number": 100
+    },
+    {
+      "id": 102,
+      "type": "SKILL",
+      "ent1": "GOD",
+      "ent2": "TRANSFORM",
+      "number": 100
+    },
+    {
+      "id": 103,
+      "type": "SKILL",
+      "ent1": "GOD",
+      "ent2": "SEPARATE",
+      "number": 100
+    },
+    {
+      "id": 200,
+      "type": "TYPE_OF",
+      "ent1": "GOD",
+      "ent2": "DIVINE"
+    },
+    {
+      "id": 201,
+      "type": "TYPE_OF",
+      "ent1": "GOD",
+      "ent2": "ETERNAL"
+    },
+    {
+      "id": 202,
+      "type": "TYPE_OF",
+      "ent1": "FELIX",
+      "ent2": "FALLEN_ANGEL"
+    },
+    {
+      "id": 203,
+      "type": "TYPE_OF",
+      "ent1": "FELIX",
+      "ent2": "ANGEL"
+    },
+    {
+      "id": 204,
+      "type": "TYPE_OF",
+      "ent1": "HEAVEN",
+      "ent2": "DIVINE_REALM"
+    },
+    {
+      "id": 205,
+      "type": "TYPE_OF",
+      "ent1": "EARTH",
+      "ent2": "MORTAL_REALM"
+    },
+    {
+      "id": 300,
+      "type": "BEHAVIOR",
+      "ent1": "FALLEN_ANGEL",
+      "ent2": "DESPAIR",
+      "number": 5
+    },
+    {
+      "id": 301,
+      "type": "BEHAVIOR",
+      "ent1": "MORTAL_REALM",
+      "ent2": "EMPTINESS",
+      "number": 2
+    },
+    {
+      "id": 302,
+      "type": "BEHAVIOR",
+      "ent1": "DIVINE_REALM",
+      "ent2": "STASIS",
+      "number": 0
+    }
   ]
 }

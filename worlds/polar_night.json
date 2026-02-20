@@ -1,6 +1,12 @@
 {
   "name": "Chronicle of the Polar Night Dynasty",
   "description": "The reign of King Harold and Queen Indrid, and the wandering of Princess Freya. Somewhere in the forest, a sealed flask changes hands.",
+  "manifest": {
+    "author": "mrklas",
+    "created": "2026-02-20",
+    "version": 1,
+    "lore": "The sun has not risen for three months. In the frozen capital of the Polar Dynasty, King Harold rules with a weary hand. His daughter Freya has vanished into the forest. The court mage Indrid knows something she will not say. And somewhere in the vault, a flask of Wildfire Oil waits for whoever holds the Iron Key."
+  },
   "entities": [
     {
       "id": "KINGDOM",
@@ -122,63 +128,362 @@
       "name": "Mana Potions",
       "type": "SUMS",
       "description": "Indrid's personal reserve. Stored in the vault. Do not drink. She will know."
+    },
+    {
+      "id": "HUMAN",
+      "name": "Human",
+      "type": "UNIQUE",
+      "description": "A mortal inhabitant of the Polar Night realm. Subject to cold, time, and dynasty."
+    },
+    {
+      "id": "ROYALTY",
+      "name": "Royalty",
+      "type": "UNIQUE",
+      "description": "A member of the reigning dynasty. Carries the weight of blood, duty, and legacy."
+    },
+    {
+      "id": "WEAPON",
+      "name": "Weapon",
+      "type": "UNIQUE",
+      "description": "An instrument of force. Each carries its own history of hands and wounds."
+    },
+    {
+      "id": "MAGICAL",
+      "name": "Magical",
+      "type": "UNIQUE",
+      "description": "Imbued with arcane energy. Responds to mana and the will of its bearer."
     }
   ],
   "relations": [
-    { "id": 1,  "type": "LOCATION", "ent1": "KINGDOM",     "ent2": "CASTLE",         "number": 1   },
-    { "id": 2,  "type": "LOCATION", "ent1": "KINGDOM",     "ent2": "FOREST",         "number": 1   },
-    { "id": 3,  "type": "LOCATION", "ent1": "CASTLE",      "ent2": "THRONE_ROOM",    "number": 1   },
-    { "id": 4,  "type": "LOCATION", "ent1": "CASTLE",      "ent2": "GREAT_HALL",     "number": 1   },
-    { "id": 5,  "type": "LOCATION", "ent1": "CASTLE",      "ent2": "ROYAL_VAULT",    "number": 1   },
-    { "id": 6,  "type": "LOCATION", "ent1": "THRONE_ROOM", "ent2": "HAROLD",         "number": 1   },
-    { "id": 7,  "type": "LOCATION", "ent1": "GREAT_HALL",  "ent2": "INDRID",         "number": 1   },
-    { "id": 8,  "type": "LOCATION", "ent1": "FOREST",      "ent2": "FREYA",          "number": 1   },
-    { "id": 9,  "type": "LOCATION", "ent1": "HAROLD",      "ent2": "CROWN_IRON",     "number": 1   },
-    { "id": 10, "type": "LOCATION", "ent1": "HAROLD",      "ent2": "SWORD_FROSTBITE","number": 1   },
-    { "id": 11, "type": "LOCATION", "ent1": "HAROLD",      "ent2": "KEY_VAULT",      "number": 1   },
-    { "id": 12, "type": "LOCATION", "ent1": "INDRID",      "ent2": "STAFF_INDRID",   "number": 1   },
-    { "id": 13, "type": "LOCATION", "ent1": "FREYA",       "ent2": "FREYA_DAGGER",   "number": 1   },
-    { "id": 16, "type": "LOCATION", "ent1": "FREYA",       "ent2": "BYGUL",          "number": 1   },
-    { "id": 17, "type": "LOCATION", "ent1": "FREYA",       "ent2": "WILDFIRE_OIL",   "number": 1   },
-    { "id": 14, "type": "LOCATION", "ent1": "ROYAL_VAULT", "ent2": "GOLD_COINS",     "number": 500 },
-    { "id": 15, "type": "LOCATION", "ent1": "ROYAL_VAULT", "ent2": "MANA_POTIONS",   "number": 7   },
-
-    { "id": 100, "type": "SKILL", "ent1": "HAROLD", "ent2": "HOLD",          "number": 4  },
-    { "id": 101, "type": "SKILL", "ent1": "HAROLD", "ent2": "COMMAND",       "number": 10 },
-    { "id": 102, "type": "SKILL", "ent1": "HAROLD", "ent2": "SWORDSMANSHIP", "number": 7  },
-
-    { "id": 103, "type": "SKILL", "ent1": "INDRID", "ent2": "HOLD",          "number": 2  },
-    { "id": 104, "type": "SKILL", "ent1": "INDRID", "ent2": "MAGIC",         "number": 12 },
-    { "id": 105, "type": "SKILL", "ent1": "INDRID", "ent2": "DIPLOMACY",     "number": 9  },
-    { "id": 110, "type": "SKILL", "ent1": "INDRID", "ent2": "ALCHEMY",       "number": 5  },
-
-    { "id": 106, "type": "SKILL", "ent1": "FREYA",  "ent2": "HOLD",          "number": 3  },
-    { "id": 107, "type": "SKILL", "ent1": "FREYA",  "ent2": "MOVE",          "number": 8  },
-    { "id": 108, "type": "SKILL", "ent1": "FREYA",  "ent2": "STEALTH",       "number": 6  },
-    { "id": 109, "type": "SKILL", "ent1": "FREYA",  "ent2": "ARCHERY",       "number": 5  },
-
-    { "id": 200, "type": "TYPE_OF", "ent1": "HAROLD",         "ent2": "HUMAN"                  },
-    { "id": 201, "type": "TYPE_OF", "ent1": "HAROLD",         "ent2": "ROYALTY"                },
-    { "id": 202, "type": "TYPE_OF", "ent1": "INDRID",         "ent2": "HUMAN"                  },
-    { "id": 203, "type": "TYPE_OF", "ent1": "INDRID",         "ent2": "ROYALTY"                },
-    { "id": 204, "type": "TYPE_OF", "ent1": "INDRID",         "ent2": "MAGE"                   },
-    { "id": 205, "type": "TYPE_OF", "ent1": "FREYA",          "ent2": "HUMAN"                  },
-    { "id": 206, "type": "TYPE_OF", "ent1": "FREYA",          "ent2": "ROYALTY"                },
-    { "id": 207, "type": "TYPE_OF", "ent1": "CROWN_IRON",     "ent2": "REGALIA"                },
-    { "id": 208, "type": "TYPE_OF", "ent1": "SWORD_FROSTBITE","ent2": "WEAPON"                 },
-    { "id": 209, "type": "TYPE_OF", "ent1": "STAFF_INDRID",   "ent2": "WEAPON"                 },
-    { "id": 210, "type": "TYPE_OF", "ent1": "STAFF_INDRID",   "ent2": "MAGICAL"                },
-    { "id": 211, "type": "TYPE_OF", "ent1": "FREYA_DAGGER",   "ent2": "WEAPON"                 },
-    { "id": 212, "type": "TYPE_OF", "ent1": "KEY_VAULT",      "ent2": "KEY"                    },
-    { "id": 213, "type": "TYPE_OF", "ent1": "GOLD_COINS",     "ent2": "CURRENCY"               },
-    { "id": 214, "type": "TYPE_OF", "ent1": "MANA_POTIONS",   "ent2": "CONSUMABLE"             },
-    { "id": 215, "type": "TYPE_OF", "ent1": "MANA_POTIONS",   "ent2": "MAGICAL"                },
-    { "id": 216, "type": "TYPE_OF", "ent1": "BYGUL",          "ent2": "CAT"                    },
-    { "id": 217, "type": "TYPE_OF", "ent1": "BYGUL",          "ent2": "ANIMAL"                 },
-    { "id": 218, "type": "TYPE_OF", "ent1": "WILDFIRE_OIL",  "ent2": "WEAPON"                 },
-    { "id": 219, "type": "TYPE_OF", "ent1": "WILDFIRE_OIL",  "ent2": "ALCHEMICAL_WEAPON"      },
-
-    { "id": 300, "type": "BEHAVIOR", "ent1": "HUMAN",  "ent2": "HUNGER", "number": 2 },
-    { "id": 301, "type": "BEHAVIOR", "ent1": "ANIMAL", "ent2": "HUNGER", "number": 1 }
+    {
+      "id": 1,
+      "type": "LOCATION",
+      "ent1": "KINGDOM",
+      "ent2": "CASTLE",
+      "number": 1
+    },
+    {
+      "id": 2,
+      "type": "LOCATION",
+      "ent1": "KINGDOM",
+      "ent2": "FOREST",
+      "number": 1
+    },
+    {
+      "id": 3,
+      "type": "LOCATION",
+      "ent1": "CASTLE",
+      "ent2": "THRONE_ROOM",
+      "number": 1
+    },
+    {
+      "id": 4,
+      "type": "LOCATION",
+      "ent1": "CASTLE",
+      "ent2": "GREAT_HALL",
+      "number": 1
+    },
+    {
+      "id": 5,
+      "type": "LOCATION",
+      "ent1": "CASTLE",
+      "ent2": "ROYAL_VAULT",
+      "number": 1
+    },
+    {
+      "id": 6,
+      "type": "LOCATION",
+      "ent1": "THRONE_ROOM",
+      "ent2": "HAROLD",
+      "number": 1
+    },
+    {
+      "id": 7,
+      "type": "LOCATION",
+      "ent1": "GREAT_HALL",
+      "ent2": "INDRID",
+      "number": 1
+    },
+    {
+      "id": 8,
+      "type": "LOCATION",
+      "ent1": "FOREST",
+      "ent2": "FREYA",
+      "number": 1
+    },
+    {
+      "id": 9,
+      "type": "LOCATION",
+      "ent1": "HAROLD",
+      "ent2": "CROWN_IRON",
+      "number": 1
+    },
+    {
+      "id": 10,
+      "type": "LOCATION",
+      "ent1": "HAROLD",
+      "ent2": "SWORD_FROSTBITE",
+      "number": 1
+    },
+    {
+      "id": 11,
+      "type": "LOCATION",
+      "ent1": "HAROLD",
+      "ent2": "KEY_VAULT",
+      "number": 1
+    },
+    {
+      "id": 12,
+      "type": "LOCATION",
+      "ent1": "INDRID",
+      "ent2": "STAFF_INDRID",
+      "number": 1
+    },
+    {
+      "id": 13,
+      "type": "LOCATION",
+      "ent1": "FREYA",
+      "ent2": "FREYA_DAGGER",
+      "number": 1
+    },
+    {
+      "id": 16,
+      "type": "LOCATION",
+      "ent1": "FREYA",
+      "ent2": "BYGUL",
+      "number": 1
+    },
+    {
+      "id": 17,
+      "type": "LOCATION",
+      "ent1": "FREYA",
+      "ent2": "WILDFIRE_OIL",
+      "number": 1
+    },
+    {
+      "id": 14,
+      "type": "LOCATION",
+      "ent1": "ROYAL_VAULT",
+      "ent2": "GOLD_COINS",
+      "number": 500
+    },
+    {
+      "id": 15,
+      "type": "LOCATION",
+      "ent1": "ROYAL_VAULT",
+      "ent2": "MANA_POTIONS",
+      "number": 7
+    },
+    {
+      "id": 100,
+      "type": "SKILL",
+      "ent1": "HAROLD",
+      "ent2": "HOLD",
+      "number": 4
+    },
+    {
+      "id": 101,
+      "type": "SKILL",
+      "ent1": "HAROLD",
+      "ent2": "COMMAND",
+      "number": 10
+    },
+    {
+      "id": 102,
+      "type": "SKILL",
+      "ent1": "HAROLD",
+      "ent2": "SWORDSMANSHIP",
+      "number": 7
+    },
+    {
+      "id": 103,
+      "type": "SKILL",
+      "ent1": "INDRID",
+      "ent2": "HOLD",
+      "number": 2
+    },
+    {
+      "id": 104,
+      "type": "SKILL",
+      "ent1": "INDRID",
+      "ent2": "MAGIC",
+      "number": 12
+    },
+    {
+      "id": 105,
+      "type": "SKILL",
+      "ent1": "INDRID",
+      "ent2": "DIPLOMACY",
+      "number": 9
+    },
+    {
+      "id": 110,
+      "type": "SKILL",
+      "ent1": "INDRID",
+      "ent2": "ALCHEMY",
+      "number": 5
+    },
+    {
+      "id": 106,
+      "type": "SKILL",
+      "ent1": "FREYA",
+      "ent2": "HOLD",
+      "number": 3
+    },
+    {
+      "id": 107,
+      "type": "SKILL",
+      "ent1": "FREYA",
+      "ent2": "MOVE",
+      "number": 8
+    },
+    {
+      "id": 108,
+      "type": "SKILL",
+      "ent1": "FREYA",
+      "ent2": "STEALTH",
+      "number": 6
+    },
+    {
+      "id": 109,
+      "type": "SKILL",
+      "ent1": "FREYA",
+      "ent2": "ARCHERY",
+      "number": 5
+    },
+    {
+      "id": 200,
+      "type": "TYPE_OF",
+      "ent1": "HAROLD",
+      "ent2": "HUMAN"
+    },
+    {
+      "id": 201,
+      "type": "TYPE_OF",
+      "ent1": "HAROLD",
+      "ent2": "ROYALTY"
+    },
+    {
+      "id": 202,
+      "type": "TYPE_OF",
+      "ent1": "INDRID",
+      "ent2": "HUMAN"
+    },
+    {
+      "id": 203,
+      "type": "TYPE_OF",
+      "ent1": "INDRID",
+      "ent2": "ROYALTY"
+    },
+    {
+      "id": 204,
+      "type": "TYPE_OF",
+      "ent1": "INDRID",
+      "ent2": "MAGE"
+    },
+    {
+      "id": 205,
+      "type": "TYPE_OF",
+      "ent1": "FREYA",
+      "ent2": "HUMAN"
+    },
+    {
+      "id": 206,
+      "type": "TYPE_OF",
+      "ent1": "FREYA",
+      "ent2": "ROYALTY"
+    },
+    {
+      "id": 207,
+      "type": "TYPE_OF",
+      "ent1": "CROWN_IRON",
+      "ent2": "REGALIA"
+    },
+    {
+      "id": 208,
+      "type": "TYPE_OF",
+      "ent1": "SWORD_FROSTBITE",
+      "ent2": "WEAPON"
+    },
+    {
+      "id": 209,
+      "type": "TYPE_OF",
+      "ent1": "STAFF_INDRID",
+      "ent2": "WEAPON"
+    },
+    {
+      "id": 210,
+      "type": "TYPE_OF",
+      "ent1": "STAFF_INDRID",
+      "ent2": "MAGICAL"
+    },
+    {
+      "id": 211,
+      "type": "TYPE_OF",
+      "ent1": "FREYA_DAGGER",
+      "ent2": "WEAPON"
+    },
+    {
+      "id": 212,
+      "type": "TYPE_OF",
+      "ent1": "KEY_VAULT",
+      "ent2": "KEY"
+    },
+    {
+      "id": 213,
+      "type": "TYPE_OF",
+      "ent1": "GOLD_COINS",
+      "ent2": "CURRENCY"
+    },
+    {
+      "id": 214,
+      "type": "TYPE_OF",
+      "ent1": "MANA_POTIONS",
+      "ent2": "CONSUMABLE"
+    },
+    {
+      "id": 215,
+      "type": "TYPE_OF",
+      "ent1": "MANA_POTIONS",
+      "ent2": "MAGICAL"
+    },
+    {
+      "id": 216,
+      "type": "TYPE_OF",
+      "ent1": "BYGUL",
+      "ent2": "CAT"
+    },
+    {
+      "id": 217,
+      "type": "TYPE_OF",
+      "ent1": "BYGUL",
+      "ent2": "ANIMAL"
+    },
+    {
+      "id": 218,
+      "type": "TYPE_OF",
+      "ent1": "WILDFIRE_OIL",
+      "ent2": "WEAPON"
+    },
+    {
+      "id": 219,
+      "type": "TYPE_OF",
+      "ent1": "WILDFIRE_OIL",
+      "ent2": "ALCHEMICAL_WEAPON"
+    },
+    {
+      "id": 300,
+      "type": "BEHAVIOR",
+      "ent1": "HUMAN",
+      "ent2": "HUNGER",
+      "number": 2
+    },
+    {
+      "id": 301,
+      "type": "BEHAVIOR",
+      "ent1": "ANIMAL",
+      "ent2": "HUNGER",
+      "number": 1
+    }
   ]
 }

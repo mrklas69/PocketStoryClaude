@@ -1,6 +1,12 @@
 {
   "name": "The Mathematical Universe",
   "description": "A world where number sets nest inside each other, constants dwell in their smallest home, and functions roam the real line.",
+  "manifest": {
+    "author": "mrklas",
+    "created": "2026-02-20",
+    "version": 1,
+    "lore": "Before things had names, there were numbers. The Mathematical Universe is the totality of all that can be precisely described — constants drifting through nested sets, functions mapping the infinite, primes standing indivisible at the foundations of arithmetic. Here, entropy runs backwards: the closer a thing is to its true place, the more whole it becomes."
+  },
   "entities": [
     {
       "id": "MATH_UNIVERSE",
@@ -119,55 +125,311 @@
       "number": 999,
       "hp": 100,
       "hp_max": 100
+    },
+    {
+      "id": "IRRATIONAL",
+      "name": "Irrational",
+      "type": "UNIQUE",
+      "description": "Cannot be expressed as a ratio of integers. Infinite, non-repeating — fills the gaps between rationals."
+    },
+    {
+      "id": "OPERATION",
+      "name": "Operation",
+      "type": "UNIQUE",
+      "description": "A mapping that transforms mathematical objects according to defined rules."
+    },
+    {
+      "id": "TRANSCENDENTAL",
+      "name": "Transcendental",
+      "type": "UNIQUE",
+      "description": "Not the root of any polynomial with rational coefficients. Escapes algebraic capture."
+    },
+    {
+      "id": "ALGEBRAIC",
+      "name": "Algebraic",
+      "type": "UNIQUE",
+      "description": "A root of a polynomial equation with rational coefficients. Lives between integers and transcendentals."
     }
   ],
   "relations": [
-    { "id": 1,  "type": "LOCATION", "ent1": "MATH_UNIVERSE", "ent2": "COMPLEX",    "number": 1 },
-    { "id": 2,  "type": "LOCATION", "ent1": "COMPLEX",       "ent2": "REALS",      "number": 1 },
-    { "id": 3,  "type": "LOCATION", "ent1": "REALS",         "ent2": "RATIONALS",  "number": 1 },
-    { "id": 4,  "type": "LOCATION", "ent1": "RATIONALS",     "ent2": "INTEGERS",   "number": 1 },
-    { "id": 5,  "type": "LOCATION", "ent1": "INTEGERS",      "ent2": "NATURALS",   "number": 1 },
-
-    { "id": 6,  "type": "LOCATION", "ent1": "NATURALS", "ent2": "CONST_ZERO", "number": 1  },
-    { "id": 7,  "type": "LOCATION", "ent1": "NATURALS", "ent2": "CONST_ONE",  "number": 1  },
-    { "id": 8,  "type": "LOCATION", "ent1": "NATURALS", "ent2": "PRIME",      "number": 8  },
-    { "id": 9,  "type": "LOCATION", "ent1": "REALS",    "ent2": "CONST_PI",   "number": 1  },
-    { "id": 10, "type": "LOCATION", "ent1": "REALS",    "ent2": "CONST_E",    "number": 1  },
-    { "id": 11, "type": "LOCATION", "ent1": "REALS",    "ent2": "CONST_PHI",  "number": 1  },
-    { "id": 12, "type": "LOCATION", "ent1": "COMPLEX",  "ent2": "CONST_I",    "number": 1  },
-
-    { "id": 13, "type": "LOCATION", "ent1": "REALS", "ent2": "FUNC_SQRT", "number": 1 },
-    { "id": 14, "type": "LOCATION", "ent1": "REALS", "ent2": "FUNC_EXP",  "number": 1 },
-    { "id": 15, "type": "LOCATION", "ent1": "REALS", "ent2": "FUNC_SIN",  "number": 1 },
-
-    { "id": 100, "type": "SKILL", "ent1": "FUNC_SQRT", "ent2": "MONOTONE",       "number": 1   },
-    { "id": 101, "type": "SKILL", "ent1": "FUNC_SQRT", "ent2": "DOMAIN_NONNEG",  "number": 1   },
-    { "id": 102, "type": "SKILL", "ent1": "FUNC_EXP",  "ent2": "MONOTONE",       "number": 1   },
-    { "id": 103, "type": "SKILL", "ent1": "FUNC_EXP",  "ent2": "RANGE_POSITIVE", "number": 1   },
-    { "id": 104, "type": "SKILL", "ent1": "FUNC_SIN",  "ent2": "PERIODIC",       "number": 6   },
-    { "id": 105, "type": "SKILL", "ent1": "FUNC_SIN",  "ent2": "AMPLITUDE",      "number": 1   },
-
-    { "id": 200, "type": "TYPE_OF", "ent1": "CONST_PI",   "ent2": "IRRATIONAL"             },
-    { "id": 201, "type": "TYPE_OF", "ent1": "CONST_PI",   "ent2": "TRANSCENDENTAL"         },
-    { "id": 202, "type": "TYPE_OF", "ent1": "CONST_E",    "ent2": "IRRATIONAL"             },
-    { "id": 203, "type": "TYPE_OF", "ent1": "CONST_E",    "ent2": "TRANSCENDENTAL"         },
-    { "id": 204, "type": "TYPE_OF", "ent1": "CONST_PHI",  "ent2": "IRRATIONAL"             },
-    { "id": 205, "type": "TYPE_OF", "ent1": "CONST_PHI",  "ent2": "ALGEBRAIC"              },
-    { "id": 206, "type": "TYPE_OF", "ent1": "CONST_I",    "ent2": "IMAGINARY"              },
-    { "id": 207, "type": "TYPE_OF", "ent1": "CONST_I",    "ent2": "ALGEBRAIC"              },
-    { "id": 208, "type": "TYPE_OF", "ent1": "CONST_ZERO", "ent2": "IDENTITY_ADDITIVE"      },
-    { "id": 209, "type": "TYPE_OF", "ent1": "CONST_ONE",  "ent2": "IDENTITY_MULTIPLICATIVE"},
-    { "id": 210, "type": "TYPE_OF", "ent1": "PRIME",      "ent2": "INDIVISIBLE"            },
-    { "id": 211, "type": "TYPE_OF", "ent1": "FUNC_SQRT",  "ent2": "OPERATION"              },
-    { "id": 212, "type": "TYPE_OF", "ent1": "FUNC_EXP",   "ent2": "OPERATION"              },
-    { "id": 213, "type": "TYPE_OF", "ent1": "FUNC_SIN",   "ent2": "OPERATION"              },
-    { "id": 214, "type": "TYPE_OF", "ent1": "FUNC_SIN",   "ent2": "TRIGONOMETRIC"          },
-
-    { "id": 300, "type": "BEHAVIOR", "ent1": "TRANSCENDENTAL", "ent2": "PROOF_EROSION",      "number": 3 },
-    { "id": 301, "type": "BEHAVIOR", "ent1": "IRRATIONAL",     "ent2": "APPROXIMATION_DRIFT","number": 2 },
-    { "id": 302, "type": "BEHAVIOR", "ent1": "IMAGINARY",      "ent2": "EXISTENCE_DOUBT",    "number": 2 },
-    { "id": 303, "type": "BEHAVIOR", "ent1": "OPERATION",      "ent2": "DOMAIN_DRIFT",       "number": 1 },
-    { "id": 304, "type": "BEHAVIOR", "ent1": "TRIGONOMETRIC",  "ent2": "OSCILLATION_LOSS",   "number": 1 },
-    { "id": 305, "type": "BEHAVIOR", "ent1": "INDIVISIBLE",    "ent2": "SIEVE_EROSION",      "number": 2 }
+    {
+      "id": 1,
+      "type": "LOCATION",
+      "ent1": "MATH_UNIVERSE",
+      "ent2": "COMPLEX",
+      "number": 1
+    },
+    {
+      "id": 2,
+      "type": "LOCATION",
+      "ent1": "COMPLEX",
+      "ent2": "REALS",
+      "number": 1
+    },
+    {
+      "id": 3,
+      "type": "LOCATION",
+      "ent1": "REALS",
+      "ent2": "RATIONALS",
+      "number": 1
+    },
+    {
+      "id": 4,
+      "type": "LOCATION",
+      "ent1": "RATIONALS",
+      "ent2": "INTEGERS",
+      "number": 1
+    },
+    {
+      "id": 5,
+      "type": "LOCATION",
+      "ent1": "INTEGERS",
+      "ent2": "NATURALS",
+      "number": 1
+    },
+    {
+      "id": 6,
+      "type": "LOCATION",
+      "ent1": "NATURALS",
+      "ent2": "CONST_ZERO",
+      "number": 1
+    },
+    {
+      "id": 7,
+      "type": "LOCATION",
+      "ent1": "NATURALS",
+      "ent2": "CONST_ONE",
+      "number": 1
+    },
+    {
+      "id": 8,
+      "type": "LOCATION",
+      "ent1": "NATURALS",
+      "ent2": "PRIME",
+      "number": 8
+    },
+    {
+      "id": 9,
+      "type": "LOCATION",
+      "ent1": "REALS",
+      "ent2": "CONST_PI",
+      "number": 1
+    },
+    {
+      "id": 10,
+      "type": "LOCATION",
+      "ent1": "REALS",
+      "ent2": "CONST_E",
+      "number": 1
+    },
+    {
+      "id": 11,
+      "type": "LOCATION",
+      "ent1": "REALS",
+      "ent2": "CONST_PHI",
+      "number": 1
+    },
+    {
+      "id": 12,
+      "type": "LOCATION",
+      "ent1": "COMPLEX",
+      "ent2": "CONST_I",
+      "number": 1
+    },
+    {
+      "id": 13,
+      "type": "LOCATION",
+      "ent1": "REALS",
+      "ent2": "FUNC_SQRT",
+      "number": 1
+    },
+    {
+      "id": 14,
+      "type": "LOCATION",
+      "ent1": "REALS",
+      "ent2": "FUNC_EXP",
+      "number": 1
+    },
+    {
+      "id": 15,
+      "type": "LOCATION",
+      "ent1": "REALS",
+      "ent2": "FUNC_SIN",
+      "number": 1
+    },
+    {
+      "id": 100,
+      "type": "SKILL",
+      "ent1": "FUNC_SQRT",
+      "ent2": "MONOTONE",
+      "number": 1
+    },
+    {
+      "id": 101,
+      "type": "SKILL",
+      "ent1": "FUNC_SQRT",
+      "ent2": "DOMAIN_NONNEG",
+      "number": 1
+    },
+    {
+      "id": 102,
+      "type": "SKILL",
+      "ent1": "FUNC_EXP",
+      "ent2": "MONOTONE",
+      "number": 1
+    },
+    {
+      "id": 103,
+      "type": "SKILL",
+      "ent1": "FUNC_EXP",
+      "ent2": "RANGE_POSITIVE",
+      "number": 1
+    },
+    {
+      "id": 104,
+      "type": "SKILL",
+      "ent1": "FUNC_SIN",
+      "ent2": "PERIODIC",
+      "number": 6
+    },
+    {
+      "id": 105,
+      "type": "SKILL",
+      "ent1": "FUNC_SIN",
+      "ent2": "AMPLITUDE",
+      "number": 1
+    },
+    {
+      "id": 200,
+      "type": "TYPE_OF",
+      "ent1": "CONST_PI",
+      "ent2": "IRRATIONAL"
+    },
+    {
+      "id": 201,
+      "type": "TYPE_OF",
+      "ent1": "CONST_PI",
+      "ent2": "TRANSCENDENTAL"
+    },
+    {
+      "id": 202,
+      "type": "TYPE_OF",
+      "ent1": "CONST_E",
+      "ent2": "IRRATIONAL"
+    },
+    {
+      "id": 203,
+      "type": "TYPE_OF",
+      "ent1": "CONST_E",
+      "ent2": "TRANSCENDENTAL"
+    },
+    {
+      "id": 204,
+      "type": "TYPE_OF",
+      "ent1": "CONST_PHI",
+      "ent2": "IRRATIONAL"
+    },
+    {
+      "id": 205,
+      "type": "TYPE_OF",
+      "ent1": "CONST_PHI",
+      "ent2": "ALGEBRAIC"
+    },
+    {
+      "id": 206,
+      "type": "TYPE_OF",
+      "ent1": "CONST_I",
+      "ent2": "IMAGINARY"
+    },
+    {
+      "id": 207,
+      "type": "TYPE_OF",
+      "ent1": "CONST_I",
+      "ent2": "ALGEBRAIC"
+    },
+    {
+      "id": 208,
+      "type": "TYPE_OF",
+      "ent1": "CONST_ZERO",
+      "ent2": "IDENTITY_ADDITIVE"
+    },
+    {
+      "id": 209,
+      "type": "TYPE_OF",
+      "ent1": "CONST_ONE",
+      "ent2": "IDENTITY_MULTIPLICATIVE"
+    },
+    {
+      "id": 210,
+      "type": "TYPE_OF",
+      "ent1": "PRIME",
+      "ent2": "INDIVISIBLE"
+    },
+    {
+      "id": 211,
+      "type": "TYPE_OF",
+      "ent1": "FUNC_SQRT",
+      "ent2": "OPERATION"
+    },
+    {
+      "id": 212,
+      "type": "TYPE_OF",
+      "ent1": "FUNC_EXP",
+      "ent2": "OPERATION"
+    },
+    {
+      "id": 213,
+      "type": "TYPE_OF",
+      "ent1": "FUNC_SIN",
+      "ent2": "OPERATION"
+    },
+    {
+      "id": 214,
+      "type": "TYPE_OF",
+      "ent1": "FUNC_SIN",
+      "ent2": "TRIGONOMETRIC"
+    },
+    {
+      "id": 300,
+      "type": "BEHAVIOR",
+      "ent1": "TRANSCENDENTAL",
+      "ent2": "PROOF_EROSION",
+      "number": 3
+    },
+    {
+      "id": 301,
+      "type": "BEHAVIOR",
+      "ent1": "IRRATIONAL",
+      "ent2": "APPROXIMATION_DRIFT",
+      "number": 2
+    },
+    {
+      "id": 302,
+      "type": "BEHAVIOR",
+      "ent1": "IMAGINARY",
+      "ent2": "EXISTENCE_DOUBT",
+      "number": 2
+    },
+    {
+      "id": 303,
+      "type": "BEHAVIOR",
+      "ent1": "OPERATION",
+      "ent2": "DOMAIN_DRIFT",
+      "number": 1
+    },
+    {
+      "id": 304,
+      "type": "BEHAVIOR",
+      "ent1": "TRIGONOMETRIC",
+      "ent2": "OSCILLATION_LOSS",
+      "number": 1
+    },
+    {
+      "id": 305,
+      "type": "BEHAVIOR",
+      "ent1": "INDIVISIBLE",
+      "ent2": "SIEVE_EROSION",
+      "number": 2
+    }
   ]
 }

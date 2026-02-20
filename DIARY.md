@@ -339,6 +339,56 @@ Refaktoring prezentační vrstvy + design Royal Chess herní mechaniky.
 
 ---
 
+## 2026-02-20 (pokračování — Royal Chess rebuild + archetypes + dokumentace)
+
+**Duration:** ~4 hours
+**With:** Claude (claude-sonnet-4-6)
+
+Rozsáhlá session zaměřená na úklid, dokumentaci a rozšíření datového modelu.
+
+**worlds/royal_chess.json — kompletní přestavba:**
+- Vygenerováno skriptem: všech 32 figur na správných startovních pozicích, 64 políček s HP 100/100
+- Figury: HP 100/100 (F-pěšci 80/100), rank dle hodnoty figury (King=10..Pawn=1)
+- Přidáno 7 archetype entit: PIECE, KING, QUEEN, ROOK, KNIGHT, ARCHER, PAWN
+- Midgame pozice zachovány: WHITE_QUEEN@d1, WHITE_H_ROOK@h8, BLACK_H_PAWN@a6, BLACK_H_ROOK@OFF_BOARD
+- Výsledek: 109 entit, 164 relací
+
+**Archetype pattern (pro všechny světy):**
+- Archetype = UNIQUE entita bez LOCATION; její id odpovídá ent2 cíli TYPE_OF relací
+- `_archetype_desc(world, entity_id)` v console.py — entity.description → TYPE_OF archetype.description → None
+- `--full` mód: UNIQUE rooty skryty (jsou metadata, ne herní objekty)
+- Přidány archetypové entity do **polar_night** (HUMAN, ROYALTY, WEAPON, MAGICAL) a **math_universe** (IRRATIONAL, OPERATION, TRANSCENDENTAL, ALGEBRAIC)
+
+**WorldManifest + WorldMeta (backend/core/world.py):**
+- `WorldManifest`: author, created, version, lore — statická metadata světa
+- `WorldMeta`: tick, turn, vars — runtime stav (key-value vars pro world-specific proměnné)
+- Všechny 4 světy mají vyplněný manifest s lore textem
+- `--full` mód konzole zobrazuje cyan manifest panel nahoře: autor, datum, verze, lore, live stats
+
+**Dokumentace — velký úklid:**
+- `GLOSSARY.md` vytvořen — kanonické názvosloví: EntityType vs. kategorie, prototype inheritance, všechny pojmy
+- `IDEAS.md` vytvořen — volný zápisník nápadů (15 položek, organizováno dle kategorií)
+- `DONE.md` vytvořen — archiv hotových úkolů přesunutých z TODO.md
+- `TODO.md` zeštíhleno: z 106 řádků na 42, jen aktivní úkoly (`[ ]` a `[~]`)
+- `CLAUDE.md` aktualizováno: seznam 7 řídících dokumentů, nový workflow pipeline
+- `README.md` aktualizováno: tabulka doc indexu
+- `MEMORY.md` aktualizováno: nová struktura docs, archetypové entity, prototype inheritance
+
+**Pořadí EntityType sjednoceno na CHAR, ENVI, UNIQUE, SUMS** (enum, TYPE_STYLE, stats, GLOSSARY)
+
+**Odstraněno:** `generate_world.py` (starý prototype, dead code), dočasné skripty `_gen_chess.py`, `_add_archetypes.py` atd.
+
+**Konceptuální diskuse:**
+- ENTITY + RELATION = dvě tabulky stačí; WORLD metadata = třetí tabulka
+- Prototype inheritance: `World.resolve_attr(entity, attr)` — čte vlastní hodnotu → TYPE_OF archetype → None; zaznamenáno do TODO + GLOSSARY
+- WorldMeta.vars = key-value store pro world-specific proměnné
+
+**Git push:** commit `0e1043d` — vše pushnutý na GitHub
+
+**Next session:** PRODUCE/CONSUME RelationType + recipe engine v tick.py; nebo World.resolve_attr() (prototype inheritance)
+
+---
+
 ## 2026-02-19 (design review + nový svět Genesis)
 
 **Duration:** ~1 hour

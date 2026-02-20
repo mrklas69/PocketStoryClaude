@@ -1,6 +1,12 @@
 {
   "name": "Royal Chess — Strategické šachy",
   "description": "Co se stane, když v šachové hře figurky ožijí? Jak se šachy změní, když střelci potřebují k boji šípy?",
+  "manifest": {
+    "author": "mrklas",
+    "created": "2026-02-20",
+    "version": 1,
+    "lore": "The pieces have been alive for as long as anyone can remember. They bleed when struck, tire when marching too far, and hunger between battles. Every pawn dreams of the last rank. Every king dreads the silence before check. The board is not a battlefield — it is a world, and its inhabitants know it."
+  },
   "entities": [
     {
       "id": "OFF_BOARD",
