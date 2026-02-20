@@ -16,13 +16,12 @@ Dokončené úkoly → [DONE.md](DONE.md) | Nápady → [IDEAS.md](IDEAS.md)
 
 ## Data Model
 
-- `[ ]` RelationType: add PRODUCE + CONSUME
 - `[ ]` Prototype inheritance: `World.resolve_attr(entity, attr)` — reads entity's own value; if `None`, walks TYPE_OF chain and returns first non-None value from archetype; enables sparse entity definitions
+- `[ ]` RelationType: add CONSUME (recipe engine — vstupy → výstupy)
 
 ## Simulation
 
-- `[~]` World simulation loop (tick-based) — DECAY working; full Intent pipeline pending
-- `[ ]` `tick()`: PRODUCE/CONSUME processing (recipe engine)
+- `[~]` World simulation loop (tick-based) — BEHAVIOR + PRODUCE working; full Intent pipeline pending
 - `[ ]` Intent dataclass (actor, action, target, weight)
 - `[ ]` `tick()` full pipeline: collect → validate → resolve → execute → chain
 - `[ ]` Intent generators per entity type (CHAR, ENVI, UNIQUE, SUMS)
@@ -47,4 +46,4 @@ Dokončené úkoly → [DONE.md](DONE.md) | Nápady → [IDEAS.md](IDEAS.md)
 
 ---
 
-*Last updated: 2026-02-20*
+*Last updated: 2026-02-21*

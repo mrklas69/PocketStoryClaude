@@ -437,6 +437,62 @@ Dva samostatné dokumenty — práce bez AI, čistá lidská přemýšlecí fáz
 
 ---
 
+## 2026-02-21
+
+**Duration:** ~2 hours
+**With:** Claude (claude-sonnet-4-6)
+
+Simulation engine rozšíření + HP per LOCATION + console polish.
+
+**tick.py → engine.py (přejmenování):**
+- `backend/sim/tick.py` → `backend/sim/engine.py` — konzistentnější název
+
+**PRODUCE mechanic dokončena:**
+- RelationType `PRODUCE` přidán: `lambda > 0` = Poisson stochastický, `lambda == 0` = deterministický pevný výnos
+- Poisson algorimtus (Knuth) s `max_yield = number`
+- Type-based PRODUCE: `ent1` = UNIQUE archetype → engine najde všechna ENVI toho TYPE_OF, vyloučí obsazená (CHAR child), vybere náhodné prázdné
+- Condition: `producer is None or producer.type == EntityType.UNIQUE` → type-based branch
+- Oprava: ChessSquares jako UNIQUE entita způsobila, že se type-based větev nevstoupila → fix podmínky
+- `worlds/royal_chess.json`: ChessSquares archetype + 64 TYPE_OF relací + PRODUCE(ChessSquares, ARROWS, λ=0.1, n=16)
+- `worlds/polar_night.json`: PRODUCE(FOREST, WOOD, λ=0.3, n=4) — stochastická produkce dřeva
+- `worlds/math_universe.json`: PRODUCE(NATURALS, PRIME, n=1) — deterministické +1 prime/tick
+
+**Genesis cleanup:**
+- Odstraněn COSMOS (obal nebyl potřeba), GOD zůstává v HEAVEN, FELIX na EARTH
+- Přidán PRIMITIVO_ES (SUMS) — italské Primitivo víno od Gianfranco Fino
+- PRODUCE(EARTH, PRIMITIVO_ES, λ=0.05, n=2) — cca jednou za 20 ticků 1–2 lahve
+
+**HP per LOCATION pro SUMS entity (architektonická změna):**
+- `entity.hp` u SUMS zrušeno; `entity.hp_max` zůstává jako typová vlastnost (výchozí čerstvost)
+- `Relation.hp` — aktuální čerstvost konkrétní hromady (per-stack)
+- Nová funkce `_process_sums_hp(world)` v engine.py: iteruje LOCATION relace s hp, drainuje behaviors, při hp=0 **smaže relaci** (žádný ghost záznam)
+- `_process_produce()` rozšíření: nový stack startuje s `hp = item.hp_max`; merge do existující hromady = vážený průměr HP `(n_old × hp_old + n_new × hp_max) / (n_old + n_new)`
+- `_collect_behaviors()` rozšíření: volitelný `location_id` parameter pro SUMS per-stack lookup
+- Entity loop: SUMS entity přeskočeny (`continue`), zpracovány výše
+- `worlds/math_universe.json`: hp přesunuto z PRIME entity do LOCATION(NATURALS, PRIME)
+- `console.py` `add_children()`: SUMS položky čtou `loc_hp` z LOCATION relace, předávají do `label()`
+
+**Console polish:**
+- `UNIQUE` tag zkrácen na `UNI`
+- HP bar bug fix: `[colour][bar][/]` → `[colour]{bar}[/]` — Rich interpretoval `[bar]` jako markup tag a tiše ho zahazoval
+- Zobrazení HP split: default mód = barevný progress bar `#####.....`, `--full` mód = barevný zlomek `50/100`
+- `_hp_colour()` helper — sdílená logika barvy pro bar i zlomek
+- Root `PocketWorld` místo `World` při více rootech
+
+**Git commits (6):**
+- `b314360` — SUMS per-LOCATION HP + Genesis cleanup
+- `b5aca9d` — delete LOCATION relation on SUMS wipe
+- `bfe0063` — fix HP display for SUMS in console
+- `6fec597` — UNI label
+- `44c3a33` — hp bar rendering fix
+- `72f6346` — bar/fraction split
+- `2c0bed1` — colored fraction in --full
+- `270a4dc` — PocketWorld root label
+
+**Next session:** Intent system; nebo World.resolve_attr() prototype inheritance; nebo konzolový chess prototype
+
+---
+
 ## 2026-02-19 (závěr)
 
 **Duration:** ~30 min

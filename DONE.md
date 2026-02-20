@@ -29,16 +29,27 @@ Archiv dokončených úkolů. Přesunuto z TODO.md.
 - CONTAINMENT_RULES: CHAR→CHAR allowed; UNIQUE→UNIQUE+SUMS allowed (capacity required)
 - `World.remove()` — remove entity + its relations
 
+## Data Model
+
+- `Relation.hp: Optional[int]` — per-stack HP for SUMS entities (freshness/durability on LOCATION relation)
+
 ## Simulation
 
-- `backend/sim/tick.py` — BEHAVIOR engine: všechny typy behaviors, tři zdroje (entity-specific, TYPE_OF cascade, location-based), hp_max cap, GRAVEYARD instant kill
+- `backend/sim/engine.py` (dříve `tick.py`) — BEHAVIOR engine + PRODUCE mechanic
+- BEHAVIOR engine: všechny typy behaviors, čtyři zdroje (entity-specific, TYPE_OF cascade, location-direct, location-TYPE_OF), hp_max cap, GRAVEYARD instant kill
+- PRODUCE mechanic: Poisson stochastický (`lambda > 0`) i deterministický pevný výnos (`lambda == 0`); type-based production (UNIQUE archetype jako producent → random prázdné ENVI)
+- SUMS HP per LOCATION: `_process_sums_hp()` drainuje behaviors per-stack; wipe (hp=0) smaže LOCATION relaci; PRODUCE blend = vážený průměr HP
 
 ## Presentation: Console
 
 - `console.py` — live `rich.Live` dashboard, HP bars, tick log, `--ticks`/`--delay`/`--full` CLI args
-- Entity type colours (blue/cyan/magenta/white); short/full mode
+- Entity type colours (blue/cyan/magenta/white); short/full mode; UNIQUE tag zkrácen na `UNI`
 - Archetype description lookup via TYPE_OF chain (`_archetype_desc`)
 - UNIQUE archetype roots hidden in normal mode, visible in `--full` mode
+- HP display: default = barevný progress bar `#####.....`; `--full` = barevný zlomek `50/100`
+- `_hp_colour()` helper sdílený pro bar i zlomek (green > 50 % / yellow > 25 % / red)
+- SUMS HP čteno z LOCATION relace (ne z entity) — `add_children()` předává `loc_hp`
+- Root label `PocketWorld` při více rootech
 
 ## Core Features
 
@@ -46,10 +57,10 @@ Archiv dokončených úkolů. Přesunuto z TODO.md.
 
 ## Worlds
 
-- `worlds/polar_night.json` — Chronicle of the Polar Night Dynasty (narativ, hierarchie prostorů, CHAR→CHAR, Wildfire Oil)
-- `worlds/math_universe.json` — Mathematical Universe (abstraktní entity, kategoriální entropie)
-- `worlds/royal_chess.json` — Royal Chess (32 figur, 64 políček, 7 archetypů figur, HP systém)
-- `worlds/genesis.json` — Genesis (Bůh + padlý anděl Felix; creation story; Felix cyklicky klesá na 0 a Bůh ho vzkřísí)
+- `worlds/polar_night.json` — Chronicle of the Polar Night Dynasty (narativ, hierarchie prostorů, CHAR→CHAR, Wildfire Oil, PRODUCE dřeva)
+- `worlds/math_universe.json` — Mathematical Universe (abstraktní entity, kategoriální entropie, deterministický PRODUCE primů, SUMS HP per LOCATION)
+- `worlds/royal_chess.json` — Royal Chess (32 figur, 64 políček, 7 archetypů figur, HP systém, type-based PRODUCE šípů na prázdná políčka)
+- `worlds/genesis.json` — Genesis (Bůh + padlý anděl Felix + PRIMITIVO_ES víno; PRODUCE λ=0.05; creation story)
 
 ## Royal Chess — MVP design decisions
 
@@ -65,4 +76,4 @@ Archiv dokončených úkolů. Přesunuto z TODO.md.
 
 ---
 
-*Last updated: 2026-02-20*
+*Last updated: 2026-02-21*

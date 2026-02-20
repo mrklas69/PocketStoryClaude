@@ -15,7 +15,7 @@ Definováno jako Python enum `EntityType` v `backend/core/entity.py`.
 | `CHAR`   | Postava / aktér. Má HP, rank, může nést předměty. |
 | `ENVI`   | Prostředí / kontejner (místnost, pole, oblast). Pasivní, bez HP (zpravidla). |
 | `UNIQUE` | Unikátní předmět nebo archetype. Kapacita povinná, pokud nese jiné entity. |
-| `SUMS`   | Součtovatelná hromada (šípy, zlato…). Má `number`, nemá individuální identitu. |
+| `SUMS`   | Součtovatelná hromada (šípy, zlato…). `number` = aktuální počet v dané hromadě (uložen v LOCATION relaci). HP (čerstvost/trvanlivost) se také uchovává per-hromada na LOCATION relaci, ne na entitě. |
 
 ### Kategorie / archetype (TYPE_OF)
 Co entita **je** v příběhu nebo herní mechanice.
@@ -33,13 +33,13 @@ Příklady: `PAWN`, `ROOK`, `RECIPE`, `GAME_STAT`, `PIECE`
 
 | Typ          | Význam |
 |--------------|--------|
-| `LOCATION`   | Entita se fyzicky nachází v kontejneru. |
-| `TYPE_OF`    | Entita patří do kategorie / dědí z archetypu. |
+| `LOCATION`   | Entita se fyzicky nachází v kontejneru. `number` = množství (SUMS). `hp` = čerstvost/trvanlivost dané hromady (SUMS only). |
+| `TYPE_OF`    | Entita patří do kategorie / dědí z archetypu. `ent2` = CamelCase plural (např. `FallenAngels`, `Indivisibles`). |
 | `SKILL`      | Entita umí provádět akci nebo pohyb. |
-| `BEHAVIOR`   | Pasivní efekt na stav entity (HP změny, decay…). |
-| `PRODUCE`    | Entita vytváří nové itemy (recept bez vstupů). |
-| `CONSUME`    | Entita spotřebovává itemy a aplikuje efekt. |
-| `RECIPE`     | Transformační recept: vstupy + energie → výstupy. |
+| `BEHAVIOR`   | Pasivní efekt na stav entity (HP změny, decay…). Kladné číslo = drain, záporné = heal. |
+| `PRODUCE`    | Entita vytváří nové itemy. `lambda > 0` = Poisson stochastický; `lambda == 0` = deterministický. `ent1` = UNIQUE archetype → type-based (random prázdné ENVI). |
+| `CONSUME`    | Entita spotřebovává itemy a aplikuje efekt. *(zatím neimplementováno)* |
+| `RECIPE`     | Transformační recept: vstupy + energie → výstupy. *(zatím neimplementováno)* |
 
 ---
 
@@ -60,4 +60,4 @@ Příklady: `PAWN`, `ROOK`, `RECIPE`, `GAME_STAT`, `PIECE`
 
 ---
 
-*Last updated: 2026-02-20*
+*Last updated: 2026-02-21*
