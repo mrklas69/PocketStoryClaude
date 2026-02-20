@@ -44,10 +44,12 @@ def _signed(n: int) -> str:
 
 
 
-def label(e: Entity, count: int = 1, full: bool = False) -> str:
+def label(e: Entity, count: int = 1, full: bool = False, loc_hp: int | None = None) -> str:
     tag   = TYPE_STYLE[e.type]
     extra = f"  x{count}" if e.type == EntityType.SUMS else ""
-    hp    = f"  {_hp_bar(e.hp, e.hp_max)}" if e.hp is not None and e.hp_max is not None else ""
+    # SUMS: HP lives on the LOCATION relation (loc_hp); others: on the entity
+    effective_hp = loc_hp if e.type == EntityType.SUMS else e.hp
+    hp    = f"  {_hp_bar(effective_hp, e.hp_max)}" if effective_hp is not None and e.hp_max is not None else ""
 
     details = ""
     if full:
@@ -62,7 +64,16 @@ def label(e: Entity, count: int = 1, full: bool = False) -> str:
 
 def add_children(world: World, parent_id: str, node: Tree, full: bool) -> None:
     for child, count in world.children(parent_id):
-        child_node = node.add(label(child, count, full))
+        loc_hp = None
+        if child.type == EntityType.SUMS:
+            loc_rel = next(
+                (r for r in world.relations.values()
+                 if r.type == RelationType.LOCATION and r.ent1 == parent_id and r.ent2 == child.id),
+                None,
+            )
+            if loc_rel is not None:
+                loc_hp = loc_rel.hp
+        child_node = node.add(label(child, count, full, loc_hp=loc_hp))
         add_children(world, child.id, child_node, full)
 
 
