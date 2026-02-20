@@ -21,7 +21,7 @@ console = Console()
 TYPE_STYLE = {
     EntityType.CHAR:   "[bold cyan]CHAR[/]",
     EntityType.ENVI:   "[bold blue]ENVI[/]",
-    EntityType.UNIQUE: "[bold magenta]UNIQUE[/]",
+    EntityType.UNIQUE: "[bold magenta]UNI[/]",
     EntityType.SUMS:   "[bold white]SUMS[/]",
 }
 
