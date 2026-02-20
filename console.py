@@ -36,7 +36,7 @@ def _hp_bar(hp: int, hp_max: int) -> str:
     filled = round(ratio * HP_BAR_WIDTH)
     bar    = "#" * filled + "." * (HP_BAR_WIDTH - filled)
     colour = "green" if ratio > 0.5 else ("yellow" if ratio > 0.25 else "red")
-    return f"[{colour}]{bar}[/] {hp}/{hp_max}"
+    return f"[{colour}]{bar}[/]"
 
 
 def _signed(n: int) -> str:
@@ -49,7 +49,10 @@ def label(e: Entity, count: int = 1, full: bool = False, loc_hp: int | None = No
     extra = f"  x{count}" if e.type == EntityType.SUMS else ""
     # SUMS: HP lives on the LOCATION relation (loc_hp); others: on the entity
     effective_hp = loc_hp if e.type == EntityType.SUMS else e.hp
-    hp    = f"  {_hp_bar(effective_hp, e.hp_max)}" if effective_hp is not None and e.hp_max is not None else ""
+    if effective_hp is not None and e.hp_max is not None:
+        hp = f"  {effective_hp}/{e.hp_max}" if full else f"  {_hp_bar(effective_hp, e.hp_max)}"
+    else:
+        hp = ""
 
     details = ""
     if full:
