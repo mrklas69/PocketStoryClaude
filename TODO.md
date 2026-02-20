@@ -31,10 +31,12 @@
 - `[x]` **Data Model** — Relation class + RelationType (LOCATION, SKILL, TYPE_OF, BEHAVIOR)
 - `[ ]` **Data Model** — RelationType: add PRODUCE + CONSUME
 - `[x]` **Data Model** — World class (entity + relation manager, load/save JSON)
-- `[ ]` **Data Model** — `World.move()` — relocate entity (change LOCATION relation)
+- `[x]` **Data Model** — `World.move(entity, container, amount?)` — relocate entity; SUMS partial move + merge; CHAR can carry CHAR
+- `[x]` **Data Model** — `World.location_of(entity)` — return direct parent container
+- `[x]` **Data Model** — CONTAINMENT_RULES: CHAR→CHAR allowed; UNIQUE→UNIQUE+SUMS allowed (capacity required)
 - `[ ]` **Data Model** — `World.remove()` — remove entity + its relations
 - `[?]` **Data Model** — `proto_id` for SUMS (mergeable stacks) — revisit after move/remove
-- `[x]` **Simulation** — `backend/sim/tick.py` — DECAY behavior via BEHAVIOR + TYPE_OF cascade
+- `[x]` **Simulation** — `backend/sim/tick.py` — BEHAVIOR engine: všechny typy behaviors, tři zdroje (entity-specific, TYPE_OF cascade, location-based), hp_max cap, GRAVEYARD instant kill
 - `[ ]` **Simulation** — `tick()`: PRODUCE/CONSUME processing (recipe engine)
 - `[ ]` **Simulation** — Intent dataclass (actor, action, target, weight)
 - `[ ]` **Simulation** — `tick()` full pipeline: collect → validate → resolve → execute → chain
@@ -50,15 +52,17 @@
 - `[ ]` Player interactions
 - `[x]` Save / load — `World.save()` / `World.load()` for JSON
 
-## Next session — martian_saga expansion
+## Worlds
 
-- `[ ]` Add KITCHEN (ENVI) + CHARGING_STATION (ENVI inside KITCHEN) to martian_saga.json
-- `[ ]` Add BEHAVIOR(HUMAN, HUNGER, 3) and BEHAVIOR(ANDROID, BATTERY_DRAIN, 5)
-- `[ ]` Add BEHAVIOR(CHARGING_STATION, RECHARGE, 15) — env behavior, applies to ANDROID children
-- `[ ]` Add GROW_TOMATOES recipe entity: PRODUCE(_, TOMATOES, 3), SKILL(GREENHOUSE, GROW_TOMATOES)
-- `[ ]` Add EAT_TOMATO recipe entity: CONSUME(_, TOMATOES, 1), restores hp_max/4 HP to actor
-- `[ ]` Iris in GREENHOUSE (has tomatoes, no eating → dies of hunger)
-- `[ ]` Martian in STORAGE (not in KITCHEN → drains to 0)
+- `[x]` `worlds/polar_night.json` — Chronicle of the Polar Night Dynasty (narativ, hierarchie prostorů, CHAR→CHAR, Wildfire Oil)
+- `[x]` `worlds/math_universe.json` — Mathematical Universe (abstraktní entity, kategoriální entropie)
+- `[x]` `worlds/royal_chess.json` — Royal Chess Fragment (mechanika, capacity, location TYPE_OF cascade, Endurance Chess)
+- `[x]` `worlds/genesis.json` — Genesis (Bůh + padlý anděl Felix; creation story; Felix cyklicky klesá na 0 a Bůh ho vzkřísí)
+- `[ ]` `worlds/terrarium.json` — The Terrarium (ekosystém bez lidí, PRODUCE/CONSUME, predátor/kořist) — čeká na recipe engine
+
+## Side projects
+
+- `[?]` **Awakened Chess** — standalone projekt; figury znají svůj domácí čtverec, vzdálenost = entropie, formační bonusy; engine PocketStory je unese přirozeně
 
 ## Planned attributes
 

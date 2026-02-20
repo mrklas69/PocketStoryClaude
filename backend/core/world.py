@@ -40,14 +40,20 @@ class World:
                     f"{parent.type.value} cannot contain {child.type.value} "
                     f"('{parent.name}' -> '{child.name}')"
                 )
-            if parent.capacity is not None and child.type in {EntityType.UNIQUE, EntityType.SUMS}:
+            # UNIQUE entity is only a container when capacity is explicitly set
+            if parent.type == EntityType.UNIQUE and parent.capacity is None:
+                raise ValueError(
+                    f"UNIQUE '{parent.name}' has no capacity — not a container"
+                )
+            _OCCUPANT_TYPES = {EntityType.CHAR, EntityType.UNIQUE, EntityType.SUMS}
+            if parent.capacity is not None and child.type in _OCCUPANT_TYPES:
                 used = sum(
                     1 for e, _ in self.children(relation.ent1)
-                    if e.type in {EntityType.UNIQUE, EntityType.SUMS}
+                    if e.type in _OCCUPANT_TYPES
                 )
                 if used >= parent.capacity:
                     raise ValueError(
-                        f"'{parent.name}' is full ({used}/{parent.capacity} item slots)"
+                        f"'{parent.name}' is full ({used}/{parent.capacity} slots)"
                     )
         self.relations[relation.id] = relation
         return relation
@@ -67,6 +73,107 @@ class World:
 
     def get(self, entity_id: str) -> Entity | None:
         return self.entities.get(entity_id)
+
+    def _next_relation_id(self) -> int:
+        return max(self.relations.keys(), default=0) + 1
+
+    def location_of(self, entity_id: str) -> Entity | None:
+        """Return the direct parent container of entity_id, or None if it is a root."""
+        for r in self.relations.values():
+            if r.type == RelationType.LOCATION and r.ent2 == entity_id:
+                return self.entities.get(r.ent1)
+        return None
+
+    def move(self, entity_id: str, new_container_id: str, amount: int | None = None) -> None:
+        """Move entity to a new container.
+
+        Rules:
+        - Containment rules are enforced (see CONTAINMENT_RULES in entity.py).
+        - UNIQUE acting as container requires capacity to be set.
+        - For SUMS: amount is required.  Partial moves split the stack in place
+          (source quantity reduced; target quantity increased or new relation created).
+        - CHAR can be placed inside another CHAR (carry a companion or pet).
+        - Capacity of the target is checked for UNIQUE and SUMS children.
+        """
+        entity = self.entities.get(entity_id)
+        if entity is None:
+            raise ValueError(f"Entity '{entity_id}' not found")
+        new_container = self.entities.get(new_container_id)
+        if new_container is None:
+            raise ValueError(f"Container '{new_container_id}' not found")
+        if entity_id == new_container_id:
+            raise ValueError("Entity cannot contain itself")
+
+        # Containment rule
+        if not can_contain(new_container.type, entity.type):
+            raise ValueError(
+                f"{new_container.type.value} cannot contain {entity.type.value} "
+                f"('{new_container.name}' ← '{entity.name}')"
+            )
+        if new_container.type == EntityType.UNIQUE and new_container.capacity is None:
+            raise ValueError(f"UNIQUE '{new_container.name}' has no capacity — not a container")
+
+        # Find existing source LOCATION relation
+        source_rel = next(
+            (r for r in self.relations.values()
+             if r.type == RelationType.LOCATION and r.ent2 == entity_id),
+            None,
+        )
+
+        if entity.type == EntityType.SUMS:
+            if amount is None:
+                raise ValueError(f"Moving SUMS '{entity.name}' requires an amount")
+            src_qty = source_rel.number if source_rel is not None else 0
+            if amount > src_qty:
+                raise ValueError(
+                    f"Cannot move {amount} × '{entity.name}' — only {src_qty} available"
+                )
+            # Reduce or remove source relation
+            if source_rel is not None:
+                if amount == src_qty:
+                    del self.relations[source_rel.id]
+                else:
+                    source_rel.number -= amount
+            # Merge into existing target relation, or create a new one
+            target_rel = next(
+                (r for r in self.relations.values()
+                 if r.type == RelationType.LOCATION
+                 and r.ent1 == new_container_id and r.ent2 == entity_id),
+                None,
+            )
+            if target_rel is not None:
+                target_rel.number += amount
+            else:
+                self.add_relation(Relation(
+                    id=self._next_relation_id(),
+                    type=RelationType.LOCATION,
+                    ent1=new_container_id,
+                    ent2=entity_id,
+                    number=amount,
+                ))
+
+        else:
+            # UNIQUE / CHAR / ENVI — simple single-location move
+            # Capacity check: CHAR + UNIQUE + SUMS count as occupants; ENVI is structural
+            _OCCUPANT_TYPES = {EntityType.CHAR, EntityType.UNIQUE, EntityType.SUMS}
+            if new_container.capacity is not None and entity.type in _OCCUPANT_TYPES:
+                used = sum(
+                    1 for e, _ in self.children(new_container_id)
+                    if e.type in _OCCUPANT_TYPES
+                )
+                if used >= new_container.capacity:
+                    raise ValueError(
+                        f"'{new_container.name}' is full ({used}/{new_container.capacity} slots)"
+                    )
+            if source_rel is not None:
+                source_rel.ent1 = new_container_id
+            else:
+                self.add_relation(Relation(
+                    id=self._next_relation_id(),
+                    type=RelationType.LOCATION,
+                    ent1=new_container_id,
+                    ent2=entity_id,
+                ))
 
     # ── Serialization ───────────────────────────────────────────────────────
 

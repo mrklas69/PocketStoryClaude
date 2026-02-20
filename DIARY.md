@@ -225,6 +225,123 @@ not new Python classes. Complexity of the world ≠ complexity of the code.
 
 ---
 
+## 2026-02-20 (pokračování — World.move() + entropie + šachy)
+
+**Duration:** ~3 hours
+**With:** Claude (claude-sonnet-4-6)
+
+Velký produktivní blok — od relokace entit přes entropii tří světů až po šachový prototyp.
+
+**World.move() + CONTAINMENT_RULES:**
+- `CONTAINMENT_RULES` doplněno: CHAR→CHAR (postava může nést jinou postavu; Freya bere koťátko)
+- UNIQUE jako kontejner jen při `capacity != None` — bez kapacity = neskladný objekt, ne krabice
+- `World._next_relation_id()` — max existujících id + 1 (fix: Relation vyžaduje id parametr)
+- `World.location_of(entity_id)` — vrací přímého rodiče (ENVI nebo CHAR)
+- `World.move(entity_id, new_container_id, amount?)` — validace containment, SUMS partial move + merge
+
+**Bygul — koťátko Freyi:**
+- Nová entita v `worlds/polar_night.json`: BYGUL (CHAR, hp:20/20)
+- Pojmenování: Bygul = "včelí zlato" ze staré norštiny
+- `LOCATION(FREYA, BYGUL)` — Freya nese koťátko
+- `TYPE_OF(BYGUL, CAT)` + `TYPE_OF(BYGUL, ANIMAL)`
+
+**tick.py — generalizace behaviors:**
+- Původní `_get_behavior(world, entity_id, "DECAY")` — hardcoded jméno
+- Nová `_collect_behaviors(world, entity_id) -> list[tuple[str, int]]`
+- Tři zdroje behaviors: (1) entity-specific, (2) TYPE_OF cascade, (3) location-based (ENVI kde entita stojí)
+- Všechny rates sečteny, jeden průchod; log zobrazuje jméno každého efektu
+- Fix: `hp` nesmí překročit `hp_max` při recharge → `max(0, min(cap, hp - total_drain))`
+
+**Entropie tří světů:**
+- `polar_night.json`: HAROLD(90/100), INDRID(75/100), FREYA(100/100); `BEHAVIOR(HUMAN, HUNGER, 2)`, `BEHAVIOR(ANIMAL, HUNGER, 1)`
+- `martian_saga.json`: `BEHAVIOR(ANDROID, BATTERY_DRAIN, 5)`, `BEHAVIOR(HUMAN, HUNGER, 3)`
+- `math_universe.json`: hp přidáno konstantám (π, e, φ, i) a funkcím (sqrt, exp, sin, PRIME); behaviors: `PROOF_EROSION(3)`, `APPROXIMATION_DRIFT(2)`, `EXISTENCE_DOUBT(2)`, `DOMAIN_DRIFT(1)`, `OSCILLATION_LOSS(1)`, `SIEVE_EROSION(2)`
+- Výsledek: π a e se erodují 5/tick, sin 2/tick, 0 a 1 jsou věčné (no HP)
+
+**worlds/royal_chess.json — šachový testovací svět:**
+- Prostory: BOARD, OFF_BOARD, HOME_BASE, DEEP_ENEMY, čtverce A1/A6/B3/C2/H8
+- Figury: WHITE_QUEEN(90/90), WHITE_BISHOP_LIGHT(30/30), WHITE_H_ROOK(50/50), BLACK_H_PAWN(100/100); `rank` = hodnost figury
+- Abstraktní statistiky jako SUMS: MOVE_COUNT(28), WHITE_LEGAL_MOVES(34), BLACK_THREATS(2)
+- SKILL: MOVE_QUEEN, MOVE_BISHOP, MOVE_ROOK, MOVE_PAWN (budoucí topologie tahy)
+- TYPE_OF hierachie: QUEEN/BISHOP/ROOK/PAWN → PIECE → WHITE/BLACK_PIECE
+
+**GRAVEYARD mechanic:**
+- `TYPE_OF(OFF_BOARD, GRAVEYARD)` — data-driven, generické
+- `_in_graveyard(world, entity_id)` v tick.py
+- Entita v GRAVEYARD ENVI: hp → 0 okamžitě, log: "captured — HP -> 0 [GRAVEYARD]"
+
+**Location-based BEHAVIOR (třetí zdroj):**
+- `BEHAVIOR(HOME_BASE, RECHARGE, -5)` — záporné číslo = léčení; figury doma regenerují
+- `BEHAVIOR(DEEP_ENEMY, TERRITORIAL_STRAIN, 4)` — figury na soupeřově území se opotřebovávají
+- `TYPE_OF(HOME_BASE, SAFE_ZONE)`, `TYPE_OF(DEEP_ENEMY, HAZARD_ZONE)` — sémantické tagy
+
+**Koncept: Endurance Chess:**
+- Figury se opotřebovávají v boji a v soupeřově území
+- Musí se vrátit domů dobít — jinak vyhasnou
+- "Budou to bláznivé šachy!" — nová varianta šachů jako emergentní vlastnost systému
+
+**Git:**
+- Repo inicializováno, `.gitignore` vytvořen (excluduje .venv/, temp/, __pycache__, *.pyc)
+- Pushnut na GitHub: https://github.com/mrklas69/PocketStoryClaude
+
+**Opravené bugy:**
+1. `UnicodeEncodeError` — znak `→` v logu na Windows cp1250 → nahrazen `->`
+2. `Relation()` bez `id` parametru → přidán `_next_relation_id()`
+3. Duplicitní `id=1` v royal_chess.json → opraveno na id=13, 14
+4. `hp` překračoval `hp_max` při recharge → přidán cap: `min(cap, hp - total_drain)`
+
+**Next session:** PRODUCE/CONSUME + recipe engine; World.remove(); martian_saga expansion (KITCHEN, CHARGING_STATION)
+
+---
+
+## 2026-02-19 (design review + nový svět Genesis)
+
+**Duration:** ~1 hour
+**With:** Claude (claude-sonnet-4-6)
+
+Celkový přehled projektu po offline práci. Žádný nový kód — čistě design a dokumentace.
+
+**Srovnávací tabulka světů (z offline ODS → přeformátovaná do MD):**
+- Přehled čtyř světů: Polar Night, Royal Chess, Genesis, Math Universe
+- Každý svět má unikátní mechaniku: RPG sága / endurance chess / creation story / obrácená entropie
+
+**Nový svět: `worlds/genesis.json`**
+- Bůh (věčný, bez HP, rank 100) + Felix (padlý anděl, hp 50/100, rank 7)
+- COSMOS → HEAVEN (Bůh) + EARTH (Felix)
+- Felix: `BEHAVIOR(FALLEN_ANGEL, DESPAIR, 5)` + `BEHAVIOR(MORTAL_REALM, EMPTINESS, 2)` = 7 HP/tick drain
+- Bůh má SKILL: CREATE/DESTROY/TRANSFORM/SEPARATE — vše na úrovni 100
+- Design insight: Felix@hp=0 → Bůh ho vzkřísí (CREATE na existující entitě = reset HP) = podmínka pro spuštění dalšího aktu
+
+**Úpravy `worlds/royal_chess.json`:**
+- BISHOP → ARCHER přejmenováno všude (entita, SKILL, TYPE_OF) — kulturní závislost anglofonního "bishop"
+- PIECE_BOX (ENVI) odstraněn
+
+---
+
+## 2026-02-19 (závěr — offline práce)
+
+**Duration:** ~7 hours
+**With:** Sám (offline)
+
+Dva samostatné dokumenty — práce bez AI, čistá lidská přemýšlecí fáze.
+
+**NOTES.md — zamyšlení nad úrovněmi prototypů enginu:**
+- Přemýšlení o tom, co vlastně chceme mít za výsledek v různých fázích projektu
+- Definice úrovní prototypu: co je "hotový" engine pro demo, pro show, pro hru
+
+**PocketStory-srovnávací tabulka světů.ods — přehled čtyř demo světů:**
+- Vytvořena tabulková dokumentace všech čtyř aktuálních světů:
+  - `martian_saga` — Sága malého Marťana
+  - `polar_night` — Království Polární noci
+  - `math_universe` — Matematický vesmír
+  - `royal_chess` — Šachový testovací svět
+- Srovnání: počty entit, typy, relace, behaviors, klíčové mechaniky
+- Přehled sloužící jako základ pro rozhodnutí, který svět rozvíjet dál
+
+**Poznámka k datumu:** Záznam dopsán zpětně 2026-02-19 — offline bloky jsou součástí stejného pracovního dne.
+
+---
+
 ## 2026-02-19 (závěr)
 
 **Duration:** ~30 min

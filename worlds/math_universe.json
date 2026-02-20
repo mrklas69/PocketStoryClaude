@@ -47,19 +47,25 @@
       "id": "FUNC_SQRT",
       "name": "Square Root",
       "type": "CHAR",
-      "description": "Maps non-negative reals to non-negative reals. Squeamish about negatives. Happy in the complex plane."
+      "description": "Maps non-negative reals to non-negative reals. Squeamish about negatives. Happy in the complex plane.",
+      "hp": 50,
+      "hp_max": 100
     },
     {
       "id": "FUNC_EXP",
       "name": "Exponential (e^x)",
       "type": "CHAR",
-      "description": "Always positive, always growing. The most natural of all functions."
+      "description": "Always positive, always growing. The most natural of all functions.",
+      "hp": 90,
+      "hp_max": 100
     },
     {
       "id": "FUNC_SIN",
       "name": "Sine",
       "type": "CHAR",
-      "description": "Periodic, bounded, smooth. The universe's favorite oscillator."
+      "description": "Periodic, bounded, smooth. The universe's favorite oscillator.",
+      "hp": 70,
+      "hp_max": 100
     },
     {
       "id": "CONST_ZERO",
@@ -77,32 +83,42 @@
       "id": "CONST_PI",
       "name": "Pi (3.14159...)",
       "type": "UNIQUE",
-      "description": "The ratio of a circle's circumference to its diameter. Never repeats, never ends, never apologizes."
+      "description": "The ratio of a circle's circumference to its diameter. Never repeats, never ends, never apologizes.",
+      "hp": 100,
+      "hp_max": 100
     },
     {
       "id": "CONST_E",
       "name": "Euler's Number (2.71828...)",
       "type": "UNIQUE",
-      "description": "The base of natural logarithm. Grows the way growth itself grows."
+      "description": "The base of natural logarithm. Grows the way growth itself grows.",
+      "hp": 100,
+      "hp_max": 100
     },
     {
       "id": "CONST_PHI",
       "name": "Golden Ratio (1.61803...)",
       "type": "UNIQUE",
-      "description": "Appears in sunflowers, spirals, and art. The most aesthetically pleasing irrational."
+      "description": "Appears in sunflowers, spirals, and art. The most aesthetically pleasing irrational.",
+      "hp": 80,
+      "hp_max": 100
     },
     {
       "id": "CONST_I",
       "name": "Imaginary Unit (i)",
       "type": "UNIQUE",
-      "description": "Square root of -1. Exists beyond the real line. Politely ignored for centuries, now indispensable."
+      "description": "Square root of -1. Exists beyond the real line. Politely ignored for centuries, now indispensable.",
+      "hp": 75,
+      "hp_max": 100
     },
     {
       "id": "PRIME",
       "name": "Prime Numbers",
       "type": "SUMS",
       "description": "The atoms of arithmetic. Infinitely many, irregularly spaced, stubbornly irreducible.",
-      "number": 999
+      "number": 999,
+      "hp": 100,
+      "hp_max": 100
     }
   ],
   "relations": [
@@ -145,6 +161,13 @@
     { "id": 211, "type": "TYPE_OF", "ent1": "FUNC_SQRT",  "ent2": "OPERATION"              },
     { "id": 212, "type": "TYPE_OF", "ent1": "FUNC_EXP",   "ent2": "OPERATION"              },
     { "id": 213, "type": "TYPE_OF", "ent1": "FUNC_SIN",   "ent2": "OPERATION"              },
-    { "id": 214, "type": "TYPE_OF", "ent1": "FUNC_SIN",   "ent2": "TRIGONOMETRIC"          }
+    { "id": 214, "type": "TYPE_OF", "ent1": "FUNC_SIN",   "ent2": "TRIGONOMETRIC"          },
+
+    { "id": 300, "type": "BEHAVIOR", "ent1": "TRANSCENDENTAL", "ent2": "PROOF_EROSION",      "number": 3 },
+    { "id": 301, "type": "BEHAVIOR", "ent1": "IRRATIONAL",     "ent2": "APPROXIMATION_DRIFT","number": 2 },
+    { "id": 302, "type": "BEHAVIOR", "ent1": "IMAGINARY",      "ent2": "EXISTENCE_DOUBT",    "number": 2 },
+    { "id": 303, "type": "BEHAVIOR", "ent1": "OPERATION",      "ent2": "DOMAIN_DRIFT",       "number": 1 },
+    { "id": 304, "type": "BEHAVIOR", "ent1": "TRIGONOMETRIC",  "ent2": "OSCILLATION_LOSS",   "number": 1 },
+    { "id": 305, "type": "BEHAVIOR", "ent1": "INDIVISIBLE",    "ent2": "SIEVE_EROSION",      "number": 2 }
   ]
 }

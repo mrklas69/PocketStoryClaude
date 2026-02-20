@@ -1,0 +1,64 @@
+{
+  "name": "Genesis",
+  "description": "In the beginning, only God, Heaven, and Earth. Everything that might exist has yet to be created. The world is formless and empty — and one fallen angel is very, very bored.",
+  "entities": [
+    {
+      "id": "COSMOS",
+      "name": "The Cosmos",
+      "type": "ENVI",
+      "description": "The totality of everything that is, was, or could be. Infinite in all directions. Mostly empty. Not for long."
+    },
+    {
+      "id": "HEAVEN",
+      "name": "Heaven",
+      "type": "ENVI",
+      "description": "God's domain. Boundless, luminous, perfectly ordered. Nothing decays here. Nothing new is born here either. It simply is.",
+      "capacity": 999
+    },
+    {
+      "id": "EARTH",
+      "name": "Earth",
+      "type": "ENVI",
+      "description": "Formless and empty. A pocket full of holes, waiting to be filled with something — anything. Currently occupied by one very unhappy former angel.",
+      "capacity": 999
+    },
+    {
+      "id": "GOD",
+      "name": "God",
+      "type": "CHAR",
+      "description": "Eternal. Omnipotent. The only entity whose HP is not a concern. Watches Felix with patient, mild disappointment. Has a plan. Has not shared it.",
+      "rank": 100
+    },
+    {
+      "id": "FELIX",
+      "name": "Felix",
+      "type": "CHAR",
+      "description": "Fallen angel. Bored, unstable, insufferable. Was expelled from Heaven for reasons he insists were completely unfair. Has been moping on the empty Earth ever since. HP swings wildly — manic highs of scheming followed by crushing lows of pointlessness. Has not yet done anything useful. Or anything at all.",
+      "hp": 50,
+      "hp_max": 100,
+      "rank": 7
+    }
+  ],
+  "relations": [
+    { "id": 1, "type": "LOCATION", "ent1": "COSMOS", "ent2": "HEAVEN", "number": 1 },
+    { "id": 2, "type": "LOCATION", "ent1": "COSMOS", "ent2": "EARTH",  "number": 1 },
+    { "id": 3, "type": "LOCATION", "ent1": "HEAVEN", "ent2": "GOD",    "number": 1 },
+    { "id": 4, "type": "LOCATION", "ent1": "EARTH",  "ent2": "FELIX",  "number": 1 },
+
+    { "id": 100, "type": "SKILL", "ent1": "GOD", "ent2": "CREATE",    "number": 100 },
+    { "id": 101, "type": "SKILL", "ent1": "GOD", "ent2": "DESTROY",   "number": 100 },
+    { "id": 102, "type": "SKILL", "ent1": "GOD", "ent2": "TRANSFORM", "number": 100 },
+    { "id": 103, "type": "SKILL", "ent1": "GOD", "ent2": "SEPARATE",  "number": 100 },
+
+    { "id": 200, "type": "TYPE_OF", "ent1": "GOD",    "ent2": "DIVINE"       },
+    { "id": 201, "type": "TYPE_OF", "ent1": "GOD",    "ent2": "ETERNAL"      },
+    { "id": 202, "type": "TYPE_OF", "ent1": "FELIX",  "ent2": "FALLEN_ANGEL" },
+    { "id": 203, "type": "TYPE_OF", "ent1": "FELIX",  "ent2": "ANGEL"        },
+    { "id": 204, "type": "TYPE_OF", "ent1": "HEAVEN", "ent2": "DIVINE_REALM" },
+    { "id": 205, "type": "TYPE_OF", "ent1": "EARTH",  "ent2": "MORTAL_REALM" },
+
+    { "id": 300, "type": "BEHAVIOR", "ent1": "FALLEN_ANGEL", "ent2": "DESPAIR",   "number": 5 },
+    { "id": 301, "type": "BEHAVIOR", "ent1": "MORTAL_REALM", "ent2": "EMPTINESS", "number": 2 },
+    { "id": 302, "type": "BEHAVIOR", "ent1": "DIVINE_REALM", "ent2": "STASIS",    "number": 0 }
+  ]
+}

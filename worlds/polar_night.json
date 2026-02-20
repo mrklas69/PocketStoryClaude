@@ -1,6 +1,6 @@
 {
   "name": "Chronicle of the Polar Night Dynasty",
-  "description": "The reign of King Harold and Queen Indrid, and the wandering of Princess Freya.",
+  "description": "The reign of King Harold and Queen Indrid, and the wandering of Princess Freya. Somewhere in the forest, a sealed flask changes hands.",
   "entities": [
     {
       "id": "KINGDOM",
@@ -47,19 +47,33 @@
       "id": "HAROLD",
       "name": "King Harold",
       "type": "CHAR",
-      "description": "Weathered, stern, and secretly afraid of spiders. Has ruled for thirty-one winters."
+      "description": "Weathered, stern, and secretly afraid of spiders. Has ruled for thirty-one winters.",
+      "hp": 90,
+      "hp_max": 100
     },
     {
       "id": "INDRID",
       "name": "Queen Indrid",
       "type": "CHAR",
-      "description": "Wise beyond her years. Knows three languages, six poisons, and one forbidden spell."
+      "description": "Wise beyond her years. Knows three languages, six poisons, and one forbidden spell.",
+      "hp": 75,
+      "hp_max": 100
     },
     {
       "id": "FREYA",
       "name": "Princess Freya",
       "type": "CHAR",
-      "description": "Seventeen, heir to the throne, currently missing from court. Probably on purpose."
+      "description": "Seventeen, heir to the throne, currently missing from court. Probably on purpose.",
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "BYGUL",
+      "name": "Bygul",
+      "type": "CHAR",
+      "description": "Freya's kitten — named after the bee-gold of old Norse lore. Uncommonly calm for a creature raised among warriors. Its amber eyes hold no judgment, only warmth.",
+      "hp": 20,
+      "hp_max": 20
     },
     {
       "id": "CROWN_IRON",
@@ -92,6 +106,12 @@
       "description": "Opens the Royal Vault. Harold keeps it under his pillow, which worries everyone."
     },
     {
+      "id": "WILDFIRE_OIL",
+      "name": "Wildfire Oil",
+      "type": "UNIQUE",
+      "description": "A sealed clay flask found on a dead wanderer's satchel deep in the forest. Southern trader marks on the wax seal. Freya does not know what it is. Indrid does — and her expression says she wishes Freya had left it in the snow."
+    },
+    {
       "id": "GOLD_COINS",
       "name": "Gold Coins",
       "type": "SUMS",
@@ -118,6 +138,8 @@
     { "id": 11, "type": "LOCATION", "ent1": "HAROLD",      "ent2": "KEY_VAULT",      "number": 1   },
     { "id": 12, "type": "LOCATION", "ent1": "INDRID",      "ent2": "STAFF_INDRID",   "number": 1   },
     { "id": 13, "type": "LOCATION", "ent1": "FREYA",       "ent2": "FREYA_DAGGER",   "number": 1   },
+    { "id": 16, "type": "LOCATION", "ent1": "FREYA",       "ent2": "BYGUL",          "number": 1   },
+    { "id": 17, "type": "LOCATION", "ent1": "FREYA",       "ent2": "WILDFIRE_OIL",   "number": 1   },
     { "id": 14, "type": "LOCATION", "ent1": "ROYAL_VAULT", "ent2": "GOLD_COINS",     "number": 500 },
     { "id": 15, "type": "LOCATION", "ent1": "ROYAL_VAULT", "ent2": "MANA_POTIONS",   "number": 7   },
 
@@ -128,6 +150,7 @@
     { "id": 103, "type": "SKILL", "ent1": "INDRID", "ent2": "HOLD",          "number": 2  },
     { "id": 104, "type": "SKILL", "ent1": "INDRID", "ent2": "MAGIC",         "number": 12 },
     { "id": 105, "type": "SKILL", "ent1": "INDRID", "ent2": "DIPLOMACY",     "number": 9  },
+    { "id": 110, "type": "SKILL", "ent1": "INDRID", "ent2": "ALCHEMY",       "number": 5  },
 
     { "id": 106, "type": "SKILL", "ent1": "FREYA",  "ent2": "HOLD",          "number": 3  },
     { "id": 107, "type": "SKILL", "ent1": "FREYA",  "ent2": "MOVE",          "number": 8  },
@@ -149,6 +172,13 @@
     { "id": 212, "type": "TYPE_OF", "ent1": "KEY_VAULT",      "ent2": "KEY"                    },
     { "id": 213, "type": "TYPE_OF", "ent1": "GOLD_COINS",     "ent2": "CURRENCY"               },
     { "id": 214, "type": "TYPE_OF", "ent1": "MANA_POTIONS",   "ent2": "CONSUMABLE"             },
-    { "id": 215, "type": "TYPE_OF", "ent1": "MANA_POTIONS",   "ent2": "MAGICAL"                }
+    { "id": 215, "type": "TYPE_OF", "ent1": "MANA_POTIONS",   "ent2": "MAGICAL"                },
+    { "id": 216, "type": "TYPE_OF", "ent1": "BYGUL",          "ent2": "CAT"                    },
+    { "id": 217, "type": "TYPE_OF", "ent1": "BYGUL",          "ent2": "ANIMAL"                 },
+    { "id": 218, "type": "TYPE_OF", "ent1": "WILDFIRE_OIL",  "ent2": "WEAPON"                 },
+    { "id": 219, "type": "TYPE_OF", "ent1": "WILDFIRE_OIL",  "ent2": "ALCHEMICAL_WEAPON"      },
+
+    { "id": 300, "type": "BEHAVIOR", "ent1": "HUMAN",  "ent2": "HUNGER", "number": 2 },
+    { "id": 301, "type": "BEHAVIOR", "ent1": "ANIMAL", "ent2": "HUNGER", "number": 1 }
   ]
 }

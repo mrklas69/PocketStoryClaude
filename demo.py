@@ -81,7 +81,7 @@ def build_display(world: World, tick_num: int, log: deque) -> Group:
 
 def parse_args() -> tuple[Path, int, float]:
     """Returns (world_path, ticks, delay_seconds)."""
-    path  = Path("worlds/martian_saga.json")
+    path  = Path("worlds/polar_night.json")
     ticks = 0
     delay = 0.8
 

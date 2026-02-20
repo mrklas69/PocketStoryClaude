@@ -1,0 +1,174 @@
+{
+  "name": "Royal Chess — Fragment",
+  "description": "Endurance Chess demo. Queen on d1 and bishop on f1 recharge at home (+4/tick). Rook holds h8 deep in enemy territory (-3/tick). Black pawn races on a6 (-4/tick). Home territory and enemy terrain expressed via TYPE_OF tags on individual squares — no abstract zones.",
+  "entities": [
+    {
+      "id": "BOARD",
+      "name": "Chessboard",
+      "type": "ENVI",
+      "description": "64 squares. Infinite decisions. Only seven matter today."
+    },
+    {
+      "id": "OFF_BOARD",
+      "name": "Off Board",
+      "type": "ENVI",
+      "description": "The graveyard. Captured pieces reside here, stripped of purpose."
+    },
+    {
+      "id": "A1",
+      "name": "a1",
+      "type": "ENVI",
+      "description": "Dark corner square. Kings hide here in endgames. Currently empty — a destination, not yet reached.",
+      "capacity": 1
+    },
+    {
+      "id": "A6",
+      "name": "a6",
+      "type": "ENVI",
+      "description": "Deep in white territory. The passed pawn's current outpost — three ranks from promotion.",
+      "capacity": 1
+    },
+    {
+      "id": "B3",
+      "name": "b3",
+      "type": "ENVI",
+      "description": "Light square. Currently empty — the archer has retreated home to recharge.",
+      "capacity": 1
+    },
+    {
+      "id": "C2",
+      "name": "c2",
+      "type": "ENVI",
+      "description": "Central light square. Currently empty — the queen has retreated home to recharge.",
+      "capacity": 1
+    },
+    {
+      "id": "D1",
+      "name": "d1",
+      "type": "ENVI",
+      "description": "White's queen starting square. Back-rank safety — pieces here recover endurance.",
+      "capacity": 1
+    },
+    {
+      "id": "F1",
+      "name": "f1",
+      "type": "ENVI",
+      "description": "White's light-squared bishop starting square. Back-rank safety — pieces here recover endurance.",
+      "capacity": 1
+    },
+    {
+      "id": "H8",
+      "name": "h8",
+      "type": "ENVI",
+      "description": "Far corner of the 8th rank. Deep in black's territory. The rook cut off all escape — but holding here is exhausting.",
+      "capacity": 1
+    },
+
+    {
+      "id": "WHITE_QUEEN",
+      "name": "White Queen",
+      "type": "CHAR",
+      "description": "The most powerful piece. Moves in all 8 directions, any distance. Exhausted from the last assault — retreated to d1 to recharge.",
+      "hp": 10,
+      "hp_max": 90,
+      "rank": 9
+    },
+    {
+      "id": "WHITE_ARCHER_LIGHT",
+      "name": "White Archer",
+      "type": "CHAR",
+      "description": "Light-footed archer. Ranges across diagonals, never crossing to dark squares. Barely survived the exchange — back on f1 with a sliver of strength, quiver nearly empty.",
+      "hp": 5,
+      "hp_max": 30,
+      "rank": 3
+    },
+    {
+      "id": "WHITE_H_ROOK",
+      "name": "White h-Rook",
+      "type": "CHAR",
+      "description": "The rook that dared the 8th rank. Controls the entire row — but every tick in enemy territory drains its endurance.",
+      "hp": 50,
+      "hp_max": 50,
+      "rank": 5
+    },
+    {
+      "id": "BLACK_H_PAWN",
+      "name": "Black h-Pawn",
+      "type": "CHAR",
+      "description": "Black's last hope. Stranded on a6, racing toward promotion. Every tick counts.",
+      "hp": 100,
+      "hp_max": 100,
+      "rank": 1
+    },
+
+    {
+      "id": "MOVE_COUNT",
+      "name": "Move Counter",
+      "type": "SUMS",
+      "description": "Abstract tally of half-moves (plies) since the game began. A SUMS living on the board itself — a game-global statistic, not a physical object.",
+      "number": 999
+    },
+    {
+      "id": "WHITE_LEGAL_MOVES",
+      "name": "White Legal Moves",
+      "type": "SUMS",
+      "description": "How many legal moves white can make this turn. Drops to 0 = stalemate. Abstract quantity — recomputed each tick by the engine (future feature).",
+      "number": 999
+    },
+    {
+      "id": "BLACK_THREATS",
+      "name": "Black Threats",
+      "type": "SUMS",
+      "description": "How many white pieces are currently under attack or in danger. Zero now, but rising.",
+      "number": 999
+    }
+  ],
+  "relations": [
+    { "id": 1,  "type": "LOCATION", "ent1": "BOARD", "ent2": "A1",                  "number": 1  },
+    { "id": 2,  "type": "LOCATION", "ent1": "BOARD", "ent2": "A6",                  "number": 1  },
+    { "id": 3,  "type": "LOCATION", "ent1": "BOARD", "ent2": "B3",                  "number": 1  },
+    { "id": 4,  "type": "LOCATION", "ent1": "BOARD", "ent2": "C2",                  "number": 1  },
+    { "id": 5,  "type": "LOCATION", "ent1": "BOARD", "ent2": "D1",                  "number": 1  },
+    { "id": 6,  "type": "LOCATION", "ent1": "BOARD", "ent2": "F1",                  "number": 1  },
+    { "id": 7,  "type": "LOCATION", "ent1": "BOARD", "ent2": "H8",                  "number": 1  },
+    { "id": 8,  "type": "LOCATION", "ent1": "A6",    "ent2": "BLACK_H_PAWN",        "number": 1  },
+    { "id": 9,  "type": "LOCATION", "ent1": "D1",    "ent2": "WHITE_QUEEN",         "number": 1  },
+    { "id": 10, "type": "LOCATION", "ent1": "F1",    "ent2": "WHITE_ARCHER_LIGHT",  "number": 1  },
+    { "id": 11, "type": "LOCATION", "ent1": "H8",    "ent2": "WHITE_H_ROOK",        "number": 1  },
+
+    { "id": 12, "type": "LOCATION", "ent1": "BOARD", "ent2": "MOVE_COUNT",          "number": 28 },
+    { "id": 13, "type": "LOCATION", "ent1": "BOARD", "ent2": "WHITE_LEGAL_MOVES",   "number": 34 },
+    { "id": 14, "type": "LOCATION", "ent1": "BOARD", "ent2": "BLACK_THREATS",       "number": 2  },
+
+    { "id": 100, "type": "SKILL", "ent1": "WHITE_QUEEN",        "ent2": "MOVE_QUEEN",  "number": 8 },
+    { "id": 101, "type": "SKILL", "ent1": "WHITE_ARCHER_LIGHT", "ent2": "MOVE_ARCHER", "number": 8 },
+    { "id": 102, "type": "SKILL", "ent1": "WHITE_H_ROOK",       "ent2": "MOVE_ROOK",   "number": 8 },
+    { "id": 103, "type": "SKILL", "ent1": "BLACK_H_PAWN",       "ent2": "MOVE_PAWN",   "number": 1 },
+
+    { "id": 200, "type": "TYPE_OF", "ent1": "WHITE_QUEEN",        "ent2": "QUEEN"       },
+    { "id": 201, "type": "TYPE_OF", "ent1": "WHITE_QUEEN",        "ent2": "PIECE"       },
+    { "id": 202, "type": "TYPE_OF", "ent1": "WHITE_QUEEN",        "ent2": "WHITE_PIECE" },
+    { "id": 203, "type": "TYPE_OF", "ent1": "WHITE_ARCHER_LIGHT", "ent2": "ARCHER"     },
+    { "id": 204, "type": "TYPE_OF", "ent1": "WHITE_ARCHER_LIGHT", "ent2": "PIECE"       },
+    { "id": 205, "type": "TYPE_OF", "ent1": "WHITE_ARCHER_LIGHT", "ent2": "WHITE_PIECE" },
+    { "id": 206, "type": "TYPE_OF", "ent1": "WHITE_H_ROOK",       "ent2": "ROOK"        },
+    { "id": 207, "type": "TYPE_OF", "ent1": "WHITE_H_ROOK",       "ent2": "PIECE"       },
+    { "id": 208, "type": "TYPE_OF", "ent1": "WHITE_H_ROOK",       "ent2": "WHITE_PIECE" },
+    { "id": 209, "type": "TYPE_OF", "ent1": "BLACK_H_PAWN",       "ent2": "PAWN"        },
+    { "id": 210, "type": "TYPE_OF", "ent1": "BLACK_H_PAWN",       "ent2": "PIECE"       },
+    { "id": 211, "type": "TYPE_OF", "ent1": "BLACK_H_PAWN",       "ent2": "BLACK_PIECE" },
+    { "id": 212, "type": "TYPE_OF", "ent1": "MOVE_COUNT",         "ent2": "GAME_STAT"   },
+    { "id": 213, "type": "TYPE_OF", "ent1": "WHITE_LEGAL_MOVES",  "ent2": "GAME_STAT"   },
+    { "id": 214, "type": "TYPE_OF", "ent1": "BLACK_THREATS",      "ent2": "GAME_STAT"   },
+
+    { "id": 215, "type": "TYPE_OF", "ent1": "OFF_BOARD", "ent2": "GRAVEYARD"      },
+    { "id": 216, "type": "TYPE_OF", "ent1": "D1",        "ent2": "HOME_SQUARE"    },
+    { "id": 217, "type": "TYPE_OF", "ent1": "F1",        "ent2": "HOME_SQUARE"    },
+    { "id": 218, "type": "TYPE_OF", "ent1": "H8",        "ent2": "ENEMY_TERRITORY"},
+
+    { "id": 300, "type": "BEHAVIOR", "ent1": "PAWN",            "ent2": "CLOCK_PRESSURE",     "number":  3 },
+    { "id": 301, "type": "BEHAVIOR", "ent1": "PIECE",           "ent2": "ACTIVITY_LOSS",      "number":  1 },
+    { "id": 302, "type": "BEHAVIOR", "ent1": "HOME_SQUARE",     "ent2": "RECHARGE",           "number": -5 },
+    { "id": 303, "type": "BEHAVIOR", "ent1": "ENEMY_TERRITORY", "ent2": "TERRITORIAL_STRAIN", "number":  2 }
+  ]
+}

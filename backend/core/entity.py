@@ -11,11 +11,16 @@ class EntityType(Enum):
 
 
 # Containment rules: which entity types can be children of which
-# (validated against LOCATION relations)
+# (validated on every LOCATION relation; see also World.move())
+#
+#   ENVI   → anything (rooms hold everything)
+#   CHAR   → CHAR (carry a companion/kitten), UNIQUE, SUMS (inventory)
+#   UNIQUE → UNIQUE, SUMS — only when capacity is explicitly set (backpack, chest)
+#   SUMS   → nothing (a pile of coins cannot hold things)
 CONTAINMENT_RULES: dict[EntityType, set[EntityType]] = {
     EntityType.ENVI:   {EntityType.ENVI, EntityType.CHAR, EntityType.UNIQUE, EntityType.SUMS},
-    EntityType.CHAR:   {EntityType.UNIQUE, EntityType.SUMS},
-    EntityType.UNIQUE: set(),
+    EntityType.CHAR:   {EntityType.CHAR, EntityType.UNIQUE, EntityType.SUMS},
+    EntityType.UNIQUE: {EntityType.UNIQUE, EntityType.SUMS},
     EntityType.SUMS:   set(),
 }
 

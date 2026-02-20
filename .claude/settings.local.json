@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(\".venv/Scripts/python.exe\" demo.py)",
+      "Bash(\".venv/Scripts/python.exe\" generate_world.py)",
+      "Bash(\".venv/Scripts/python.exe\":*)",
+      "Bash(\".venv/Scripts/python.exe\" -c \"\nfrom backend.core.world import World\nw = World.load\\(''worlds/martian_saga.json''\\)\nprint\\(w\\)\nfor e in w.entities.values\\(\\):\n    indent = ''    '' * \\(1 if e.parent_id else 0\\)\n    parent = w.get\\(e.parent_id\\) if e.parent_id else None\n    if parent:\n        gp = w.get\\(parent.parent_id\\) if parent.parent_id else None\n        if gp:\n            indent = ''        ''\n    print\\(f''{indent}[{e.type.value:6}] {e.id:20} {e.name}''\\)\n\")",
+      "Bash(.venv/Scripts/python.exe:*)",
+      "Bash(python:*)",
+      "Bash(.venv/Scripts/python:*)",
+      "Bash(dir:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(\"/c/Users/mrkla/source/PocketStory/temp/draft.html\":*)",
+      "Bash(echo:*)"
+    ]
+  }
+}
