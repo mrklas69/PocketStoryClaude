@@ -31,12 +31,16 @@ HP_BAR_WIDTH = 10
 LOG_LINES    = 8
 
 
+def _hp_colour(hp: int, hp_max: int) -> str:
+    ratio = hp / hp_max if hp_max > 0 else 0
+    return "green" if ratio > 0.5 else ("yellow" if ratio > 0.25 else "red")
+
+
 def _hp_bar(hp: int, hp_max: int) -> str:
     ratio  = hp / hp_max if hp_max > 0 else 0
     filled = round(ratio * HP_BAR_WIDTH)
     bar    = "#" * filled + "." * (HP_BAR_WIDTH - filled)
-    colour = "green" if ratio > 0.5 else ("yellow" if ratio > 0.25 else "red")
-    return f"[{colour}]{bar}[/]"
+    return f"[{_hp_colour(hp, hp_max)}]{bar}[/]"
 
 
 def _signed(n: int) -> str:
@@ -50,7 +54,8 @@ def label(e: Entity, count: int = 1, full: bool = False, loc_hp: int | None = No
     # SUMS: HP lives on the LOCATION relation (loc_hp); others: on the entity
     effective_hp = loc_hp if e.type == EntityType.SUMS else e.hp
     if effective_hp is not None and e.hp_max is not None:
-        hp = f"  {effective_hp}/{e.hp_max}" if full else f"  {_hp_bar(effective_hp, e.hp_max)}"
+        colour = _hp_colour(effective_hp, e.hp_max)
+        hp = f"  [{colour}]{effective_hp}/{e.hp_max}[/]" if full else f"  {_hp_bar(effective_hp, e.hp_max)}"
     else:
         hp = ""
 
