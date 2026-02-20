@@ -167,7 +167,15 @@ def build_display(world: World, tick_num: int, log: deque, full: bool) -> Group:
 
     # ── Event log ────────────────────────────────────────────────
     if log:
-        log_text = Text("\n".join(log), style="dim")
+        log_text = Text()
+        for i, line in enumerate(log):
+            if i > 0:
+                log_text.append("\n")
+            # Dialogue lines (quoted speech or resurrection) stand out with reverse video.
+            if '"' in line or line.startswith("[RESURRECT]"):
+                log_text.append(line, style="reverse")
+            else:
+                log_text.append(line, style="dim")
     else:
         log_text = Text("(no events yet)", style="dim italic")
 
