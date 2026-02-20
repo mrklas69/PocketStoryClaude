@@ -130,6 +130,13 @@
       "description": "Indrid's personal reserve. Stored in the vault. Do not drink. She will know."
     },
     {
+      "id": "WOOD",
+      "name": "Wood",
+      "type": "SUMS",
+      "description": "Timber gathered from the Whispering Forest.",
+      "capacity": 100
+    },
+    {
       "id": "HUMAN",
       "name": "Human",
       "type": "UNIQUE",
@@ -470,6 +477,13 @@
       "type": "TYPE_OF",
       "ent1": "WILDFIRE_OIL",
       "ent2": "ALCHEMICAL_WEAPON"
+    },
+    {
+      "id": 400,
+      "type": "PRODUCE",
+      "ent1": "FOREST",
+      "ent2": "WOOD",
+      "lambda": 0.4
     },
     {
       "id": 300,

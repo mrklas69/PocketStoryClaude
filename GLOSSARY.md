@@ -37,8 +37,9 @@ Příklady: `PAWN`, `ROOK`, `RECIPE`, `GAME_STAT`, `PIECE`
 | `TYPE_OF`    | Entita patří do kategorie / dědí z archetypu. |
 | `SKILL`      | Entita umí provádět akci nebo pohyb. |
 | `BEHAVIOR`   | Pasivní efekt na stav entity (HP změny, decay…). |
-| `PRODUCE`    | Entita (recept) produkuje výstup. *(plánováno)* |
-| `CONSUME`    | Entita (recept) spotřebovává vstup. *(plánováno)* |
+| `PRODUCE`    | Entita vytváří nové itemy (recept bez vstupů). |
+| `CONSUME`    | Entita spotřebovává itemy a aplikuje efekt. |
+| `RECIPE`     | Transformační recept: vstupy + energie → výstupy. |
 
 ---
 
@@ -49,10 +50,13 @@ Příklady: `PAWN`, `ROOK`, `RECIPE`, `GAME_STAT`, `PIECE`
 | **tick**     | Základní časová jednotka simulace. Jedna iterace enginu. |
 | **rank**     | Síla / priorita entity při řešení konfliktů. |
 | **nature**   | Vrozenná morální esence entity (−10000 tmavá ↔ +10000 světlá). `None` = neutrální. |
-| **karma**    | Nakumulované důsledky jednání CHAR entity. Dynamická, mění se každý tick/událost. |
+| **karma**    | Nakumulované důsledky jednání CHAR entity. Dynamická, mění se každý tick/gebeurtenost. |
 | **decay**    | Přirozený pokles HP způsobený BEHAVIOR relacemi. |
 | **archetype entity** | UNIQUE entita bez LOCATION, jejíž `id` je cílem TYPE_OF relací. Slouží jako sdílená definice kategorie (popis, pravidla). |
 | **prototype inheritance** | Mechanismus rozlišení atributů: engine čte hodnotu nejprve z entity samotné; pokud je `None`, jde po TYPE_OF řetězci a vezme první nalezenou hodnotu z archetypu. Umožňuje psát instance "řídce" — uvádět jen odchylky od archetypu. Analogie: JavaScript prototype chain, CSS cascade. |
+| **PRODUCER** | Entita (typicky ENVI), která během ticku automaticky vytváří nové itemy. Např. Jablečný sad produkuje 3 jablka/tick. Vyjádřeno relací `PRODUCE(entity, item, number)`. |
+| **CONSUMER** | Entita (typicky CHAR), která spotřebovává itemy a aplikuje efekt (zvýšení HP, získání skillů, atd.). Vyjádřeno relací `CONSUME(entity, item, effect)`. |
+| **TRANSFORMER** | Entita (typicky ENVI), která provádí recept: přijímá dohodnuté vstupy + energii a vytváří výstupy. Např. Kamenná pec: 1 mouka + 0.5 voda + 400 kJ → 1 chléb. Vyjádřeno relací `RECIPE` s názorem vstupů, výstupů a energetických požadavků. |
 
 ---
 

@@ -43,44 +43,26 @@ def _signed(n: int) -> str:
     return f"+{n}" if n >= 0 else str(n)
 
 
-def _archetype_desc(world: World, entity_id: str) -> str | None:
-    """Return description from entity itself, or from its first TYPE_OF archetype."""
-    entity = world.get(entity_id)
-    if entity is None:
-        return None
-    if entity.description:
-        return entity.description
-    for r in world.relations.values():
-        if r.type == RelationType.TYPE_OF and r.ent1 == entity_id and r.ent2 is not None:
-            archetype = world.get(r.ent2)
-            if archetype and archetype.description:
-                return archetype.description
-    return None
 
-
-def label(e: Entity, count: int = 1, full: bool = False, desc: str | None = None) -> str:
+def label(e: Entity, count: int = 1, full: bool = False) -> str:
     tag   = TYPE_STYLE[e.type]
     extra = f"  x{count}" if e.type == EntityType.SUMS else ""
     hp    = f"  {_hp_bar(e.hp, e.hp_max)}" if e.hp is not None and e.hp_max is not None else ""
 
     details = ""
     if full:
-        details += f"  [dim]r:{e.rank}[/]"
+        details += f"  [dim]r{e.rank}[/]"
         if e.nature is not None:
             details += f"  [dim]nat:{_signed(e.nature)}[/]"
         if e.karma is not None:
             details += f"  [dim]karma:{_signed(e.karma)}[/]"
-        if desc:
-            short = (desc[:50] + "…") if len(desc) > 50 else desc
-            details += f"  [dim italic]\"{short}\"[/]"
 
     return f"{tag}  {e.name}{extra}{hp}{details}"
 
 
 def add_children(world: World, parent_id: str, node: Tree, full: bool) -> None:
     for child, count in world.children(parent_id):
-        desc = _archetype_desc(world, child.id) if full else None
-        child_node = node.add(label(child, count, full, desc))
+        child_node = node.add(label(child, count, full))
         add_children(world, child.id, child_node, full)
 
 
@@ -132,14 +114,12 @@ def build_display(world: World, tick_num: int, log: deque, full: bool) -> Group:
     if not full:
         roots = [r for r in roots if r.type != EntityType.UNIQUE]
     if len(roots) == 1:
-        desc = _archetype_desc(world, roots[0].id) if full else None
-        tree = Tree(label(roots[0], full=full, desc=desc))
+        tree = Tree(label(roots[0], full=full))
         add_children(world, roots[0].id, tree, full)
     else:
         tree = Tree("[bold]World[/]")
         for root in roots:
-            desc = _archetype_desc(world, root.id) if full else None
-            subtree = tree.add(label(root, full=full, desc=desc))
+            subtree = tree.add(label(root, full=full))
             add_children(world, root.id, subtree, full)
 
     world_panel = Panel(
