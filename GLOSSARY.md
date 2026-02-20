@@ -40,6 +40,7 @@ Příklady: `PAWN`, `ROOK`, `RECIPE`, `GAME_STAT`, `PIECE`
 | `PRODUCE`    | Entita vytváří nové itemy. `lambda > 0` = Poisson stochastický; `lambda == 0` = deterministický. `ent1` = UNIQUE archetype → type-based (random prázdné ENVI). |
 | `CONSUME`    | Entita spotřebovává itemy a aplikuje efekt. *(zatím neimplementováno)* |
 | `RECIPE`     | Transformační recept: vstupy + energie → výstupy. *(zatím neimplementováno)* |
+| `TRIGGER`    | Dialogová linka nebo událost vázaná na podmínku. `ent1` = mluvčí/subjekt, `ent2` = dialogová UNIQUE entita (text v `description`). `number`: `> 0` = HP threshold (fire-once, normální CDF); `0` = ambient (Bernoulli, λ = pravděpodobnost/tick); `-1` = resurrekt (hp → hp_max, arc se resetuje). Fire-once stav v `meta.vars["triggers_fired"]`. |
 
 ---
 
@@ -60,4 +61,4 @@ Příklady: `PAWN`, `ROOK`, `RECIPE`, `GAME_STAT`, `PIECE`
 
 ---
 
-*Last updated: 2026-02-21*
+*Last updated: 2026-02-21 (TRIGGER added)*

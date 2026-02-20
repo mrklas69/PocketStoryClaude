@@ -60,7 +60,7 @@ Archiv dokončených úkolů. Přesunuto z TODO.md.
 - `worlds/polar_night.json` — Chronicle of the Polar Night Dynasty (narativ, hierarchie prostorů, CHAR→CHAR, Wildfire Oil, PRODUCE dřeva)
 - `worlds/math_universe.json` — Mathematical Universe (abstraktní entity, kategoriální entropie, deterministický PRODUCE primů, SUMS HP per LOCATION)
 - `worlds/royal_chess.json` — Royal Chess (32 figur, 64 políček, 7 archetypů figur, HP systém, type-based PRODUCE šípů na prázdná políčka)
-- `worlds/genesis.json` — Genesis (Bůh + padlý anděl Felix + PRIMITIVO_ES víno; PRODUCE λ=0.05; creation story)
+- `worlds/genesis.json` — Genesis (Bůh + padlý anděl Felix + PRIMITIVO_ES víno; PRODUCE λ=0.05; creation story; TRIGGER dialogy + resurrekt)
 
 ## Royal Chess — MVP design decisions
 
@@ -69,11 +69,18 @@ Archiv dokončených úkolů. Přesunuto z TODO.md.
 - Čas: tick-based; hráč čeká na tah soupeře → ticky využívá výrobou/sběrem
 - Dynamit: náhodně se objeví na políčku, nelze vyrábět
 
+## Simulation (continued)
+
+- TRIGGER mechanic: `RelationType.TRIGGER` + `_process_triggers()` — tři módy:
+  - HP-threshold fire-once (number > 0): normální CDF Phi((threshold−hp)/sigma); fired IDs v meta.vars["triggers_fired"]
+  - Ambient repeatable (number == 0): Bernoulli p = lambda_ per tick
+  - Resurrection (number == -1): hp → hp_max, arc se resetuje (fired IDs vymazány pro daný subjekt)
+
 ## Documentation
 
-- `GLOSSARY.md` — kanonické názvosloví projektu (EntityType vs kategorie, prototype inheritance)
+- `GLOSSARY.md` — kanonické názvosloví projektu (EntityType vs kategorie, prototype inheritance, TRIGGER)
 - Archetype entities přidány do všech světů (polar_night, math_universe, royal_chess)
 
 ---
 
-*Last updated: 2026-02-21*
+*Last updated: 2026-02-21 (TRIGGER)*

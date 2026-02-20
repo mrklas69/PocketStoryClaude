@@ -8,6 +8,7 @@ class RelationType(Enum):
     SKILL    = "SKILL"     # ENT1 has skill ENT2 at level/capacity NUMBER
     BEHAVIOR = "BEHAVIOR"  # ENT1 (entity or category) has behavior ENT2; NUMBER = intensity/rate
     PRODUCE  = "PRODUCE"   # ENT1 produces ENT2 each tick; NUMBER = fixed yield OR LAMBDA = Poisson parameter
+    TRIGGER  = "TRIGGER"  # ENT1 = speaker/subject, ENT2 = dialogue entity, NUMBER = hp threshold (>0 fire-once, 0=ambient, -1=resurrection), LAMBDA = sigma (threshold) or probability (ambient)
 
 
 class Relation:

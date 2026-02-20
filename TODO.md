@@ -46,4 +46,4 @@ Dokončené úkoly → [DONE.md](DONE.md) | Nápady → [IDEAS.md](IDEAS.md)
 
 ---
 
-*Last updated: 2026-02-21*
+*Last updated: 2026-02-21 (TRIGGER done)*

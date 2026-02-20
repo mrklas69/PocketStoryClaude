@@ -216,6 +216,87 @@ def _process_sums_hp(world: World) -> list[str]:
     return log
 
 
+def _get_dialogue(world: World, entity_id: str | None) -> str | None:
+    """Return description of a dialogue UNIQUE entity, or None."""
+    if entity_id is None:
+        return None
+    entity = world.get(entity_id)
+    return entity.description if entity is not None else None
+
+
+def _process_triggers(world: World) -> list[str]:
+    """Fire TRIGGER relations — character dialogue driven by HP or probability.
+
+    Three modes (controlled by 'number' field):
+      number > 0   HP-threshold, fire-once: fires when ent1.hp <= number.
+                   Probability = normal CDF Phi((number - hp) / lambda_).
+                   lambda_ == 0 means fire immediately (p = 1.0).
+                   Fired IDs tracked in meta.vars["triggers_fired"].
+      number == 0  Ambient, repeatable: fires each tick with Bernoulli
+                   probability lambda_. No HP condition required.
+      number == -1 Resurrection: fires when ent1.hp == 0, resets hp to
+                   hp_max, and clears this entity's threshold triggers from
+                   fired so the arc can repeat in the next life.
+    """
+    log: list[str] = []
+    fired: list = world.meta.vars.setdefault("triggers_fired", [])
+
+    for r in list(world.relations.values()):
+        if r.type != RelationType.TRIGGER:
+            continue
+        speaker = world.get(r.ent1)
+        if speaker is None:
+            continue
+
+        # ── Resurrection (number == -1) ───────────────────────────
+        if r.number == -1:
+            if speaker.hp is not None and speaker.hp == 0 and speaker.hp_max is not None:
+                speaker.hp = speaker.hp_max
+                # Reset threshold triggers so the despair arc repeats next life
+                reset_ids = [
+                    tr.id for tr in world.relations.values()
+                    if tr.type == RelationType.TRIGGER
+                    and tr.ent1 == r.ent1
+                    and tr.number > 0
+                    and tr.id in fired
+                ]
+                for tid in reset_ids:
+                    fired.remove(tid)
+                line = _get_dialogue(world, r.ent2)
+                suffix = f" | \"{line}\"" if line else ""
+                log.append(f"[RESURRECT] {speaker.name} 0 -> {speaker.hp_max} HP{suffix}")
+            continue
+
+        # ── Ambient (number == 0) ─────────────────────────────────
+        if r.number == 0:
+            if r.lambda_ > 0 and random.random() < r.lambda_:
+                line = _get_dialogue(world, r.ent2)
+                if line:
+                    log.append(f"{speaker.name}: \"{line}\"")
+            continue
+
+        # ── HP-threshold, fire-once (number > 0) ─────────────────
+        if r.id in fired:
+            continue
+        if speaker.hp is None or speaker.hp > r.number:
+            continue
+
+        # Probability via normal CDF: p = Phi((threshold - hp) / sigma)
+        if r.lambda_ > 0:
+            z = (r.number - speaker.hp) / r.lambda_
+            p = 0.5 * (1.0 + math.erf(z / math.sqrt(2.0)))
+        else:
+            p = 1.0  # No sigma = always fire when threshold is crossed
+
+        if random.random() < p:
+            fired.append(r.id)
+            line = _get_dialogue(world, r.ent2)
+            if line:
+                log.append(f"{speaker.name}: \"{line}\"  [HP {speaker.hp} <= {r.number}]")
+
+    return log
+
+
 def _in_graveyard(world: World, entity_id: str) -> bool:
     """Return True if entity_id resides in an ENVI marked TYPE_OF GRAVEYARD."""
     location = world.location_of(entity_id)
@@ -266,4 +347,5 @@ def tick(world: World) -> list[str]:
             suffix = " [DEAD]" if entity.hp == 0 else ""
             log.append(f"{entity.name}: HP {old_hp} -> {entity.hp}  [{causes}]{suffix}")
 
+    log += _process_triggers(world)
     return log

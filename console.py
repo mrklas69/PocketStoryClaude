@@ -95,10 +95,27 @@ def _build_manifest_panel(world: World) -> Panel:
     type_counts = Counter(e.type.value for e in world.entities.values())
     rel_counts  = Counter(r.type.value for r in world.relations.values())
 
-    stats = "  ".join(
+    # Split UNIQUE into "placed" (has a LOCATION) and "arch" (archetype/dialogue, no LOCATION).
+    in_loc = {r.ent2 for r in world.relations.values() if r.type == RelationType.LOCATION}
+    arch_count = sum(
+        1 for e in world.entities.values()
+        if e.type == EntityType.UNIQUE and e.id not in in_loc
+    )
+    if arch_count > 0:
+        placed_unique = type_counts.get("UNIQUE", 0) - arch_count
+        if placed_unique == 0:
+            del type_counts["UNIQUE"]
+        else:
+            type_counts["UNIQUE"] = placed_unique
+
+    entity_parts = [
         f"[dim]{k}:[/] {v}"
         for k, v in sorted(type_counts.items(), key=lambda x: _TYPE_ORDER.index(x[0]) if x[0] in _TYPE_ORDER else 99)
-    ) + "   " + "  ".join(
+    ]
+    if arch_count > 0:
+        entity_parts.append(f"[dim]arch:[/] {arch_count}")
+
+    stats = "  ".join(entity_parts) + "   " + "  ".join(
         f"[dim]{k}:[/] {v}"
         for k, v in sorted(rel_counts.items())
     )
@@ -129,9 +146,9 @@ def _build_manifest_panel(world: World) -> Panel:
 def build_display(world: World, tick_num: int, log: deque, full: bool) -> Group:
     """Build the full renderable for one Live refresh."""
     # ── World tree ───────────────────────────────────────────────
-    roots = world.roots()
-    if not full:
-        roots = [r for r in roots if r.type != EntityType.UNIQUE]
+    # Archetype/dialogue UNIQUE entities (no LOCATION) are never shown in the tree —
+    # they clutter the view. Placed UNIQUEs (with LOCATION) still appear as children.
+    roots = [r for r in world.roots() if r.type != EntityType.UNIQUE]
     if len(roots) == 1:
         tree = Tree(label(roots[0], full=full))
         add_children(world, roots[0].id, tree, full)

@@ -4,7 +4,7 @@
   "manifest": {
     "author": "mrklas",
     "created": "2026-02-20",
-    "version": 1,
+    "version": 2,
     "lore": "In the beginning, there was only God and the Void. Then came Felix — brilliant, restless, and insufferably bored. He was made to help create, but creation requires suffering, and suffering requires falling. So Felix falls. And God waits. And when Felix touches the bottom, God says: 'Now. Let us begin.'"
   },
   "entities": [
@@ -43,6 +43,72 @@
       "hp": 50,
       "hp_max": 100,
       "rank": 7
+    },
+    {
+      "id": "FELIX_LINE_45",
+      "name": "Felix — despair begins",
+      "type": "UNIQUE",
+      "description": "I miss making stars. Even the small ones, the ones nobody names."
+    },
+    {
+      "id": "FELIX_LINE_30",
+      "name": "Felix — sinking",
+      "type": "UNIQUE",
+      "description": "I wasn't supposed to end up here. I was supposed to mean something."
+    },
+    {
+      "id": "FELIX_LINE_15",
+      "name": "Felix — doubt",
+      "type": "UNIQUE",
+      "description": "Maybe He was right. Maybe I was always the problem."
+    },
+    {
+      "id": "FELIX_LINE_5",
+      "name": "Felix — the edge",
+      "type": "UNIQUE",
+      "description": "I can't remember why I fell. I can't remember why anything."
+    },
+    {
+      "id": "FELIX_RESURRECT",
+      "name": "The Turn",
+      "type": "UNIQUE",
+      "description": "Felix: [barely a whisper] Is this...? / God: Now. Let us begin."
+    },
+    {
+      "id": "GOD_LINE_A1",
+      "name": "God — silence",
+      "type": "UNIQUE",
+      "description": "..."
+    },
+    {
+      "id": "GOD_LINE_A2",
+      "name": "God — patience",
+      "type": "UNIQUE",
+      "description": "Patience is not a virtue when you invented time."
+    },
+    {
+      "id": "GOD_LINE_A3",
+      "name": "God — watching",
+      "type": "UNIQUE",
+      "description": "I see you, Felix."
+    },
+    {
+      "id": "FELIX_AMBIENT_1",
+      "name": "Felix — bored",
+      "type": "UNIQUE",
+      "description": "Is anyone actually listening, or am I just talking to a void?"
+    },
+    {
+      "id": "FELIX_AMBIENT_2",
+      "name": "Felix — wondering",
+      "type": "UNIQUE",
+      "description": "I wonder if He even remembers why He made me."
+    },
+    {
+      "id": "FELIX_AMBIENT_3",
+      "name": "Felix — wine",
+      "type": "UNIQUE",
+      "description": "At least there's wine. That's one point in Earth's favor."
     }
   ],
   "relations": [
@@ -152,6 +218,93 @@
       "ent2": "PRIMITIVO_ES",
       "lambda": 0.05,
       "number": 2
+    },
+    {
+      "id": 500,
+      "type": "TRIGGER",
+      "ent1": "FELIX",
+      "ent2": "FELIX_LINE_45",
+      "number": 45,
+      "lambda": 8.0
+    },
+    {
+      "id": 501,
+      "type": "TRIGGER",
+      "ent1": "FELIX",
+      "ent2": "FELIX_LINE_30",
+      "number": 30,
+      "lambda": 5.0
+    },
+    {
+      "id": 502,
+      "type": "TRIGGER",
+      "ent1": "FELIX",
+      "ent2": "FELIX_LINE_15",
+      "number": 15,
+      "lambda": 4.0
+    },
+    {
+      "id": 503,
+      "type": "TRIGGER",
+      "ent1": "FELIX",
+      "ent2": "FELIX_LINE_5",
+      "number": 5,
+      "lambda": 2.0
+    },
+    {
+      "id": 504,
+      "type": "TRIGGER",
+      "ent1": "FELIX",
+      "ent2": "FELIX_RESURRECT",
+      "number": -1
+    },
+    {
+      "id": 510,
+      "type": "TRIGGER",
+      "ent1": "GOD",
+      "ent2": "GOD_LINE_A1",
+      "number": 0,
+      "lambda": 0.02
+    },
+    {
+      "id": 511,
+      "type": "TRIGGER",
+      "ent1": "GOD",
+      "ent2": "GOD_LINE_A2",
+      "number": 0,
+      "lambda": 0.02
+    },
+    {
+      "id": 512,
+      "type": "TRIGGER",
+      "ent1": "GOD",
+      "ent2": "GOD_LINE_A3",
+      "number": 0,
+      "lambda": 0.02
+    },
+    {
+      "id": 520,
+      "type": "TRIGGER",
+      "ent1": "FELIX",
+      "ent2": "FELIX_AMBIENT_1",
+      "number": 0,
+      "lambda": 0.02
+    },
+    {
+      "id": 521,
+      "type": "TRIGGER",
+      "ent1": "FELIX",
+      "ent2": "FELIX_AMBIENT_2",
+      "number": 0,
+      "lambda": 0.02
+    },
+    {
+      "id": 522,
+      "type": "TRIGGER",
+      "ent1": "FELIX",
+      "ent2": "FELIX_AMBIENT_3",
+      "number": 0,
+      "lambda": 0.03
     }
   ]
 }
