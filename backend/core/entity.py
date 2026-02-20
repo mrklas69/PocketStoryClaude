@@ -45,6 +45,8 @@ class Entity:
         rank: int = 1,
         hp: Optional[int] = None,
         hp_max: Optional[int] = None,
+        nature: Optional[int] = None,
+        karma: Optional[int] = None,
     ):
         self.id: str = id or _new_id()
         self.name: str = name
@@ -64,6 +66,14 @@ class Entity:
         self.hp: Optional[int] = hp
         self.hp_max: Optional[int] = hp_max
         # Current / maximum health (freshness, durability...). None = not applicable.
+
+        self.nature: Optional[int] = nature
+        # Innate moral/essence charge. Range: -10000 (dark) to +10000 (light). None = neutral.
+        # Changes rarely (cursed, blessed). Can spread via BEHAVIOR.
+
+        self.karma: Optional[int] = karma
+        # Accumulated consequence of actions (CHAR only in practice). None = not applicable.
+        # Dynamic: grows/shrinks each tick or event. Interacts with nature.
 
     def __repr__(self) -> str:
         return f"Entity({self.type.value}, id={self.id!r}, name={self.name!r})"

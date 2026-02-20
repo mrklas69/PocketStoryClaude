@@ -17,4 +17,6 @@ Vysvětlení:
 ## Verze ??? (Pokročilá konzole)
 - Konzole obsahuje příkazový řádek, kde lze psát příkazy a simulaci řídit př. TASK(KING_HEROLD, FEED, BYGUL).
 
+## Verze ??? (Genesis konzole)
+- Konzole obsahuje i příkazy na editaci ENTIT a RELATION.
 

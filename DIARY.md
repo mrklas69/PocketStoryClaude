@@ -294,6 +294,51 @@ Velký produktivní blok — od relokace entit přes entropii tří světů až 
 
 ---
 
+## 2026-02-20 (pokračování — Royal Chess design + konzole)
+
+**Duration:** ~2 hours
+**With:** Claude (claude-sonnet-4-6)
+
+Refaktoring prezentační vrstvy + design Royal Chess herní mechaniky.
+
+**console.py (náhrada za demo.py):**
+- Přejmenování: `demo.py` → `console.py`
+- Nové barvy entit (red/yellow/green rezervovány pro ERR/WARN/OK):
+  - ENVI = blue, CHAR = cyan, UNIQUE = magenta, SUMS = white
+- Odstraněn výpis capacity z labelu
+- Přidán přepínač `--full`: zobrazuje rank, nature, karma
+- `_signed(n)` helper: kladná čísla dostávají prefix `+`
+
+**entity.py + world.py — nové atributy:**
+- `nature: Optional[int]` — morální/esenciální náboj (-10000 dark ↔ +10000 light); None = neutral
+- `karma: Optional[int]` — naakumulované důsledky akcí (CHAR only v praxi); None = N/A
+- Serializace: obojí omítnuto z JSON při None (defaultní)
+
+**world.py — `World.remove()`:**
+- Odstraní entitu + všechny relace kde `ent1 == id` nebo `ent2 == id`
+- Děti entity se stávají rooty (osiřelé, ne smazané)
+
+**worlds/royal_chess.json — opravy + rozšíření:**
+- Opraveny JSON chyby (chybějící čárky, trailing commas) po ručním editaci
+- Přidána všechna chybějící políčka šachovnice (bylo 8, přidáno 56 → 64 celkem)
+- Opraven F4: chyběl `"type": "ENVI"`
+- Reorganizace souboru: OFF_BOARD → políčka a1-h8 → figury → zdroje → relace
+
+**Design session: Royal Chess herní mechanika (MVP):**
+- Pravidla šachu: standardní FIDE (mat, pat, opakování, remíza dohodou)
+- Braní: přesun figury na pole soupeře (standard)
+- Čas: tick-based; hráč čeká na soupeřův tah → v té době probíhá výroba/sběr zdrojů
+- Akce: hráč nebo skript; plánován jednoduchý chess engine
+- Dynamit: náhodně se objeví na políčku šachovnice, nelze vyrábět
+
+**Rozhodnutí: zjednodušujeme!**
+- Zastavujeme vrstvení nápadů; prioritou je dokumentace + stabilizace základu
+- Nápady pro další iterace zaznamenány do TODO.md místo okamžité implementace
+
+**Next session:** PRODUCE/CONSUME + recipe engine; nebo konzolový chess prototype
+
+---
+
 ## 2026-02-19 (design review + nový svět Genesis)
 
 **Duration:** ~1 hour

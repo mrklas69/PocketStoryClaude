@@ -84,6 +84,22 @@ class World:
                 return self.entities.get(r.ent1)
         return None
 
+    def remove(self, entity_id: str) -> None:
+        """Remove entity and all relations that reference it.
+
+        Children (entities located inside this one) become roots — they are not
+        deleted, just no longer contained anywhere.
+        """
+        if entity_id not in self.entities:
+            raise ValueError(f"Entity '{entity_id}' not found")
+        to_delete = [
+            rid for rid, r in self.relations.items()
+            if r.ent1 == entity_id or r.ent2 == entity_id
+        ]
+        for rid in to_delete:
+            del self.relations[rid]
+        del self.entities[entity_id]
+
     def move(self, entity_id: str, new_container_id: str, amount: int | None = None) -> None:
         """Move entity to a new container.
 
@@ -228,6 +244,10 @@ def _entity_to_dict(e: Entity) -> dict:
         d["hp"] = e.hp
     if e.hp_max is not None:
         d["hp_max"] = e.hp_max
+    if e.nature is not None:
+        d["nature"] = e.nature
+    if e.karma is not None:
+        d["karma"] = e.karma
     return d
 
 
@@ -242,6 +262,8 @@ def _dict_to_entity(d: dict) -> Entity:
         rank=d.get("rank", 1),
         hp=d.get("hp"),
         hp_max=d.get("hp_max"),
+        nature=d.get("nature"),
+        karma=d.get("karma"),
     )
 
 

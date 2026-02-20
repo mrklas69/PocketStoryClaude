@@ -1,174 +1,1890 @@
 {
-  "name": "Royal Chess — Fragment",
-  "description": "Endurance Chess demo. Queen on d1 and bishop on f1 recharge at home (+4/tick). Rook holds h8 deep in enemy territory (-3/tick). Black pawn races on a6 (-4/tick). Home territory and enemy terrain expressed via TYPE_OF tags on individual squares — no abstract zones.",
+  "name": "Royal Chess — Strategické šachy",
+  "description": "Co se stane, když v šachové hře figurky ožijí? Jak se šachy změní, když střelci potřebují k boji šípy?",
   "entities": [
-    {
-      "id": "BOARD",
-      "name": "Chessboard",
-      "type": "ENVI",
-      "description": "64 squares. Infinite decisions. Only seven matter today."
-    },
     {
       "id": "OFF_BOARD",
       "name": "Off Board",
       "type": "ENVI",
-      "description": "The graveyard. Captured pieces reside here, stripped of purpose."
+      "description": "The graveyard. Captured pieces reside here; their remains are used to recycle the very rare ivory.",
+      "capacity": 64
     },
     {
       "id": "A1",
       "name": "a1",
       "type": "ENVI",
-      "description": "Dark corner square. Kings hide here in endgames. Currently empty — a destination, not yet reached.",
-      "capacity": 1
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "A2",
+      "name": "a2",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "A3",
+      "name": "a3",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "A4",
+      "name": "a4",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "A5",
+      "name": "a5",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
     },
     {
       "id": "A6",
       "name": "a6",
       "type": "ENVI",
-      "description": "Deep in white territory. The passed pawn's current outpost — three ranks from promotion.",
-      "capacity": 1
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "A7",
+      "name": "a7",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "A8",
+      "name": "a8",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "B1",
+      "name": "b1",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "B2",
+      "name": "b2",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
     },
     {
       "id": "B3",
       "name": "b3",
       "type": "ENVI",
-      "description": "Light square. Currently empty — the archer has retreated home to recharge.",
-      "capacity": 1
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "B4",
+      "name": "b4",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "B5",
+      "name": "b5",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "B6",
+      "name": "b6",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "B7",
+      "name": "b7",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "B8",
+      "name": "b8",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "C1",
+      "name": "c1",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
     },
     {
       "id": "C2",
       "name": "c2",
       "type": "ENVI",
-      "description": "Central light square. Currently empty — the queen has retreated home to recharge.",
-      "capacity": 1
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "C3",
+      "name": "c3",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "C4",
+      "name": "c4",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "C5",
+      "name": "c5",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "C6",
+      "name": "c6",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "C7",
+      "name": "c7",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "C8",
+      "name": "c8",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
     },
     {
       "id": "D1",
       "name": "d1",
       "type": "ENVI",
-      "description": "White's queen starting square. Back-rank safety — pieces here recover endurance.",
-      "capacity": 1
+      "capacity": 1,
+      "description": "White queen's home square. Back-rank safety — pieces here recover endurance.",
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "D2",
+      "name": "d2",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "D3",
+      "name": "d3",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "D4",
+      "name": "d4",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "D5",
+      "name": "d5",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "D6",
+      "name": "d6",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "D7",
+      "name": "d7",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "D8",
+      "name": "d8",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "E1",
+      "name": "e1",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "E2",
+      "name": "e2",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "E3",
+      "name": "e3",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "E4",
+      "name": "e4",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "E5",
+      "name": "e5",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "E6",
+      "name": "e6",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "E7",
+      "name": "e7",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "E8",
+      "name": "e8",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
     },
     {
       "id": "F1",
       "name": "f1",
       "type": "ENVI",
-      "description": "White's light-squared bishop starting square. Back-rank safety — pieces here recover endurance.",
-      "capacity": 1
+      "capacity": 1,
+      "description": "White light-archer's home square. Back-rank safety — pieces here recover endurance.",
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "F2",
+      "name": "f2",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "F3",
+      "name": "f3",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "F4",
+      "name": "f4",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "F5",
+      "name": "f5",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "F6",
+      "name": "f6",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "F7",
+      "name": "f7",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "F8",
+      "name": "f8",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "G1",
+      "name": "g1",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "G2",
+      "name": "g2",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "G3",
+      "name": "g3",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "G4",
+      "name": "g4",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "G5",
+      "name": "g5",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "G6",
+      "name": "g6",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "G7",
+      "name": "g7",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "G8",
+      "name": "g8",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "H1",
+      "name": "h1",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "H2",
+      "name": "h2",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "H3",
+      "name": "h3",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "H4",
+      "name": "h4",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "H5",
+      "name": "h5",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "H6",
+      "name": "h6",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "H7",
+      "name": "h7",
+      "type": "ENVI",
+      "capacity": 1,
+      "hp": 100,
+      "hp_max": 100
     },
     {
       "id": "H8",
       "name": "h8",
       "type": "ENVI",
-      "description": "Far corner of the 8th rank. Deep in black's territory. The rook cut off all escape — but holding here is exhausting.",
-      "capacity": 1
+      "capacity": 1,
+      "description": "Far corner of the 8th rank. Deep in black territory. The rook cut off all escape — but holding here is exhausting.",
+      "hp": 100,
+      "hp_max": 100
     },
-
+    {
+      "id": "WHITE_KING",
+      "name": "White King",
+      "type": "CHAR",
+      "description": "The white sovereign. Moves one step in any direction — never into danger. The game ends when he falls.",
+      "capacity": 20,
+      "rank": 10,
+      "hp": 100,
+      "hp_max": 100
+    },
     {
       "id": "WHITE_QUEEN",
       "name": "White Queen",
       "type": "CHAR",
       "description": "The most powerful piece. Moves in all 8 directions, any distance. Exhausted from the last assault — retreated to d1 to recharge.",
-      "hp": 10,
-      "hp_max": 90,
-      "rank": 9
+      "capacity": 16,
+      "rank": 9,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "WHITE_A_ROOK",
+      "name": "White a-Rook",
+      "type": "CHAR",
+      "description": "Stationed at the a-file corner, awaiting the endgame. Patient, powerful, built for open files.",
+      "capacity": 12,
+      "rank": 5,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "WHITE_B_KNIGHT",
+      "name": "White b-Knight",
+      "type": "CHAR",
+      "description": "Bold opener — leaps over the pawn wall before the game has begun.",
+      "capacity": 8,
+      "rank": 4,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "WHITE_C_ARCHER",
+      "name": "White c-Archer",
+      "type": "CHAR",
+      "description": "Dark-squared archer. Prowls the long black diagonals from c1, never touching a light square.",
+      "capacity": 8,
+      "rank": 3,
+      "hp": 100,
+      "hp_max": 100
     },
     {
       "id": "WHITE_ARCHER_LIGHT",
-      "name": "White Archer",
+      "name": "White f-Archer",
       "type": "CHAR",
-      "description": "Light-footed archer. Ranges across diagonals, never crossing to dark squares. Barely survived the exchange — back on f1 with a sliver of strength, quiver nearly empty.",
-      "hp": 5,
-      "hp_max": 30,
-      "rank": 3
+      "description": "Light-footed archer. Ranges across diagonals, never crossing to dark squares. Barely survived the last exchange — back on f1 with a sliver of strength, quiver nearly empty.",
+      "capacity": 8,
+      "rank": 3,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "WHITE_G_KNIGHT",
+      "name": "White g-Knight",
+      "type": "CHAR",
+      "description": "Classical kingside opener. Leaps over pawns and lands with a threat.",
+      "capacity": 8,
+      "rank": 4,
+      "hp": 100,
+      "hp_max": 100
     },
     {
       "id": "WHITE_H_ROOK",
       "name": "White h-Rook",
       "type": "CHAR",
       "description": "The rook that dared the 8th rank. Controls the entire row — but every tick in enemy territory drains its endurance.",
-      "hp": 50,
-      "hp_max": 50,
-      "rank": 5
+      "capacity": 12,
+      "rank": 5,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "WHITE_A_PAWN",
+      "name": "White a-Pawn",
+      "type": "CHAR",
+      "capacity": 4,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "WHITE_B_PAWN",
+      "name": "White b-Pawn",
+      "type": "CHAR",
+      "capacity": 4,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "WHITE_C_PAWN",
+      "name": "White c-Pawn",
+      "type": "CHAR",
+      "capacity": 4,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "WHITE_D_PAWN",
+      "name": "White d-Pawn",
+      "type": "CHAR",
+      "capacity": 4,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "WHITE_E_PAWN",
+      "name": "White e-Pawn",
+      "type": "CHAR",
+      "capacity": 4,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "WHITE_F_PAWN",
+      "name": "White f-Pawn",
+      "type": "CHAR",
+      "capacity": 4,
+      "hp": 80,
+      "hp_max": 100
+    },
+    {
+      "id": "WHITE_G_PAWN",
+      "name": "White g-Pawn",
+      "type": "CHAR",
+      "capacity": 4,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "WHITE_H_PAWN",
+      "name": "White h-Pawn",
+      "type": "CHAR",
+      "capacity": 4,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "BLACK_KING",
+      "name": "Black King",
+      "type": "CHAR",
+      "description": "The black sovereign. Sheltered deep in his own ranks — for now. Every tick the enemy presses closer.",
+      "capacity": 20,
+      "rank": 10,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "BLACK_QUEEN",
+      "name": "Black Queen",
+      "type": "CHAR",
+      "description": "The black queen surveys the board from d8, ready to strike the moment white overextends.",
+      "capacity": 16,
+      "rank": 9,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "BLACK_A_ROOK",
+      "name": "Black a-Rook",
+      "type": "CHAR",
+      "description": "Anchored at a8. Waits for the queenside file to open.",
+      "capacity": 12,
+      "rank": 5,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "BLACK_B_KNIGHT",
+      "name": "Black b-Knight",
+      "type": "CHAR",
+      "description": "Poised to challenge the centre. Quick and cunning.",
+      "capacity": 8,
+      "rank": 4,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "BLACK_C_ARCHER",
+      "name": "Black c-Archer",
+      "type": "CHAR",
+      "description": "Dark-squared black archer. Commands the long diagonal — patient and dangerous.",
+      "capacity": 8,
+      "rank": 3,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "BLACK_F_ARCHER",
+      "name": "Black f-Archer",
+      "type": "CHAR",
+      "description": "Light-squared black archer. Eyes the kingside from f8.",
+      "capacity": 8,
+      "rank": 3,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "BLACK_G_KNIGHT",
+      "name": "Black g-Knight",
+      "type": "CHAR",
+      "description": "Kingside guardian. Quick to react to white aggression.",
+      "capacity": 8,
+      "rank": 4,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "BLACK_H_ROOK",
+      "name": "Black h-Rook",
+      "type": "CHAR",
+      "description": "Fallen. Captured when white dared the 8th rank — now its ivory fuels the war effort from the graveyard.",
+      "capacity": 12,
+      "rank": 5,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "BLACK_A_PAWN",
+      "name": "Black a-Pawn",
+      "type": "CHAR",
+      "capacity": 4,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "BLACK_B_PAWN",
+      "name": "Black b-Pawn",
+      "type": "CHAR",
+      "capacity": 4,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "BLACK_C_PAWN",
+      "name": "Black c-Pawn",
+      "type": "CHAR",
+      "capacity": 4,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "BLACK_D_PAWN",
+      "name": "Black d-Pawn",
+      "type": "CHAR",
+      "capacity": 4,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "BLACK_E_PAWN",
+      "name": "Black e-Pawn",
+      "type": "CHAR",
+      "capacity": 4,
+      "hp": 100,
+      "hp_max": 100
+    },
+    {
+      "id": "BLACK_F_PAWN",
+      "name": "Black f-Pawn",
+      "type": "CHAR",
+      "capacity": 4,
+      "hp": 80,
+      "hp_max": 100
+    },
+    {
+      "id": "BLACK_G_PAWN",
+      "name": "Black g-Pawn",
+      "type": "CHAR",
+      "capacity": 4,
+      "hp": 100,
+      "hp_max": 100
     },
     {
       "id": "BLACK_H_PAWN",
       "name": "Black h-Pawn",
       "type": "CHAR",
       "description": "Black's last hope. Stranded on a6, racing toward promotion. Every tick counts.",
+      "capacity": 4,
       "hp": 100,
-      "hp_max": 100,
-      "rank": 1
-    },
-
-    {
-      "id": "MOVE_COUNT",
-      "name": "Move Counter",
-      "type": "SUMS",
-      "description": "Abstract tally of half-moves (plies) since the game began. A SUMS living on the board itself — a game-global statistic, not a physical object.",
-      "number": 999
+      "hp_max": 100
     },
     {
-      "id": "WHITE_LEGAL_MOVES",
-      "name": "White Legal Moves",
+      "id": "ARROWS",
+      "name": "Arrows",
       "type": "SUMS",
-      "description": "How many legal moves white can make this turn. Drops to 0 = stalemate. Abstract quantity — recomputed each tick by the engine (future feature).",
-      "number": 999
+      "description": "Required ammunition for archer fire. Each shot costs 1 arrow. Issued by the king; production can be delegated to other pieces. Can also be looted from captured enemy archers, or appear rarely on the board.",
+      "number": 16
     },
     {
-      "id": "BLACK_THREATS",
-      "name": "Black Threats",
+      "id": "HAY",
+      "name": "Hay",
       "type": "SUMS",
-      "description": "How many white pieces are currently under attack or in danger. Zero now, but rising.",
-      "number": 999
+      "description": "Basic fodder for horses. Each knight move costs 4 units of hay. Issued by the king; production can be delegated to pawns. Can be looted from enemy pawns or appear rarely on the board.",
+      "number": 32
+    },
+    {
+      "id": "OATS",
+      "name": "Oats",
+      "type": "SUMS",
+      "description": "Energy fodder for horses. Each knight move costs 1 unit of oats. Issued by the king; production can be delegated to pawns. Can be looted from enemy pawns.",
+      "number": 32
+    },
+    {
+      "id": "IVORY",
+      "name": "Ivory",
+      "type": "SUMS",
+      "description": "Used to repair a destroyed board square. Each repair costs 1 unit. Obtained from captured pieces.",
+      "number": 1
+    },
+    {
+      "id": "DYNAMITE",
+      "name": "Dynamite",
+      "type": "SUMS",
+      "description": "Explosive needed to destroy a board square. Each blast costs 1 unit. Cannot be crafted — appears rarely on board squares.",
+      "number": 1
+    },
+    {
+      "id": "PIECE",
+      "name": "Piece",
+      "type": "UNIQUE",
+      "description": "Any chess piece — a living participant in the battle, subject to endurance, capture, and resource constraints."
+    },
+    {
+      "id": "KING",
+      "name": "King",
+      "type": "UNIQUE",
+      "description": "The sovereign. Moves one step in any direction. Its fall ends the game — protect it at all costs."
+    },
+    {
+      "id": "QUEEN",
+      "name": "Queen",
+      "type": "UNIQUE",
+      "description": "The supreme commander. Ranges freely in all 8 directions, any distance. The most powerful piece on the board."
+    },
+    {
+      "id": "ROOK",
+      "name": "Rook",
+      "type": "UNIQUE",
+      "description": "The fortress tower. Commands open files and ranks with orthogonal reach. Strongest in the endgame."
+    },
+    {
+      "id": "KNIGHT",
+      "name": "Knight",
+      "type": "UNIQUE",
+      "description": "The leaping warrior. Ignores all pieces in its path; strikes in an L-shaped arc. Unpredictable and nimble."
+    },
+    {
+      "id": "ARCHER",
+      "name": "Archer",
+      "type": "UNIQUE",
+      "description": "The diagonal ranger. Commands the long diagonals and never leaves its colour. Requires arrows to fight."
+    },
+    {
+      "id": "PAWN",
+      "name": "Pawn",
+      "type": "UNIQUE",
+      "description": "The foot soldier. Slow, expendable — but every pawn carries a queen within."
     }
   ],
   "relations": [
-    { "id": 1,  "type": "LOCATION", "ent1": "BOARD", "ent2": "A1",                  "number": 1  },
-    { "id": 2,  "type": "LOCATION", "ent1": "BOARD", "ent2": "A6",                  "number": 1  },
-    { "id": 3,  "type": "LOCATION", "ent1": "BOARD", "ent2": "B3",                  "number": 1  },
-    { "id": 4,  "type": "LOCATION", "ent1": "BOARD", "ent2": "C2",                  "number": 1  },
-    { "id": 5,  "type": "LOCATION", "ent1": "BOARD", "ent2": "D1",                  "number": 1  },
-    { "id": 6,  "type": "LOCATION", "ent1": "BOARD", "ent2": "F1",                  "number": 1  },
-    { "id": 7,  "type": "LOCATION", "ent1": "BOARD", "ent2": "H8",                  "number": 1  },
-    { "id": 8,  "type": "LOCATION", "ent1": "A6",    "ent2": "BLACK_H_PAWN",        "number": 1  },
-    { "id": 9,  "type": "LOCATION", "ent1": "D1",    "ent2": "WHITE_QUEEN",         "number": 1  },
-    { "id": 10, "type": "LOCATION", "ent1": "F1",    "ent2": "WHITE_ARCHER_LIGHT",  "number": 1  },
-    { "id": 11, "type": "LOCATION", "ent1": "H8",    "ent2": "WHITE_H_ROOK",        "number": 1  },
-
-    { "id": 12, "type": "LOCATION", "ent1": "BOARD", "ent2": "MOVE_COUNT",          "number": 28 },
-    { "id": 13, "type": "LOCATION", "ent1": "BOARD", "ent2": "WHITE_LEGAL_MOVES",   "number": 34 },
-    { "id": 14, "type": "LOCATION", "ent1": "BOARD", "ent2": "BLACK_THREATS",       "number": 2  },
-
-    { "id": 100, "type": "SKILL", "ent1": "WHITE_QUEEN",        "ent2": "MOVE_QUEEN",  "number": 8 },
-    { "id": 101, "type": "SKILL", "ent1": "WHITE_ARCHER_LIGHT", "ent2": "MOVE_ARCHER", "number": 8 },
-    { "id": 102, "type": "SKILL", "ent1": "WHITE_H_ROOK",       "ent2": "MOVE_ROOK",   "number": 8 },
-    { "id": 103, "type": "SKILL", "ent1": "BLACK_H_PAWN",       "ent2": "MOVE_PAWN",   "number": 1 },
-
-    { "id": 200, "type": "TYPE_OF", "ent1": "WHITE_QUEEN",        "ent2": "QUEEN"       },
-    { "id": 201, "type": "TYPE_OF", "ent1": "WHITE_QUEEN",        "ent2": "PIECE"       },
-    { "id": 202, "type": "TYPE_OF", "ent1": "WHITE_QUEEN",        "ent2": "WHITE_PIECE" },
-    { "id": 203, "type": "TYPE_OF", "ent1": "WHITE_ARCHER_LIGHT", "ent2": "ARCHER"     },
-    { "id": 204, "type": "TYPE_OF", "ent1": "WHITE_ARCHER_LIGHT", "ent2": "PIECE"       },
-    { "id": 205, "type": "TYPE_OF", "ent1": "WHITE_ARCHER_LIGHT", "ent2": "WHITE_PIECE" },
-    { "id": 206, "type": "TYPE_OF", "ent1": "WHITE_H_ROOK",       "ent2": "ROOK"        },
-    { "id": 207, "type": "TYPE_OF", "ent1": "WHITE_H_ROOK",       "ent2": "PIECE"       },
-    { "id": 208, "type": "TYPE_OF", "ent1": "WHITE_H_ROOK",       "ent2": "WHITE_PIECE" },
-    { "id": 209, "type": "TYPE_OF", "ent1": "BLACK_H_PAWN",       "ent2": "PAWN"        },
-    { "id": 210, "type": "TYPE_OF", "ent1": "BLACK_H_PAWN",       "ent2": "PIECE"       },
-    { "id": 211, "type": "TYPE_OF", "ent1": "BLACK_H_PAWN",       "ent2": "BLACK_PIECE" },
-    { "id": 212, "type": "TYPE_OF", "ent1": "MOVE_COUNT",         "ent2": "GAME_STAT"   },
-    { "id": 213, "type": "TYPE_OF", "ent1": "WHITE_LEGAL_MOVES",  "ent2": "GAME_STAT"   },
-    { "id": 214, "type": "TYPE_OF", "ent1": "BLACK_THREATS",      "ent2": "GAME_STAT"   },
-
-    { "id": 215, "type": "TYPE_OF", "ent1": "OFF_BOARD", "ent2": "GRAVEYARD"      },
-    { "id": 216, "type": "TYPE_OF", "ent1": "D1",        "ent2": "HOME_SQUARE"    },
-    { "id": 217, "type": "TYPE_OF", "ent1": "F1",        "ent2": "HOME_SQUARE"    },
-    { "id": 218, "type": "TYPE_OF", "ent1": "H8",        "ent2": "ENEMY_TERRITORY"},
-
-    { "id": 300, "type": "BEHAVIOR", "ent1": "PAWN",            "ent2": "CLOCK_PRESSURE",     "number":  3 },
-    { "id": 301, "type": "BEHAVIOR", "ent1": "PIECE",           "ent2": "ACTIVITY_LOSS",      "number":  1 },
-    { "id": 302, "type": "BEHAVIOR", "ent1": "HOME_SQUARE",     "ent2": "RECHARGE",           "number": -5 },
-    { "id": 303, "type": "BEHAVIOR", "ent1": "ENEMY_TERRITORY", "ent2": "TERRITORIAL_STRAIN", "number":  2 }
+    {
+      "id": 1,
+      "type": "LOCATION",
+      "ent1": "F4",
+      "ent2": "DYNAMITE"
+    },
+    {
+      "id": 8,
+      "type": "LOCATION",
+      "ent1": "A6",
+      "ent2": "BLACK_H_PAWN"
+    },
+    {
+      "id": 9,
+      "type": "LOCATION",
+      "ent1": "D1",
+      "ent2": "WHITE_QUEEN"
+    },
+    {
+      "id": 10,
+      "type": "LOCATION",
+      "ent1": "F1",
+      "ent2": "WHITE_ARCHER_LIGHT"
+    },
+    {
+      "id": 11,
+      "type": "LOCATION",
+      "ent1": "H8",
+      "ent2": "WHITE_H_ROOK"
+    },
+    {
+      "id": 12,
+      "type": "LOCATION",
+      "ent1": "A1",
+      "ent2": "WHITE_A_ROOK"
+    },
+    {
+      "id": 13,
+      "type": "LOCATION",
+      "ent1": "B1",
+      "ent2": "WHITE_B_KNIGHT"
+    },
+    {
+      "id": 14,
+      "type": "LOCATION",
+      "ent1": "C1",
+      "ent2": "WHITE_C_ARCHER"
+    },
+    {
+      "id": 15,
+      "type": "LOCATION",
+      "ent1": "E1",
+      "ent2": "WHITE_KING"
+    },
+    {
+      "id": 16,
+      "type": "LOCATION",
+      "ent1": "G1",
+      "ent2": "WHITE_G_KNIGHT"
+    },
+    {
+      "id": 17,
+      "type": "LOCATION",
+      "ent1": "A2",
+      "ent2": "WHITE_A_PAWN"
+    },
+    {
+      "id": 18,
+      "type": "LOCATION",
+      "ent1": "B2",
+      "ent2": "WHITE_B_PAWN"
+    },
+    {
+      "id": 19,
+      "type": "LOCATION",
+      "ent1": "C2",
+      "ent2": "WHITE_C_PAWN"
+    },
+    {
+      "id": 20,
+      "type": "LOCATION",
+      "ent1": "D2",
+      "ent2": "WHITE_D_PAWN"
+    },
+    {
+      "id": 21,
+      "type": "LOCATION",
+      "ent1": "E2",
+      "ent2": "WHITE_E_PAWN"
+    },
+    {
+      "id": 22,
+      "type": "LOCATION",
+      "ent1": "F2",
+      "ent2": "WHITE_F_PAWN"
+    },
+    {
+      "id": 23,
+      "type": "LOCATION",
+      "ent1": "G2",
+      "ent2": "WHITE_G_PAWN"
+    },
+    {
+      "id": 24,
+      "type": "LOCATION",
+      "ent1": "H2",
+      "ent2": "WHITE_H_PAWN"
+    },
+    {
+      "id": 25,
+      "type": "LOCATION",
+      "ent1": "A8",
+      "ent2": "BLACK_A_ROOK"
+    },
+    {
+      "id": 26,
+      "type": "LOCATION",
+      "ent1": "B8",
+      "ent2": "BLACK_B_KNIGHT"
+    },
+    {
+      "id": 27,
+      "type": "LOCATION",
+      "ent1": "C8",
+      "ent2": "BLACK_C_ARCHER"
+    },
+    {
+      "id": 28,
+      "type": "LOCATION",
+      "ent1": "D8",
+      "ent2": "BLACK_QUEEN"
+    },
+    {
+      "id": 29,
+      "type": "LOCATION",
+      "ent1": "E8",
+      "ent2": "BLACK_KING"
+    },
+    {
+      "id": 30,
+      "type": "LOCATION",
+      "ent1": "F8",
+      "ent2": "BLACK_F_ARCHER"
+    },
+    {
+      "id": 31,
+      "type": "LOCATION",
+      "ent1": "G8",
+      "ent2": "BLACK_G_KNIGHT"
+    },
+    {
+      "id": 32,
+      "type": "LOCATION",
+      "ent1": "OFF_BOARD",
+      "ent2": "BLACK_H_ROOK"
+    },
+    {
+      "id": 33,
+      "type": "LOCATION",
+      "ent1": "A7",
+      "ent2": "BLACK_A_PAWN"
+    },
+    {
+      "id": 34,
+      "type": "LOCATION",
+      "ent1": "B7",
+      "ent2": "BLACK_B_PAWN"
+    },
+    {
+      "id": 35,
+      "type": "LOCATION",
+      "ent1": "C7",
+      "ent2": "BLACK_C_PAWN"
+    },
+    {
+      "id": 36,
+      "type": "LOCATION",
+      "ent1": "D7",
+      "ent2": "BLACK_D_PAWN"
+    },
+    {
+      "id": 37,
+      "type": "LOCATION",
+      "ent1": "E7",
+      "ent2": "BLACK_E_PAWN"
+    },
+    {
+      "id": 38,
+      "type": "LOCATION",
+      "ent1": "F7",
+      "ent2": "BLACK_F_PAWN"
+    },
+    {
+      "id": 39,
+      "type": "LOCATION",
+      "ent1": "G7",
+      "ent2": "BLACK_G_PAWN"
+    },
+    {
+      "id": 100,
+      "type": "SKILL",
+      "ent1": "WHITE_QUEEN",
+      "ent2": "MOVE_QUEEN",
+      "number": 8
+    },
+    {
+      "id": 101,
+      "type": "SKILL",
+      "ent1": "WHITE_ARCHER_LIGHT",
+      "ent2": "MOVE_ARCHER",
+      "number": 8
+    },
+    {
+      "id": 102,
+      "type": "SKILL",
+      "ent1": "WHITE_H_ROOK",
+      "ent2": "MOVE_ROOK",
+      "number": 8
+    },
+    {
+      "id": 103,
+      "type": "SKILL",
+      "ent1": "BLACK_H_PAWN",
+      "ent2": "MOVE_PAWN"
+    },
+    {
+      "id": 104,
+      "type": "SKILL",
+      "ent1": "WHITE_KING",
+      "ent2": "MOVE_KING"
+    },
+    {
+      "id": 105,
+      "type": "SKILL",
+      "ent1": "WHITE_A_ROOK",
+      "ent2": "MOVE_ROOK",
+      "number": 8
+    },
+    {
+      "id": 106,
+      "type": "SKILL",
+      "ent1": "WHITE_B_KNIGHT",
+      "ent2": "MOVE_KNIGHT"
+    },
+    {
+      "id": 107,
+      "type": "SKILL",
+      "ent1": "WHITE_C_ARCHER",
+      "ent2": "MOVE_ARCHER",
+      "number": 8
+    },
+    {
+      "id": 108,
+      "type": "SKILL",
+      "ent1": "WHITE_G_KNIGHT",
+      "ent2": "MOVE_KNIGHT"
+    },
+    {
+      "id": 109,
+      "type": "SKILL",
+      "ent1": "WHITE_A_PAWN",
+      "ent2": "MOVE_PAWN"
+    },
+    {
+      "id": 110,
+      "type": "SKILL",
+      "ent1": "WHITE_B_PAWN",
+      "ent2": "MOVE_PAWN"
+    },
+    {
+      "id": 111,
+      "type": "SKILL",
+      "ent1": "WHITE_C_PAWN",
+      "ent2": "MOVE_PAWN"
+    },
+    {
+      "id": 112,
+      "type": "SKILL",
+      "ent1": "WHITE_D_PAWN",
+      "ent2": "MOVE_PAWN"
+    },
+    {
+      "id": 113,
+      "type": "SKILL",
+      "ent1": "WHITE_E_PAWN",
+      "ent2": "MOVE_PAWN"
+    },
+    {
+      "id": 114,
+      "type": "SKILL",
+      "ent1": "WHITE_F_PAWN",
+      "ent2": "MOVE_PAWN"
+    },
+    {
+      "id": 115,
+      "type": "SKILL",
+      "ent1": "WHITE_G_PAWN",
+      "ent2": "MOVE_PAWN"
+    },
+    {
+      "id": 116,
+      "type": "SKILL",
+      "ent1": "WHITE_H_PAWN",
+      "ent2": "MOVE_PAWN"
+    },
+    {
+      "id": 117,
+      "type": "SKILL",
+      "ent1": "BLACK_KING",
+      "ent2": "MOVE_KING"
+    },
+    {
+      "id": 118,
+      "type": "SKILL",
+      "ent1": "BLACK_QUEEN",
+      "ent2": "MOVE_QUEEN",
+      "number": 8
+    },
+    {
+      "id": 119,
+      "type": "SKILL",
+      "ent1": "BLACK_A_ROOK",
+      "ent2": "MOVE_ROOK",
+      "number": 8
+    },
+    {
+      "id": 120,
+      "type": "SKILL",
+      "ent1": "BLACK_B_KNIGHT",
+      "ent2": "MOVE_KNIGHT"
+    },
+    {
+      "id": 121,
+      "type": "SKILL",
+      "ent1": "BLACK_C_ARCHER",
+      "ent2": "MOVE_ARCHER",
+      "number": 8
+    },
+    {
+      "id": 122,
+      "type": "SKILL",
+      "ent1": "BLACK_F_ARCHER",
+      "ent2": "MOVE_ARCHER",
+      "number": 8
+    },
+    {
+      "id": 123,
+      "type": "SKILL",
+      "ent1": "BLACK_G_KNIGHT",
+      "ent2": "MOVE_KNIGHT"
+    },
+    {
+      "id": 124,
+      "type": "SKILL",
+      "ent1": "BLACK_H_ROOK",
+      "ent2": "MOVE_ROOK",
+      "number": 8
+    },
+    {
+      "id": 125,
+      "type": "SKILL",
+      "ent1": "BLACK_A_PAWN",
+      "ent2": "MOVE_PAWN"
+    },
+    {
+      "id": 126,
+      "type": "SKILL",
+      "ent1": "BLACK_B_PAWN",
+      "ent2": "MOVE_PAWN"
+    },
+    {
+      "id": 127,
+      "type": "SKILL",
+      "ent1": "BLACK_C_PAWN",
+      "ent2": "MOVE_PAWN"
+    },
+    {
+      "id": 128,
+      "type": "SKILL",
+      "ent1": "BLACK_D_PAWN",
+      "ent2": "MOVE_PAWN"
+    },
+    {
+      "id": 129,
+      "type": "SKILL",
+      "ent1": "BLACK_E_PAWN",
+      "ent2": "MOVE_PAWN"
+    },
+    {
+      "id": 130,
+      "type": "SKILL",
+      "ent1": "BLACK_F_PAWN",
+      "ent2": "MOVE_PAWN"
+    },
+    {
+      "id": 131,
+      "type": "SKILL",
+      "ent1": "BLACK_G_PAWN",
+      "ent2": "MOVE_PAWN"
+    },
+    {
+      "id": 200,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_QUEEN",
+      "ent2": "QUEEN"
+    },
+    {
+      "id": 201,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_QUEEN",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 202,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_QUEEN",
+      "ent2": "WHITE_PIECE"
+    },
+    {
+      "id": 203,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_ARCHER_LIGHT",
+      "ent2": "ARCHER"
+    },
+    {
+      "id": 204,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_ARCHER_LIGHT",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 205,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_ARCHER_LIGHT",
+      "ent2": "WHITE_PIECE"
+    },
+    {
+      "id": 206,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_H_ROOK",
+      "ent2": "ROOK"
+    },
+    {
+      "id": 207,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_H_ROOK",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 208,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_H_ROOK",
+      "ent2": "WHITE_PIECE"
+    },
+    {
+      "id": 209,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_H_PAWN",
+      "ent2": "PAWN"
+    },
+    {
+      "id": 210,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_H_PAWN",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 211,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_H_PAWN",
+      "ent2": "BLACK_PIECE"
+    },
+    {
+      "id": 212,
+      "type": "TYPE_OF",
+      "ent1": "MOVE_COUNT",
+      "ent2": "GAME_STAT"
+    },
+    {
+      "id": 213,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_LEGAL_MOVES",
+      "ent2": "GAME_STAT"
+    },
+    {
+      "id": 214,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_THREATS",
+      "ent2": "GAME_STAT"
+    },
+    {
+      "id": 215,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_KING",
+      "ent2": "KING"
+    },
+    {
+      "id": 216,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_KING",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 217,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_KING",
+      "ent2": "WHITE_PIECE"
+    },
+    {
+      "id": 218,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_A_ROOK",
+      "ent2": "ROOK"
+    },
+    {
+      "id": 219,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_A_ROOK",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 220,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_A_ROOK",
+      "ent2": "WHITE_PIECE"
+    },
+    {
+      "id": 221,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_B_KNIGHT",
+      "ent2": "KNIGHT"
+    },
+    {
+      "id": 222,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_B_KNIGHT",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 223,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_B_KNIGHT",
+      "ent2": "WHITE_PIECE"
+    },
+    {
+      "id": 224,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_C_ARCHER",
+      "ent2": "ARCHER"
+    },
+    {
+      "id": 225,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_C_ARCHER",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 226,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_C_ARCHER",
+      "ent2": "WHITE_PIECE"
+    },
+    {
+      "id": 227,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_G_KNIGHT",
+      "ent2": "KNIGHT"
+    },
+    {
+      "id": 228,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_G_KNIGHT",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 229,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_G_KNIGHT",
+      "ent2": "WHITE_PIECE"
+    },
+    {
+      "id": 230,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_A_PAWN",
+      "ent2": "PAWN"
+    },
+    {
+      "id": 231,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_A_PAWN",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 232,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_A_PAWN",
+      "ent2": "WHITE_PIECE"
+    },
+    {
+      "id": 233,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_B_PAWN",
+      "ent2": "PAWN"
+    },
+    {
+      "id": 234,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_B_PAWN",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 235,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_B_PAWN",
+      "ent2": "WHITE_PIECE"
+    },
+    {
+      "id": 236,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_C_PAWN",
+      "ent2": "PAWN"
+    },
+    {
+      "id": 237,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_C_PAWN",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 238,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_C_PAWN",
+      "ent2": "WHITE_PIECE"
+    },
+    {
+      "id": 239,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_D_PAWN",
+      "ent2": "PAWN"
+    },
+    {
+      "id": 240,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_D_PAWN",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 241,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_D_PAWN",
+      "ent2": "WHITE_PIECE"
+    },
+    {
+      "id": 242,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_E_PAWN",
+      "ent2": "PAWN"
+    },
+    {
+      "id": 243,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_E_PAWN",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 244,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_E_PAWN",
+      "ent2": "WHITE_PIECE"
+    },
+    {
+      "id": 245,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_F_PAWN",
+      "ent2": "PAWN"
+    },
+    {
+      "id": 246,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_F_PAWN",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 247,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_F_PAWN",
+      "ent2": "WHITE_PIECE"
+    },
+    {
+      "id": 248,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_G_PAWN",
+      "ent2": "PAWN"
+    },
+    {
+      "id": 249,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_G_PAWN",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 250,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_G_PAWN",
+      "ent2": "WHITE_PIECE"
+    },
+    {
+      "id": 251,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_H_PAWN",
+      "ent2": "PAWN"
+    },
+    {
+      "id": 252,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_H_PAWN",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 253,
+      "type": "TYPE_OF",
+      "ent1": "WHITE_H_PAWN",
+      "ent2": "WHITE_PIECE"
+    },
+    {
+      "id": 254,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_KING",
+      "ent2": "KING"
+    },
+    {
+      "id": 255,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_KING",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 256,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_KING",
+      "ent2": "BLACK_PIECE"
+    },
+    {
+      "id": 257,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_QUEEN",
+      "ent2": "QUEEN"
+    },
+    {
+      "id": 258,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_QUEEN",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 259,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_QUEEN",
+      "ent2": "BLACK_PIECE"
+    },
+    {
+      "id": 260,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_A_ROOK",
+      "ent2": "ROOK"
+    },
+    {
+      "id": 261,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_A_ROOK",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 262,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_A_ROOK",
+      "ent2": "BLACK_PIECE"
+    },
+    {
+      "id": 263,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_B_KNIGHT",
+      "ent2": "KNIGHT"
+    },
+    {
+      "id": 264,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_B_KNIGHT",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 265,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_B_KNIGHT",
+      "ent2": "BLACK_PIECE"
+    },
+    {
+      "id": 266,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_C_ARCHER",
+      "ent2": "ARCHER"
+    },
+    {
+      "id": 267,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_C_ARCHER",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 268,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_C_ARCHER",
+      "ent2": "BLACK_PIECE"
+    },
+    {
+      "id": 269,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_F_ARCHER",
+      "ent2": "ARCHER"
+    },
+    {
+      "id": 270,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_F_ARCHER",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 271,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_F_ARCHER",
+      "ent2": "BLACK_PIECE"
+    },
+    {
+      "id": 272,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_G_KNIGHT",
+      "ent2": "KNIGHT"
+    },
+    {
+      "id": 273,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_G_KNIGHT",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 274,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_G_KNIGHT",
+      "ent2": "BLACK_PIECE"
+    },
+    {
+      "id": 275,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_H_ROOK",
+      "ent2": "ROOK"
+    },
+    {
+      "id": 276,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_H_ROOK",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 277,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_H_ROOK",
+      "ent2": "BLACK_PIECE"
+    },
+    {
+      "id": 278,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_A_PAWN",
+      "ent2": "PAWN"
+    },
+    {
+      "id": 279,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_A_PAWN",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 280,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_A_PAWN",
+      "ent2": "BLACK_PIECE"
+    },
+    {
+      "id": 281,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_B_PAWN",
+      "ent2": "PAWN"
+    },
+    {
+      "id": 282,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_B_PAWN",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 283,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_B_PAWN",
+      "ent2": "BLACK_PIECE"
+    },
+    {
+      "id": 284,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_C_PAWN",
+      "ent2": "PAWN"
+    },
+    {
+      "id": 285,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_C_PAWN",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 286,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_C_PAWN",
+      "ent2": "BLACK_PIECE"
+    },
+    {
+      "id": 287,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_D_PAWN",
+      "ent2": "PAWN"
+    },
+    {
+      "id": 288,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_D_PAWN",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 289,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_D_PAWN",
+      "ent2": "BLACK_PIECE"
+    },
+    {
+      "id": 290,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_E_PAWN",
+      "ent2": "PAWN"
+    },
+    {
+      "id": 291,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_E_PAWN",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 292,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_E_PAWN",
+      "ent2": "BLACK_PIECE"
+    },
+    {
+      "id": 293,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_F_PAWN",
+      "ent2": "PAWN"
+    },
+    {
+      "id": 294,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_F_PAWN",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 295,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_F_PAWN",
+      "ent2": "BLACK_PIECE"
+    },
+    {
+      "id": 296,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_G_PAWN",
+      "ent2": "PAWN"
+    },
+    {
+      "id": 297,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_G_PAWN",
+      "ent2": "PIECE"
+    },
+    {
+      "id": 298,
+      "type": "TYPE_OF",
+      "ent1": "BLACK_G_PAWN",
+      "ent2": "BLACK_PIECE"
+    }
   ]
 }

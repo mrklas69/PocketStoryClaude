@@ -12,9 +12,10 @@ Dnes stačí jen kreativita a nápady. O zbytek se postará AI.
 2. Modelování
 3. PocketWorld = Entity
 4. PocketWorld = Relace
-5. Vizualizace světa
-6. Čas
-7. Generátory, Kolektory, Transformátory
+5. Čtyři testovací světy
+6. Vizualizace světa
+7. Čas
+8. Generátory, Kolektory, Transformátory
 
 ---
 
@@ -51,7 +52,17 @@ Dnes stačí jen kreativita a nápady. O zbytek se postará AI.
 
 ---
 
-### 4. PocketWorld = Relace
+### 4. Čtyři testovací světy
+
+- **Jeden engine, čtyři úplně jiné světy** — ukázka, že stejný datový model (Entity + Relace) udrží severskou ságu, abstraktní matematiku, šachový turnaj i prázdné plátno; rozdíl je jen v datech, ne v kódu
+- **Polar Night** — Království polární noci; král Harold, královna Indrid, princezna Freya; příběhový svět s hierarchií prostorů, postavami a mechanikou hladu; nejrozvinutější ze čtyř světů
+- **Royal Chess** — Endurance Chess; figury mají HP a opotřebovávají se v boji i v soupeřově území; aby přežily, musí se vrátit domů dobít — nová varianta šachů jako emergentní vlastnost simulace, ne naprogramovaný výsledek
+- **Mathematical Universe** — entity jsou abstraktní pojmy (π, e, √2, sin); obrácená entropie — správné umístění entit v Matematickém vesmíru entitám HP přidává, zatímco jinde erodují; svět bez fyzické reality, ale se stejnými pravidly enginu
+- **Genesis** — prázdné plátno; ostatní světy jsou snapshoty hotového řádu, Genesis je prázdnota kde obsah teprve vzniká; hráč (nebo engine) rozhoduje co se narodí — jednorožci, démoni, nebo něco dosud nevídaného; zárodek pro tvorbu vlastních světů
+
+---
+
+### 5. PocketWorld = Relace
 
 - **Matematický základ** — unární, binární relace; multigraf s typovanými hranami
 - Každá relace: `(id, type, ent1, ent2, number)`
@@ -71,17 +82,17 @@ Dnes stačí jen kreativita a nápady. O zbytek se postará AI.
 
 ---
 
-### 5. Vizualizace světa
+### 6. Vizualizace světa
 
 - Entity a relace = uzly a hrany grafu s atributy
 - Vizualizace matematické struktury
-- **Úroveň 1 — barevná konzole** (rich, refreshující se obrazovka) — hotovo!
-- **Úroveň 2 — webový prohlížeč** (Three.js, jednoduché polygony)
-- **Úroveň 3 — herní engine** (Godot / Unity, vykreslené objekty)
+- **barevná konzole** (rich, refreshující se obrazovka) — hotovo!
+- **webový prohlížeč** (Three.js, jednoduché polygony)
+- **herní engine** (Godot / Unity, vykreslené objekty)
 
 ---
 
-### 6. Čas
+### 7. Čas
 
 - **Herní cyklus (tick loop)**: collect intents → validate → resolve → execute → chain
 - **HP, HP_MAX** — kondice entit (entropie, stárnutí, hladovění, vybíjení baterií...)
@@ -93,7 +104,7 @@ Dnes stačí jen kreativita a nápady. O zbytek se postará AI.
 
 ---
 
-### 7. Generátory, Kolektory, Transformátory
+### 8. Generátory, Kolektory, Transformátory
 
 - **Generátor** — produkuje entity bez vstupů: `PRODUCE(GREENHOUSE, TOMATOES, 3)`
 - **Kolektor / Sink** — spotřebovává entity: `CONSUME(BIN, TRASH, 10)`
