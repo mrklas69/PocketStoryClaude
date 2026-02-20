@@ -12,6 +12,7 @@ __pycache__/
 
 # Working / temp files
 temp/
+*.~ods
 
 # IDE
 .vscode/settings.json
