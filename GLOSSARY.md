@@ -41,6 +41,7 @@ Příklady: `PAWN`, `ROOK`, `RECIPE`, `GAME_STAT`, `PIECE`
 | `CONSUME`    | Entita spotřebovává itemy a aplikuje efekt. *(zatím neimplementováno)* |
 | `RECIPE`     | Transformační recept: vstupy + energie → výstupy. *(zatím neimplementováno)* |
 | `TRIGGER`    | Dialogová linka nebo událost vázaná na podmínku. `ent1` = mluvčí/subjekt, `ent2` = dialogová UNIQUE entita (text v `description`). `number`: `> 0` = HP threshold (fire-once, normální CDF); `0` = ambient (Bernoulli, λ = pravděpodobnost/tick); `-1` = resurrekt (hp → hp_max, arc se resetuje). Fire-once stav v `meta.vars["triggers_fired"]`. |
+| `EDGE`       | Spojení mezi dvěma ENVI. `ent1` a `ent2` = propojená prostředí. `number` = vzdálenost/cena přechodu (0 = bezprostřední sousedství, default). `way` = typ cesty (`road`, `sea`, `air`, …), nepovinný. `one_way = true` = jednosměrné (pouze ent1→ent2); default je **obousměrné**. Více EDGE mezi stejnými ENVIs je možné (různé typy cest). Bez EDGE nelze MOVE — žádná implicitní dostupnost. |
 
 ---
 
@@ -74,4 +75,4 @@ Příklady: `PAWN`, `ROOK`, `RECIPE`, `GAME_STAT`, `PIECE`
 
 ---
 
-*Last updated: 2026-02-21 (TRIGGER added)*
+*Last updated: 2026-02-21 (TRIGGER + EDGE added; PASSAGE renamed to EDGE)*

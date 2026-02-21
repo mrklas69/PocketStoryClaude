@@ -4,6 +4,32 @@ Chronological development log. Each session records date, duration, and what hap
 
 ---
 
+## 2026-02-21 (pokračování — PASSAGE topologie)
+
+**With:** Claude (claude-sonnet-4-6)
+
+### PASSAGE relation type
+
+Implementována topologie pohybu mezi ENVIs:
+
+- **`RelationType.PASSAGE`** přidána do `backend/core/relation.py`
+- **`_find_healing_envi()`** přepsána — místo hledání sourozenců ve stejném kontejneru teď traversuje PASSAGE relace (obousměrně: kontroluje ent1 → ent2 i ent2 → ent1)
+- **`worlds/polar_night.json`** doplněn o:
+  - `BEHAVIOR(GREAT_HALL, REST, -3)` — odpočinek v hodovní síni léčí
+  - `PASSAGE(THRONE_ROOM, GREAT_HALL)` — přechod trůnní sál ↔ hodovní síň
+  - `PASSAGE(GREAT_HALL, ROYAL_VAULT)` — přechod hodovní síň ↔ trezor
+- **`GLOSSARY.md`** doplněn o definici PASSAGE
+
+### Ověřený demo scénář
+
+Harold bez jídla, HP=65:
+- tick 1: `HUNGER` drain → survival brain → `MOVE -> Great Hall` (přes PASSAGE)
+- tick 2+: Harold v GREAT_HALL → `HUNGER(+2) + REST(-3)` = net +1 HP/tick
+
+**Princip funguje:** PASSAGE definuje topologii, engine ji respektuje. Žádná implicitní dostupnost ze sousedství.
+
+---
+
 ## 2026-02-18
 
 **Duration:** ~30 min
@@ -598,3 +624,40 @@ Organizační práce + první implementace Intent systému.
 **Aktualizace GLOSSARY.md:** sekce Intent systém (Intent, action, weight, control, survival brain, pipeline)
 
 **Next session:** `control="rand"` (probabilistický brain); MOVE k léčivému ENVI test; `"player"` CLI stub
+
+---
+
+## 2026-02-21 (pokračování — EDGE topologie + přístupová kontrola)
+
+**With:** Claude (claude-sonnet-4-6)
+
+### PASSAGE → EDGE (přejmenování + rozšíření)
+
+`RelationType.PASSAGE` nahrazen `RelationType.EDGE` s novými atributy:
+
+- **`number`** (float, default 0) — vzdálenost/cena přechodu; 0 = bezprostřední sousedství
+- **`way`** (str, optional) — typ cesty: `road`, `sea`, `air`, …; umožňuje více EDGE mezi stejnými ENVIs
+- **`one_way`** (bool, default False) — jednosměrnost; default = obousměrné
+- **`deny`** (str, optional) — TYPE_OF kategorie, které mají průchod zakázán
+
+### Nové funkce v engine.py
+
+- **`_actor_categories(world, actor_id)`** — vrátí set TYPE_OF kategorií aktora
+- **`_edge_allows(world, from_id, to_id, actor_id)`** — zkontroluje existenci platné EDGE (směr + deny)
+- Enforcement na dvou místech: `_find_healing_envi()` (survival brain) + MOVE execution (execute intent)
+
+### Světy — EDGE topologie
+
+| Svět | Změna |
+|---|---|
+| `polar_night.json` | PASSAGE → EDGE (`number=0`); topologie nezměněna |
+| `royal_chess.json` | **210 EDGE relací** (king-move sousedství všech 64 políček; IDs 1000–1209) |
+| `math_universe.json` | **5 EDGE relací**: N↔Z↔Q↔R↔C↔MATH_UNIVERSE |
+| `genesis.json` | `EDGE(HEAVEN, EARTH, deny="FallenAngels")` — Bůh prochází, Felix ne |
+
+### Architektonické rozhodnutí: LOCATION ≠ EDGE
+
+- `LOCATION` = fyzická příslušnost (jsem uvnitř truhly / místnosti)
+- `EDGE` = pohybová dostupnost (mohu MOVE do sousední místnosti)
+- Truhla v místnosti: `LOCATION(ROOM, CHEST)` — bez EDGE → nelze MOVE, přístup přes PICK/OPEN
+- Explicitní EDGE = světový designér musí aktivně rozhodnout, co je průchozí

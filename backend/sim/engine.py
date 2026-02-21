@@ -327,38 +327,75 @@ def _find_food_in_inventory(world: World, actor_id: str) -> Entity | None:
     return None
 
 
-def _find_healing_envi(world: World, actor_id: str) -> Entity | None:
-    """Return an accessible ENVI sibling that provides net healing for this actor.
+def _actor_categories(world: World, actor_id: str) -> set[str]:
+    """Return the set of TYPE_OF category strings for this actor."""
+    return {
+        r.ent2 for r in world.relations.values()
+        if r.type == RelationType.TYPE_OF and r.ent1 == actor_id and r.ent2 is not None
+    }
 
-    'Accessible' means: another ENVI inside the same parent container.
-    Healing means: has at least one BEHAVIOR with negative rate (drain < 0)
-    whose ent1 matches the actor's id, its TYPE_OF categories, or the ENVI itself.
+
+def _edge_allows(world: World, from_id: str, to_id: str, actor_id: str) -> bool:
+    """Return True if at least one EDGE permits actor to move from from_id to to_id.
+
+    Checks direction (one_way) and deny (TYPE_OF category restriction).
+    """
+    actor_cats = _actor_categories(world, actor_id)
+    for r in world.relations.values():
+        if r.type != RelationType.EDGE:
+            continue
+        if r.ent1 == from_id and r.ent2 == to_id:
+            pass  # forward direction
+        elif r.ent2 == from_id and r.ent1 == to_id and not r.one_way:
+            pass  # reverse direction, bidirectional edge
+        else:
+            continue
+        if r.deny is not None and r.deny in actor_cats:
+            continue  # this edge denies the actor — try next
+        return True
+    return False
+
+
+def _find_healing_envi(world: World, actor_id: str) -> Entity | None:
+    """Return a reachable ENVI (via EDGE) that provides net healing for this actor.
+
+    Reachable means: connected to the actor's current ENVI by an EDGE that allows
+    this actor (respects one_way and deny).
+    Healing means: the candidate ENVI (or one of its TYPE_OF categories) has at
+    least one BEHAVIOR with a negative rate (drain < 0).
     """
     current_loc = world.location_of(actor_id)
     if current_loc is None or current_loc.type != EntityType.ENVI:
         return None
-    parent = world.location_of(current_loc.id)
-    if parent is None:
-        return None
 
-    actor_categories = {
-        r.ent2 for r in world.relations.values()
-        if r.type == RelationType.TYPE_OF and r.ent1 == actor_id
+    # Collect entity IDs that carry a net-healing BEHAVIOR (negative rate)
+    healing_sources: set[str] = {
+        r.ent1 for r in world.relations.values()
+        if r.type == RelationType.BEHAVIOR and r.number < 0
     }
 
-    # Collect all BEHAVIOR sources that provide healing (negative rate)
-    healing_sources: set[str] = set()
+    # Walk all EDGE relations touching current_loc
+    actor_cats = _actor_categories(world, actor_id)
     for r in world.relations.values():
-        if r.type == RelationType.BEHAVIOR and r.number < 0:
-            healing_sources.add(r.ent1)
-
-    for candidate, _ in world.children(parent.id):
-        if candidate.type != EntityType.ENVI or candidate.id == current_loc.id:
+        if r.type != RelationType.EDGE:
+            continue
+        if r.ent1 == current_loc.id:
+            target_id = r.ent2
+        elif r.ent2 == current_loc.id and not r.one_way:
+            target_id = r.ent1
+        else:
+            continue
+        if r.deny is not None and r.deny in actor_cats:
+            continue  # actor denied on this edge
+        if target_id is None:
+            continue
+        candidate = world.get(target_id)
+        if candidate is None or candidate.type != EntityType.ENVI:
             continue
         # Direct healing on this ENVI, or via its TYPE_OF categories
         candidate_sources = {candidate.id} | {
-            r.ent2 for r in world.relations.values()
-            if r.type == RelationType.TYPE_OF and r.ent1 == candidate.id
+            r2.ent2 for r2 in world.relations.values()
+            if r2.type == RelationType.TYPE_OF and r2.ent1 == candidate.id
         }
         if candidate_sources & healing_sources:
             return candidate
@@ -445,6 +482,9 @@ def _execute_intents(world: World, intents: list[Intent]) -> list[str]:
             target = world.get(intent.target_id)
             if target is None:
                 continue
+            current_loc = world.location_of(intent.actor_id)
+            if current_loc is None or not _edge_allows(world, current_loc.id, intent.target_id, intent.actor_id):
+                continue  # no valid EDGE or actor denied
             try:
                 world.move(intent.actor_id, intent.target_id)
                 log.append(f"{actor.name}: MOVE -> {target.name}")

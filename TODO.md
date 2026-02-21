@@ -20,7 +20,7 @@ Dokončené úkoly → [DONE.md](DONE.md) | Nápady → [IDEAS.md](IDEAS.md)
 
 ## Simulation
 
-- `[~]` World simulation loop (tick-based) — BEHAVIOR + PRODUCE + Intent(EAT/MOVE) working; validate/resolve/chain pending
+- `[~]` World simulation loop (tick-based) — BEHAVIOR + PRODUCE + Intent(EAT/MOVE) + EDGE working; validate/resolve/chain pending
 - `[ ]` Intent `control="rand"` brain (probabilistický, z dostupných akcí)
 - `[ ]` Intent `control="player"` CLI stub (vypíše možnosti, čeká na vstup)
 - `[ ]` Intent validate + resolve fáze (rank-based conflict resolution)
@@ -45,4 +45,4 @@ Dokončené úkoly → [DONE.md](DONE.md) | Nápady → [IDEAS.md](IDEAS.md)
 
 ---
 
-*Last updated: 2026-02-21 (Intent EAT/MOVE + control attr done)*
+*Last updated: 2026-02-21 (PASSAGE → EDGE; deny + way + one_way; king-move topology chess; genesis EDGE)*

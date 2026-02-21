@@ -352,6 +352,12 @@ def _relation_to_dict(r: Relation) -> dict:
         d["lambda"] = r.lambda_
     if r.hp is not None:
         d["hp"] = r.hp
+    if r.way is not None:
+        d["way"] = r.way
+    if r.one_way:
+        d["one_way"] = True
+    if r.deny is not None:
+        d["deny"] = r.deny
     return d
 
 
@@ -364,4 +370,7 @@ def _dict_to_relation(d: dict) -> Relation:
         number=d.get("number", 1),
         lambda_=d.get("lambda", 0.0),
         hp=d.get("hp"),
+        way=d.get("way"),
+        one_way=d.get("one_way", False),
+        deny=d.get("deny"),
     )

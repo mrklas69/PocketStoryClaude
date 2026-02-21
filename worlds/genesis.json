@@ -305,6 +305,14 @@
       "ent2": "FELIX_AMBIENT_3",
       "number": 0,
       "lambda": 0.03
+    },
+    {
+      "id": 600,
+      "type": "EDGE",
+      "ent1": "HEAVEN",
+      "ent2": "EARTH",
+      "number": 0,
+      "deny": "FallenAngels"
     }
   ]
 }

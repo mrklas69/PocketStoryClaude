@@ -509,11 +509,32 @@
       "number": 1
     },
     {
+      "id": 302,
+      "type": "BEHAVIOR",
+      "ent1": "GREAT_HALL",
+      "ent2": "REST",
+      "number": -3
+    },
+    {
       "id": 401,
       "type": "LOCATION",
       "ent1": "HAROLD",
       "ent2": "VENISON",
       "number": 5
+    },
+    {
+      "id": 500,
+      "type": "EDGE",
+      "number": 0,
+      "ent1": "THRONE_ROOM",
+      "ent2": "GREAT_HALL"
+    },
+    {
+      "id": 501,
+      "type": "EDGE",
+      "number": 0,
+      "ent1": "GREAT_HALL",
+      "ent2": "ROYAL_VAULT"
     }
   ]
 }

@@ -437,6 +437,11 @@
       "ent1": "NATURALS",
       "ent2": "PRIME",
       "number": 1
-    }
+    },
+    { "id": 500, "type": "EDGE", "ent1": "NATURALS",  "ent2": "INTEGERS",      "number": 0 },
+    { "id": 501, "type": "EDGE", "ent1": "INTEGERS",  "ent2": "RATIONALS",     "number": 0 },
+    { "id": 502, "type": "EDGE", "ent1": "RATIONALS", "ent2": "REALS",         "number": 0 },
+    { "id": 503, "type": "EDGE", "ent1": "REALS",     "ent2": "COMPLEX",       "number": 0 },
+    { "id": 504, "type": "EDGE", "ent1": "COMPLEX",   "ent2": "MATH_UNIVERSE", "number": 0 }
   ]
 }
