@@ -19,6 +19,12 @@ Přečti si prosím:
 Pak mi stručně shrň: kde jsme skončili, co nás čeká, a navrhni, čím začneme.
 ```
 
+Spusť server (pro Editor):
+```
+uvicorn editor.server:app --reload --port 8787
+```
+→ http://localhost:8787
+
 ---
 
 ## THINK!  —  Brainstorming
