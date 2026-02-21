@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PocketStory — World Editor</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <span class="logo">⚙ PocketStory</span>
+    <span class="subtitle">World Editor</span>
+  </div>
+  <div class="header-center">
+    <select id="world-select">
+      <option value="">— vyber svět —</option>
+    </select>
+  </div>
+  <div class="header-right">
+    <span id="dirty-indicator" class="dirty-indicator hidden">● neuloženo</span>
+    <button id="btn-save" class="btn btn-primary" disabled>Uložit</button>
+    <button id="btn-export" class="btn" disabled>Export JSON</button>
+  </div>
+</header>
+
+<div id="world-meta" class="world-meta hidden">
+  <div class="meta-field"><label>Název</label><input id="meta-name" type="text"></div>
+  <div class="meta-field"><label>Popis</label><input id="meta-desc" type="text"></div>
+</div>
+
+<nav id="tabs" class="tabs hidden">
+  <button class="tab active" data-tab="entities">Entity</button>
+  <button class="tab" data-tab="LOCATION">LOCATION</button>
+  <button class="tab" data-tab="SKILL">SKILL</button>
+  <button class="tab" data-tab="TYPE_OF">TYPE_OF</button>
+  <button class="tab" data-tab="BEHAVIOR">BEHAVIOR</button>
+  <button class="tab" data-tab="EDGE">EDGE</button>
+  <button class="tab" data-tab="PRODUCE">PRODUCE</button>
+  <button class="tab" data-tab="TRIGGER">TRIGGER</button>
+  <button class="tab" data-tab="CONSUME">CONSUME</button>
+</nav>
+
+<div id="toolbar" class="toolbar hidden">
+  <input id="search" type="search" placeholder="Hledat…" autocomplete="off">
+  <button id="btn-add" class="btn btn-success">+ Přidat řádek</button>
+</div>
+
+<main id="table-container">
+  <div id="empty-state" class="empty-state">
+    <p>Vyber svět v horní liště.</p>
+  </div>
+  <table id="main-table" class="hidden">
+    <thead><tr id="table-head"></tr></thead>
+    <tbody id="table-body"></tbody>
+  </table>
+</main>
+
+<!-- Edit modal -->
+<div id="modal-overlay" class="modal-overlay hidden">
+  <div class="modal">
+    <h2 id="modal-title">Editace záznamu</h2>
+    <div id="modal-fields"></div>
+    <div class="modal-footer">
+      <button id="modal-cancel" class="btn">Zrušit</button>
+      <button id="modal-duplicate" class="btn">Duplikovat</button>
+      <button id="modal-delete" class="btn btn-danger">Smazat</button>
+      <button id="modal-save" class="btn btn-primary">Uložit záznam</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
