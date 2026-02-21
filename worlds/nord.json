@@ -538,6 +538,20 @@
       "number": 0,
       "ent1": "GREAT_HALL",
       "ent2": "ROYAL_VAULT"
+    },
+    {
+      "id": 502,
+      "type": "EDGE",
+      "number": 0,
+      "ent1": "CASTLE",
+      "ent2": "FOREST"
+    },
+    {
+      "id": 503,
+      "type": "EDGE",
+      "number": 0,
+      "ent1": "CASTLE",
+      "ent2": "THRONE_ROOM"
     }
   ]
 }

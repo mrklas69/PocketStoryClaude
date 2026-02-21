@@ -75,6 +75,8 @@ Archiv dokončených úkolů. Přesunuto z TODO.md.
 
 ## Simulation (continued)
 
+- `control="rand"` brain — `_rand_brain()`: každý tick vybere náhodné dosažitelné ENVI přes EDGE (respektuje `one_way`, `deny`); INDRID, FREYA, BYGUL v nord.json
+- EDGE system: `RelationType.EDGE` + atributy `way`, `one_way`, `deny`; `_edge_allows()` + `_actor_categories()` helpers; nahrazuje PASSAGE; king-move chess (210 EDGEs); EDGE chain math; genesis deny FallenAngels
 - TRIGGER mechanic: `RelationType.TRIGGER` + `_process_triggers()` — tři módy:
   - HP-threshold fire-once (number > 0): normální CDF Phi((threshold−hp)/sigma); fired IDs v meta.vars["triggers_fired"]
   - Ambient repeatable (number == 0): Bernoulli p = lambda_ per tick

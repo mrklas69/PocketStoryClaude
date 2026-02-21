@@ -239,7 +239,7 @@ header {
 .td-bool-false { color: var(--text-muted); }
 .td-num { color: #fbbf24; }
 
-/* Entity type pills */
+/* Entity type pills — barvy sladěny s konzolí (cyan/blue/magenta/white) */
 .pill {
   display: inline-block;
   padding: 1px 7px;
@@ -248,10 +248,10 @@ header {
   font-weight: 600;
   font-family: var(--font);
 }
-.pill-ENVI   { background: #1d4ed8; color: #bfdbfe; }
-.pill-CHAR   { background: #7e22ce; color: #e9d5ff; }
-.pill-UNIQUE { background: #b45309; color: #fde68a; }
-.pill-SUMS   { background: #065f46; color: #6ee7b7; }
+.pill-CHAR   { background: #164e63; color: #67e8f9; }   /* bold cyan */
+.pill-ENVI   { background: #1e3a8a; color: #93c5fd; }   /* bold blue */
+.pill-UNIQUE { background: #581c87; color: #e879f9; }   /* bold magenta */
+.pill-SUMS   { background: #334155; color: #f1f5f9; }   /* bold white */
 
 /* ── Modal ── */
 .modal-overlay {

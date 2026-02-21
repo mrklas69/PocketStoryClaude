@@ -4,6 +4,43 @@ Chronological development log. Each session records date, duration, and what hap
 
 ---
 
+## 2026-02-21 (pokračování — World Editor + refaktory)
+
+**With:** Claude (claude-sonnet-4-6)
+
+### rand brain + EDGE opravy (nord)
+
+- `_rand_brain()` implementován — INDRID, FREYA, BYGUL dostaly `control="rand"`
+- Diagnostika: Freya uvízla v FOREST (žádné EDGE), Harold sedí na trůnu (survival brain nečinný při vysokém HP)
+- Přidány EDGE: `CASTLE↔FOREST` (502) a `CASTLE↔THRONE_ROOM` (503)
+
+### Web editor PocketWorld (`editor/`)
+
+- `editor/server.py` — FastAPI: `GET /worlds`, `GET/PUT /worlds/{name}`, statické soubory
+- `editor/index.html` — tabbed layout (Entity + 8 typů relací), search, modal edit
+- `editor/style.css` — dark theme, pills sladěny s konzolí (cyan/blue/magenta/white)
+- `editor/app.js` — CRUD: load/save/export JSON, sort, search, add/duplicate/delete, inline modal s formuláři per schema
+- `control` pole jako combobox: `— žádný —` / survival / rand / player
+
+### TRIGGER refaktoring — inline text
+
+- Koncepční rozhodnutí: dialogue text přesunout z pomocných UNIQUE entit přímo na TRIGGER relaci
+- `Relation.text: Optional[str]` přidáno; serializace v `world.py`
+- `_process_triggers()` čte `r.text` přímo — `_get_dialogue()` odstraněna
+- `genesis.json` v3: 10 line entit smazáno, texty inlinovány do 11 TRIGGERů; zbývá 5 reálných entit
+- Editor: TRIGGER schema rozšířen o `text` textarea
+
+### Principy do CLAUDE.md
+
+- **Conceptual Integrity + SLAP**: všechny vrstvy udržovat na stejném levelu abstrakce
+- "Betonujeme základy, ne barva záclon."
+
+### Terminologie
+
+- Diskuse o pojmenování: archetype vs. line vs. placed UNIQUE — rozhodnuto: Lines jako koncept zanikají (text jde do TRIGGER), Archetypy zůstávají
+
+---
+
 ## 2026-02-21 (pokračování — PASSAGE topologie)
 
 **With:** Claude (claude-sonnet-4-6)

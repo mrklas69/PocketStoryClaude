@@ -22,6 +22,10 @@ Early concept phase.
 ## Code Style
 > TBD — will be filled in as the tech stack is decided.
 
+## Design Principles
+- **Conceptual Integrity + SLAP**: Keep all directions, parts, and areas of the project at the same level of detail, depth, and quality of execution. When a concept changes, update all layers together (model, engine, editor, data, docs) — no layer left behind at an older abstraction.
+- First things first: foundations before decoration. ("Betonujeme základy, ne barva záclon.")
+
 ## Preferences
 - Keep solutions simple and focused. No over-engineering.
 - Discuss ideas before writing code.

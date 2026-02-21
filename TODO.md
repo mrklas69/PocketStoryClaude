@@ -21,7 +21,6 @@ Dokončené úkoly → [DONE.md](DONE.md) | Nápady → [IDEAS.md](IDEAS.md)
 ## Simulation
 
 - `[~]` World simulation loop (tick-based) — BEHAVIOR + PRODUCE + Intent(EAT/MOVE) + EDGE working; validate/resolve/chain pending
-- `[ ]` Intent `control="rand"` brain (probabilistický, z dostupných akcí)
 - `[ ]` Intent `control="player"` CLI stub (vypíše možnosti, čeká na vstup)
 - `[ ]` Intent validate + resolve fáze (rank-based conflict resolution)
 - `[ ]` Conflict resolution via `rank` + skill check
@@ -30,9 +29,22 @@ Dokončené úkoly → [DONE.md](DONE.md) | Nápady → [IDEAS.md](IDEAS.md)
 
 - `[ ]` Player interactions
 
+## Console UI
+
+- `[ ]` **Přepracovat layout** — log zabírá celou výšku, dialogy a projevy postav zanikají; rozdělit plochu na: panel světa | log | panel dialogů/postav
+- `[ ]` **Panel postav / dialogů** — samostatná oblast pro TRIGGER výstupy (dialogy, monology); posouvat se nesmí — vždy viditelné
+- `[ ]` **Player input area** — vyhrazené místo pro budoucí hráčský vstup (příkazy, volby)
+- `[ ]` **Log filtry / barvy** — odlišit MOVE, EAT, TRIGGER, PRODUCE; možnost skrýt kategorie
+
 ## Presentation
 
-- `[ ]` **Web** — Three.js frontend
+- `[ ]` **Web editor PocketWorld** — editace JSON světů přes prohlížeč
+  - záložky dle typu relace (LOCATION, SKILL, BEHAVIOR, EDGE, PRODUCE, TRIGGER, TYPE_OF)
+  - tabulka s řazením a fulltextovým vyhledáváním
+  - přidání záznamu jako předvyplněná kopie existujícího řádku
+  - inline editace (klik → edit, Enter → uložit)
+  - export → world JSON
+- `[ ]` **Web** — Three.js frontend (vizualizace světa)
 - `[ ]` **Engine** — Godot / Unity (future)
 
 ## Worlds
@@ -45,4 +57,4 @@ Dokončené úkoly → [DONE.md](DONE.md) | Nápady → [IDEAS.md](IDEAS.md)
 
 ---
 
-*Last updated: 2026-02-21 (PASSAGE → EDGE; deny + way + one_way; king-move topology chess; genesis EDGE)*
+*Last updated: 2026-02-21 (rand brain; EDGE nord fixes; Console UI + Web editor TODOs)*
