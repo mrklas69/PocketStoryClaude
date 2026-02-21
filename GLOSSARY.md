@@ -44,6 +44,19 @@ Příklady: `PAWN`, `ROOK`, `RECIPE`, `GAME_STAT`, `PIECE`
 
 ---
 
+## Intent systém
+
+| Pojem | Definice |
+|-------|----------|
+| **Intent** | Záměr CHAR entity provést akci v daném ticku. Ephemeral Python objekt — vzniká a zaniká v rámci jednoho `tick()`. Pole: `actor_id`, `action`, `target_id`, `amount`, `weight`. |
+| **action** | String identifikátor akce: `"EAT"`, `"MOVE"`, `"PICK"`, … |
+| **weight** | Urgence záměru: `0.0` = nízká, `1.0` = kritická. Odvozuje se z potřeby (např. `1 - hp/hp_max`). |
+| **control** | Atribut CHAR entity. Určuje, kdo nebo co generuje intenty. `null` (pasivní, default) → žádné intenty; `"survival"` → data-driven přežití; `"player"` → vstup hráče (stub); `"rand"` → náhodná akce (stub); `"remote:url"` → externí zdroj (stub). |
+| **survival brain** | Funkce pro `control="survival"`. Spustí se při `hp < 80 % hp_max`. Priorita: 1) EAT ze svého inventáře (SUMS s `hp_max > 0`), 2) MOVE k léčivému ENVI (negativní BEHAVIOR). Data-driven — nepotřebuje znát konkrétní svět. |
+| **Intent pipeline** | Pořadí v `tick()`: PRODUCE → SUMS HP → BEHAVIOR → collect intents → execute intents → TRIGGER. |
+
+---
+
 ## Ostatní pojmy
 
 | Pojem        | Definice |

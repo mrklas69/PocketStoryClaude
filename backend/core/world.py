@@ -95,6 +95,36 @@ class World:
     def get(self, entity_id: str) -> Entity | None:
         return self.entities.get(entity_id)
 
+    def resolve_attr(self, entity: Entity, attr: str) -> Any:
+        """Read attr from entity; if None, walk TYPE_OF chain (BFS) for first non-None value.
+
+        Enables sparse entity definitions: instances only store what differs from
+        their archetype. Analogous to JavaScript prototype chain or CSS cascade.
+        """
+        value = getattr(entity, attr, None)
+        if value is not None:
+            return value
+
+        visited: set[str] = {entity.id}
+        queue: list[str] = [entity.id]
+        while queue:
+            current_id = queue.pop(0)
+            for r in self.relations.values():
+                if r.type != RelationType.TYPE_OF or r.ent1 != current_id:
+                    continue
+                archetype_id = r.ent2
+                if archetype_id is None or archetype_id in visited:
+                    continue
+                visited.add(archetype_id)
+                archetype = self.entities.get(archetype_id)
+                if archetype is None:
+                    continue
+                value = getattr(archetype, attr, None)
+                if value is not None:
+                    return value
+                queue.append(archetype_id)
+        return None
+
     def _next_relation_id(self) -> int:
         return max(self.relations.keys(), default=0) + 1
 
@@ -290,6 +320,8 @@ def _entity_to_dict(e: Entity) -> dict:
         d["nature"] = e.nature
     if e.karma is not None:
         d["karma"] = e.karma
+    if e.control is not None:
+        d["control"] = e.control
     return d
 
 
@@ -306,6 +338,7 @@ def _dict_to_entity(d: dict) -> Entity:
         hp_max=d.get("hp_max"),
         nature=d.get("nature"),
         karma=d.get("karma"),
+        control=d.get("control"),
     )
 
 

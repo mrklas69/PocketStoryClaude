@@ -21,10 +21,27 @@ under multiple effects accumulates them all each tick.
 
 import math
 import random
+from dataclasses import dataclass
 
 from backend.core.world import World
-from backend.core.entity import EntityType
+from backend.core.entity import Entity, EntityType
 from backend.core.relation import Relation, RelationType
+
+
+# ── Intent ───────────────────────────────────────────────────────────────────
+
+@dataclass
+class Intent:
+    """A single action a CHAR wants to perform this tick.
+
+    Produced by _collect_intents(); consumed by _execute_intents().
+    Intents are ephemeral — they live only within one tick() call.
+    """
+    actor_id: str
+    action: str              # "EAT", "MOVE", "PICK", …
+    target_id: str | None = None
+    amount: int = 1
+    weight: float = 1.0      # urgency: 0.0 = low, 1.0 = critical
 
 
 def _poisson(lam: float, max_yield: int = 4) -> int:
@@ -297,6 +314,146 @@ def _process_triggers(world: World) -> list[str]:
     return log
 
 
+# ── Intent pipeline ──────────────────────────────────────────────────────────
+
+_SURVIVAL_THRESHOLD = 0.8   # EAT when hp / hp_max falls below this
+
+
+def _find_food_in_inventory(world: World, actor_id: str) -> Entity | None:
+    """Return the first SUMS item in actor's direct inventory with nutritional value (hp_max > 0)."""
+    for entity, qty in world.children(actor_id):
+        if entity.type == EntityType.SUMS and entity.hp_max and qty > 0:
+            return entity
+    return None
+
+
+def _find_healing_envi(world: World, actor_id: str) -> Entity | None:
+    """Return an accessible ENVI sibling that provides net healing for this actor.
+
+    'Accessible' means: another ENVI inside the same parent container.
+    Healing means: has at least one BEHAVIOR with negative rate (drain < 0)
+    whose ent1 matches the actor's id, its TYPE_OF categories, or the ENVI itself.
+    """
+    current_loc = world.location_of(actor_id)
+    if current_loc is None or current_loc.type != EntityType.ENVI:
+        return None
+    parent = world.location_of(current_loc.id)
+    if parent is None:
+        return None
+
+    actor_categories = {
+        r.ent2 for r in world.relations.values()
+        if r.type == RelationType.TYPE_OF and r.ent1 == actor_id
+    }
+
+    # Collect all BEHAVIOR sources that provide healing (negative rate)
+    healing_sources: set[str] = set()
+    for r in world.relations.values():
+        if r.type == RelationType.BEHAVIOR and r.number < 0:
+            healing_sources.add(r.ent1)
+
+    for candidate, _ in world.children(parent.id):
+        if candidate.type != EntityType.ENVI or candidate.id == current_loc.id:
+            continue
+        # Direct healing on this ENVI, or via its TYPE_OF categories
+        candidate_sources = {candidate.id} | {
+            r.ent2 for r in world.relations.values()
+            if r.type == RelationType.TYPE_OF and r.ent1 == candidate.id
+        }
+        if candidate_sources & healing_sources:
+            return candidate
+    return None
+
+
+def _survival_brain(world: World, entity: Entity) -> list[Intent]:
+    """Generate intents for a CHAR in survival mode.
+
+    Priority order:
+      1. EAT — food already in inventory (SUMS with hp_max > 0)
+      2. MOVE — towards a sibling ENVI that has a healing BEHAVIOR
+    Only fires when hp < SURVIVAL_THRESHOLD * hp_max.
+    """
+    if entity.hp is None or entity.hp_max is None or entity.hp_max == 0:
+        return []
+    if entity.hp / entity.hp_max >= _SURVIVAL_THRESHOLD:
+        return []
+
+    urgency = 1.0 - entity.hp / entity.hp_max
+
+    food = _find_food_in_inventory(world, entity.id)
+    if food is not None:
+        return [Intent(actor_id=entity.id, action="EAT", target_id=food.id, weight=urgency)]
+
+    healing = _find_healing_envi(world, entity.id)
+    if healing is not None:
+        return [Intent(actor_id=entity.id, action="MOVE", target_id=healing.id, weight=urgency)]
+
+    return []
+
+
+def _collect_intents(world: World) -> list[Intent]:
+    """Ask every active CHAR for its intent this tick."""
+    intents: list[Intent] = []
+    for entity in world.entities.values():
+        if entity.type != EntityType.CHAR or entity.control is None:
+            continue
+        match entity.control:
+            case "survival":
+                intents.extend(_survival_brain(world, entity))
+            case "player" | "rand" | _:
+                pass   # stubs — future iterations
+    return intents
+
+
+def _execute_intents(world: World, intents: list[Intent]) -> list[str]:
+    """Execute collected intents and return log messages.
+
+    EAT  — consume 1 unit of a SUMS item from inventory; restore hp_max // 4 HP.
+    MOVE — relocate actor to target ENVI (validated by world.move()).
+    """
+    log: list[str] = []
+    for intent in intents:
+        actor = world.get(intent.actor_id)
+        if actor is None:
+            continue
+
+        if intent.action == "EAT":
+            item = world.get(intent.target_id)
+            if item is None or item.hp_max is None:
+                continue
+            loc_rel = next(
+                (r for r in world.relations.values()
+                 if r.type == RelationType.LOCATION
+                 and r.ent1 == intent.actor_id and r.ent2 == intent.target_id),
+                None,
+            )
+            if loc_rel is None or loc_rel.number <= 0:
+                continue
+            restore = max(1, item.hp_max // 4)
+            old_hp = actor.hp
+            actor.hp = min(actor.hp_max, actor.hp + restore)
+            loc_rel.number -= 1
+            note = " [last]" if loc_rel.number == 0 else f" x{loc_rel.number} left"
+            if loc_rel.number == 0:
+                del world.relations[loc_rel.id]
+            log.append(
+                f"{actor.name}: EAT {item.name}{note}  "
+                f"(+{restore} HP  {old_hp} -> {actor.hp})"
+            )
+
+        elif intent.action == "MOVE":
+            target = world.get(intent.target_id)
+            if target is None:
+                continue
+            try:
+                world.move(intent.actor_id, intent.target_id)
+                log.append(f"{actor.name}: MOVE -> {target.name}")
+            except ValueError:
+                pass   # containment or capacity violation — silently skip
+
+    return log
+
+
 def _in_graveyard(world: World, entity_id: str) -> bool:
     """Return True if entity_id resides in an ENVI marked TYPE_OF GRAVEYARD."""
     location = world.location_of(entity_id)
@@ -346,6 +503,9 @@ def tick(world: World) -> list[str]:
             causes = "+".join(name for name, _ in behaviors)
             suffix = " [DEAD]" if entity.hp == 0 else ""
             log.append(f"{entity.name}: HP {old_hp} -> {entity.hp}  [{causes}]{suffix}")
+
+    intents = _collect_intents(world)
+    log += _execute_intents(world, intents)
 
     log += _process_triggers(world)
     return log

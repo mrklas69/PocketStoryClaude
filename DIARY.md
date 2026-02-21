@@ -554,3 +554,47 @@ Implementace dialogového systému + úklid konzole.
 - `f6c2409` — reverse video pro dialogue lines v event logu
 
 **Next session:** Intent system; World.resolve_attr() prototype inheritance; konzolový chess prototype
+
+---
+
+## 2026-02-21 (pokračování — PROMPTS + Intent systém)
+
+**Duration:** ~3 hours
+**With:** Claude (claude-sonnet-4-6)
+
+Organizační práce + první implementace Intent systému.
+
+**Nové soubory:**
+- `PROMPTS.md` — 5 kmenových promptů s volacími znaky: BEGIN!, THINK!, AUDIT!, DOCS!, END! + spouštěcí znaky konzole (CHESS!, POLAR!, MARS!, MATH!, GENESIS!)
+- `show/PROMPTS.md` — 4 prompty pro produkci SHOW série (SCRIPT!, FEEDBACK!, TERMS!, VISUALS!)
+
+**World.resolve_attr() — prototype inheritance:**
+- BFS průchod TYPE_OF řetězcem; vrátí první non-None hodnotu z archetypu
+- `WHITE_A_PAWN.description = None` → resolved z `Pawns` archetypu ✓
+- Přesunuto do DONE.md
+
+**Intent systém — design (dlouhá diskuse):**
+- Klíčové rozhodnutí: `control: str | None` atribut na CHAR — kdo/co generuje intenty
+- `null` = pasivní (default); `"survival"` = data-driven; `"player"` / `"rand"` / `"remote:url"` = stuby
+- `control=null` elegantně řeší: šachové figury, Šípková Růženka, pasivní NPC — žádný extra atribut
+- MOVE = defaultní schopnost CHAR; SKILL specializuje topologii pohybu (MOVE_PAWN, MOVE_QUEEN)
+- Survival brain = data-driven: hledá léčivé BEHAVIOR v dostupných ENVI — funguje pro pěšce i Felixe i √2
+- Design insight do IDEAS.md: "HP je univerzální, fyzika světa je v datech"
+
+**Intent systém — implementace:**
+- `Intent` dataclass: `actor_id, action, target_id, amount, weight`
+- `_survival_brain()`: EAT (inventář) → MOVE (léčivé ENVI) při `hp < 80 % hp_max`
+- `_find_food_in_inventory()`: SUMS s `hp_max > 0` v přímém inventáři
+- `_find_healing_envi()`: ENVI sourozenec s negativní BEHAVIOR pro kategorii entity
+- `_collect_intents()`: dispatch dle `entity.control` (match/case)
+- `_execute_intents()`: EAT (−1 kus, +hp_max//4 HP), MOVE (world.move())
+- Pipeline zapojená do `tick()`: po BEHAVIOR, před TRIGGER
+
+**Demo — polar_night.json:**
+- Harold: `control="survival"`, inventář + 5× Venison (`hp_max=100`)
+- Výsledek: Harold jí na ticku 6 (+25 HP, x4 zbývá), pak na ticku 17 (+25 HP, x3 zbývá)
+- Ostatní světy: genesis, royal_chess, math_universe — všechny OK ✓
+
+**Aktualizace GLOSSARY.md:** sekce Intent systém (Intent, action, weight, control, survival brain, pipeline)
+
+**Next session:** `control="rand"` (probabilistický brain); MOVE k léčivému ENVI test; `"player"` CLI stub

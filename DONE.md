@@ -4,6 +4,10 @@ Archiv dokončených úkolů. Přesunuto z TODO.md.
 
 ---
 
+## Data Model
+
+- `World.resolve_attr(entity, attr)` — prototype inheritance: BFS po TYPE_OF řetězci; vrátí první non-None hodnotu z archetypu; umožňuje sparse entity definitions
+
 ## Concept & Design
 
 - Define the "world" — what lives in it? entities, relations, intents

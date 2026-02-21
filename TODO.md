@@ -16,15 +16,14 @@ Dokončené úkoly → [DONE.md](DONE.md) | Nápady → [IDEAS.md](IDEAS.md)
 
 ## Data Model
 
-- `[ ]` Prototype inheritance: `World.resolve_attr(entity, attr)` — reads entity's own value; if `None`, walks TYPE_OF chain and returns first non-None value from archetype; enables sparse entity definitions
 - `[ ]` RelationType: add CONSUME (recipe engine — vstupy → výstupy)
 
 ## Simulation
 
-- `[~]` World simulation loop (tick-based) — BEHAVIOR + PRODUCE working; full Intent pipeline pending
-- `[ ]` Intent dataclass (actor, action, target, weight)
-- `[ ]` `tick()` full pipeline: collect → validate → resolve → execute → chain
-- `[ ]` Intent generators per entity type (CHAR, ENVI, UNIQUE, SUMS)
+- `[~]` World simulation loop (tick-based) — BEHAVIOR + PRODUCE + Intent(EAT/MOVE) working; validate/resolve/chain pending
+- `[ ]` Intent `control="rand"` brain (probabilistický, z dostupných akcí)
+- `[ ]` Intent `control="player"` CLI stub (vypíše možnosti, čeká na vstup)
+- `[ ]` Intent validate + resolve fáze (rank-based conflict resolution)
 - `[ ]` Conflict resolution via `rank` + skill check
 
 ## Core Features
@@ -46,4 +45,4 @@ Dokončené úkoly → [DONE.md](DONE.md) | Nápady → [IDEAS.md](IDEAS.md)
 
 ---
 
-*Last updated: 2026-02-21 (TRIGGER done)*
+*Last updated: 2026-02-21 (Intent EAT/MOVE + control attr done)*

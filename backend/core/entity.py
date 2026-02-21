@@ -47,6 +47,7 @@ class Entity:
         hp_max: Optional[int] = None,
         nature: Optional[int] = None,
         karma: Optional[int] = None,
+        control: Optional[str] = None,
     ):
         self.id: str = id or _new_id()
         self.name: str = name
@@ -74,6 +75,14 @@ class Entity:
         self.karma: Optional[int] = karma
         # Accumulated consequence of actions (CHAR only in practice). None = not applicable.
         # Dynamic: grows/shrinks each tick or event. Interacts with nature.
+
+        self.control: Optional[str] = control
+        # Who/what drives this CHAR's intent generation each tick.
+        # None       → passive; generates no intents (default).
+        # "survival" → data-driven: seeks HP recovery via world's BEHAVIOR data.
+        # "player"   → human-in-the-loop; opens dialog for action selection (stub).
+        # "rand"     → probabilistic random action from available action set (stub).
+        # "remote:…" → external decision source: REST API, chess engine, LLM… (stub).
 
     def __repr__(self) -> str:
         return f"Entity({self.type.value}, id={self.id!r}, name={self.name!r})"

@@ -55,7 +55,8 @@
       "type": "CHAR",
       "description": "Weathered, stern, and secretly afraid of spiders. Has ruled for thirty-one winters.",
       "hp": 90,
-      "hp_max": 100
+      "hp_max": 100,
+      "control": "survival"
     },
     {
       "id": "INDRID",
@@ -159,6 +160,13 @@
       "name": "Magical",
       "type": "UNIQUE",
       "description": "Imbued with arcane energy. Responds to mana and the will of its bearer."
+    },
+    {
+      "id": "VENISON",
+      "name": "Venison",
+      "type": "SUMS",
+      "description": "Salted game meat from the northern hunt. Keeps the cold at bay.",
+      "hp_max": 100
     }
   ],
   "relations": [
@@ -499,6 +507,13 @@
       "ent1": "Animals",
       "ent2": "HUNGER",
       "number": 1
+    },
+    {
+      "id": 401,
+      "type": "LOCATION",
+      "ent1": "HAROLD",
+      "ent2": "VENISON",
+      "number": 5
     }
   ]
 }

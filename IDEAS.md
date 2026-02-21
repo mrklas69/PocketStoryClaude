@@ -53,6 +53,15 @@ Zralé nápady se přesouvají do TODO.md jako konkrétní úkoly.
 15. Domácí čtverec: každá figura zná svůj home square, vzdálenost od home = entropie
 16. Fog of War: hráč vidí jen políčka, kam dohlédnou jeho figury (každý typ = jiný dosah)
 
+## SHOW — klíčové koncepty pro scénář
+
+18. **HP je univerzální, fyzika každého světa je v datech** *(ep. 7 nebo 8)*
+    - HP = jednotná míra "zdraví" čehokoliv: čerstvost rajčete, energie baterie, víra anděla, platnost důkazu, kondice šachové figury
+    - Co HP ničí a léčí je výhradně v BEHAVIOR relacích + TYPE_OF kaskádě — žádný hardcode v enginu
+    - Survival brain CHARu nepotřebuje vědět nic o konkrétním světě: hledá ENVI s léčivým BEHAVIOR pro svoji kategorii
+    - Pěšec → HOME_BASE; Iris → jídlo; Felix → nic (záměr); √2 → správné ENVI v Math Universe
+    - Stejný kód, jiná data = jiná fyzika světa. To je pointa celé architektury.
+
 ## Side Projects
 
 17. **Awakened Chess** — standalone projekt; figury znají svůj home square, vzdálenost = entropie, formační bonusy; engine PocketStory je unese přirozeně
