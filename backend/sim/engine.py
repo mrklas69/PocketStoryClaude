@@ -233,14 +233,6 @@ def _process_sums_hp(world: World) -> list[str]:
     return log
 
 
-def _get_dialogue(world: World, entity_id: str | None) -> str | None:
-    """Return description of a dialogue UNIQUE entity, or None."""
-    if entity_id is None:
-        return None
-    entity = world.get(entity_id)
-    return entity.description if entity is not None else None
-
-
 def _process_triggers(world: World) -> list[str]:
     """Fire TRIGGER relations — character dialogue driven by HP or probability.
 
@@ -254,6 +246,8 @@ def _process_triggers(world: World) -> list[str]:
       number == -1 Resurrection: fires when ent1.hp == 0, resets hp to
                    hp_max, and clears this entity's threshold triggers from
                    fired so the arc can repeat in the next life.
+
+    Dialogue text is stored inline in the TRIGGER relation's 'text' field.
     """
     log: list[str] = []
     fired: list = world.meta.vars.setdefault("triggers_fired", [])
@@ -279,17 +273,15 @@ def _process_triggers(world: World) -> list[str]:
                 ]
                 for tid in reset_ids:
                     fired.remove(tid)
-                line = _get_dialogue(world, r.ent2)
-                suffix = f" | \"{line}\"" if line else ""
+                suffix = f" | \"{r.text}\"" if r.text else ""
                 log.append(f"[RESURRECT] {speaker.name} 0 -> {speaker.hp_max} HP{suffix}")
             continue
 
         # ── Ambient (number == 0) ─────────────────────────────────
         if r.number == 0:
             if r.lambda_ > 0 and random.random() < r.lambda_:
-                line = _get_dialogue(world, r.ent2)
-                if line:
-                    log.append(f"{speaker.name}: \"{line}\"")
+                if r.text:
+                    log.append(f"{speaker.name}: \"{r.text}\"")
             continue
 
         # ── HP-threshold, fire-once (number > 0) ─────────────────
@@ -307,9 +299,8 @@ def _process_triggers(world: World) -> list[str]:
 
         if random.random() < p:
             fired.append(r.id)
-            line = _get_dialogue(world, r.ent2)
-            if line:
-                log.append(f"{speaker.name}: \"{line}\"  [HP {speaker.hp} <= {r.number}]")
+            if r.text:
+                log.append(f"{speaker.name}: \"{r.text}\"  [HP {speaker.hp} <= {r.number}]")
 
     return log
 

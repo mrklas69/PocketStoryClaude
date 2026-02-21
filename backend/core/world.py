@@ -358,6 +358,8 @@ def _relation_to_dict(r: Relation) -> dict:
         d["one_way"] = True
     if r.deny is not None:
         d["deny"] = r.deny
+    if r.text is not None:
+        d["text"] = r.text
     return d
 
 
@@ -373,4 +375,5 @@ def _dict_to_relation(d: dict) -> Relation:
         way=d.get("way"),
         one_way=d.get("one_way", False),
         deny=d.get("deny"),
+        text=d.get("text"),
     )

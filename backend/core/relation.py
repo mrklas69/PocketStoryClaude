@@ -8,7 +8,7 @@ class RelationType(Enum):
     SKILL    = "SKILL"     # ENT1 has skill ENT2 at level/capacity NUMBER
     BEHAVIOR = "BEHAVIOR"  # ENT1 (entity or category) has behavior ENT2; NUMBER = intensity/rate
     PRODUCE  = "PRODUCE"   # ENT1 produces ENT2 each tick; NUMBER = fixed yield OR LAMBDA = Poisson parameter
-    TRIGGER  = "TRIGGER"   # ENT1 = speaker/subject, ENT2 = dialogue entity, NUMBER = hp threshold (>0 fire-once, 0=ambient, -1=resurrection), LAMBDA = sigma (threshold) or probability (ambient)
+    TRIGGER  = "TRIGGER"   # ENT1 = speaker/subject, NUMBER = hp threshold (>0 fire-once, 0=ambient, -1=resurrection), LAMBDA = sigma/probability, TEXT = inline dialogue string
     EDGE     = "EDGE"      # ENT1 and ENT2 are adjacent ENVIs; NUMBER = distance/cost (0 = immediate); WAY = route type (road/sea/air/…); bidirectional by default
 
 
@@ -25,6 +25,7 @@ class Relation:
         way: Optional[str] = None,
         one_way: bool = False,
         deny: Optional[str] = None,
+        text: Optional[str] = None,
     ):
         self.id: int = id
         self.type: RelationType = type
@@ -36,6 +37,7 @@ class Relation:
         self.way: Optional[str] = way    # EDGE only: route type (road, sea, air, …)
         self.one_way: bool = one_way     # EDGE only: if True, only ent1→ent2 is traversable
         self.deny: Optional[str] = deny  # EDGE only: TYPE_OF category string denied passage
+        self.text: Optional[str] = text  # TRIGGER only: inline dialogue/event text
 
     def __repr__(self) -> str:
         return f"Relation({self.type.value}, id={self.id}, {self.ent1!r} → {self.ent2!r}, n={self.number}, λ={self.lambda_})"

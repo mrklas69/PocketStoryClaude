@@ -11,7 +11,8 @@ const ENTITY_COLS = [
   { key: "hp_max",      label: "HP max",       type: "number", optional: true },
   { key: "capacity",    label: "Kapacita",     type: "number", optional: true },
   { key: "rank",        label: "Rank",         type: "number", optional: true },
-  { key: "control",     label: "Control",      type: "text",   optional: true },
+  { key: "control",     label: "Control",      type: "select",
+    options: ["", "survival", "rand", "player"], optional: true },
 ];
 
 const REL_COMMON = [
@@ -45,6 +46,7 @@ const REL_SCHEMAS = {
   TRIGGER: [...REL_COMMON,
     { key: "number",  label: "HP práh (-1=resurrekt, 0=ambient)", type: "number" },
     { key: "lambda",  label: "Lambda",  type: "number", optional: true },
+    { key: "text",    label: "Text (replika)", type: "textarea", optional: true },
   ],
   CONSUME: [...REL_COMMON,
     { key: "number",  label: "Množství", type: "number" },
@@ -359,8 +361,10 @@ function openModal(row) {
       input = document.createElement("select");
       col.options.forEach(opt => {
         const o = document.createElement("option");
-        o.value = opt; o.textContent = opt;
-        if (opt === (editingRow[col.key] ?? col.options[0])) o.selected = true;
+        o.value = opt;
+        o.textContent = opt === "" ? "— žádný —" : opt;
+        const current = editingRow[col.key] ?? (col.optional ? "" : col.options[0]);
+        if (opt === (current ?? "")) o.selected = true;
         input.appendChild(o);
       });
     } else if (col.type === "checkbox") {
