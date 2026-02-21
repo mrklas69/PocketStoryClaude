@@ -61,9 +61,9 @@ Archiv dokončených úkolů. Přesunuto z TODO.md.
 
 ## Worlds
 
-- `worlds/polar_night.json` — Chronicle of the Polar Night Dynasty (narativ, hierarchie prostorů, CHAR→CHAR, Wildfire Oil, PRODUCE dřeva)
-- `worlds/math_universe.json` — Mathematical Universe (abstraktní entity, kategoriální entropie, deterministický PRODUCE primů, SUMS HP per LOCATION)
-- `worlds/royal_chess.json` — Royal Chess (32 figur, 64 políček, 7 archetypů figur, HP systém, type-based PRODUCE šípů na prázdná políčka)
+- `worlds/nord.json` — Chronicle of the Polar Night Dynasty (narativ, hierarchie prostorů, CHAR→CHAR, Wildfire Oil, PRODUCE dřeva)
+- `worlds/math.json` — Mathematical Universe (abstraktní entity, kategoriální entropie, deterministický PRODUCE primů, SUMS HP per LOCATION)
+- `worlds/chess.json` — Royal Chess (32 figur, 64 políček, 7 archetypů figur, HP systém, type-based PRODUCE šípů na prázdná políčka)
 - `worlds/genesis.json` — Genesis (Bůh + padlý anděl Felix + PRIMITIVO_ES víno; PRODUCE λ=0.05; creation story; TRIGGER dialogy + resurrekt)
 
 ## Royal Chess — MVP design decisions
@@ -83,7 +83,7 @@ Archiv dokončených úkolů. Přesunuto z TODO.md.
 ## Documentation
 
 - `GLOSSARY.md` — kanonické názvosloví projektu (EntityType vs kategorie, prototype inheritance, TRIGGER)
-- Archetype entities přidány do všech světů (polar_night, math_universe, royal_chess)
+- Archetype entities přidány do všech světů (nord, math, chess)
 
 ---
 

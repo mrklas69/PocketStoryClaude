@@ -45,10 +45,10 @@ Dnes stačí jen kreativita a nápady. O zbytek se postará AI.
 - **ENVIronment** — prostředí, kontejnery (místnost, batoh, svět)
 - **CHARacter** — postavy, NPC, autonomní agenti
 - **UNIQUE** — unikátní předměty (Haroldův meč, klíč od trezoru)
-- **SUMS** — součtovatelné položky, zdroje (73 mincí, 5 rajčat)
+- **SUMS** — součtovatelné položky, zdroje (5 kusů zvěřiny, 8 prvočísel, 16 šípů)
 - **Pravidla jsou dvojího druhu:**
   - *Natvrdo v kódu* (CONTAINMENT_RULES) — postava nemůže obsahovat prostředí; UNIQUE nemůže obsahovat nic
-  - *Měkká, deklarativní* — definovaná jako relace (viz ep. 4); př. rajčata se kazí, lidé hladovějí
+  - *Měkká, deklarativní* — definovaná jako relace (viz ep. 4); př. jídlo se kazí, lidé hladovějí
 
 ---
 
@@ -69,9 +69,9 @@ Dnes stačí jen kreativita a nápady. O zbytek se postará AI.
 
 | Typ | Význam | Příklad |
 |-----|--------|---------|
-| **LOCATION** | ENT1 obsahuje ENT2 v množství NUMBER | Skleník obsahuje 5 rajčat |
-| **SKILL** | ENT1 umí ENT2 na úrovni NUMBER | Iris umí hydroponiku (8), Pec zná recept na chléb |
-| **TYPE_OF** | ENT1 patří do kategorie ENT2 | Rajčata jsou PERISHABLE_FOOD, Iris je HUMAN |
+| **LOCATION** | ENT1 obsahuje ENT2 v množství NUMBER | THRONE_ROOM obsahuje Harolda, les obsahuje 4 polena |
+| **SKILL** | ENT1 umí ENT2 na úrovni NUMBER | Harold umí HUNT (5), Bůh umí CREATE (100) |
+| **TYPE_OF** | ENT1 patří do kategorie ENT2 | Harold je HUMAN, Bygul je ANIMAL, π je Transcendental |
 | **BEHAVIOR** | ENT1 má chování ENT2 s intenzitou NUMBER | PERISHABLE_FOOD se kazí rychlostí 8/tick |
 | **PRODUCE** | ENT1 produkuje N kusů ENT2 per tick | Skleník produkuje 3 rajčata |
 | **CONSUME** | ENT1 spotřebuje N kusů ENT2 per tick | Recept na chléb spotřebuje 2 mouky |
@@ -100,13 +100,13 @@ Dnes stačí jen kreativita a nápady. O zbytek se postará AI.
 - Pohyb = změna LOCATION relace
   - Aktivní (postava umí MOVE)
   - Pasivní (předmět lze sebrat / odhodit)
-- Demo: rajčata se kazí v reálném čase, HP bar živě klesá
+- Demo: Harold hladoví, Felix zoufá, π eroduje — HP bar živě klesá
 
 ---
 
-### 8. Generátory, Kolektory, Transformátory
+### 8. Producenti, Konzumenti, Transformátory
 
-- **Generátor** — produkuje entity bez vstupů: `PRODUCE(GREENHOUSE, TOMATOES, 3)`
+- **Generátor** — produkuje entity bez vstupů: `PRODUCE(FOREST, WOOD, 3)`
 - **Kolektor / Sink** — spotřebovává entity: `CONSUME(BIN, TRASH, 10)`
 - **Transformátor / Crafting** — CONSUME vstupů + PRODUCE výstupů
 - **Recept je entita** (UNIQUE, TYPE_OF RECIPE):
@@ -118,8 +118,9 @@ Dnes stačí jen kreativita a nápady. O zbytek se postará AI.
   SKILL(CAMPFIRE, BREAD_RECIPE, 1)  ← i táborák zná recept
   ```
 - Proč recept jako entita? → řeší disambiguaci (pec s deseti recepty, mouka ve třech z nich)
-- Demo: skleník pěstuje rajčata, Iris hladoví, Marťan vybíjí baterie
+- Demo: les produkuje dřevo (nord), přirůstají prvočísla (math), šípy padají na políčka (chess)
 
+### 9. Spouště (Triggery)
 ---
 
 ---

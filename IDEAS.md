@@ -59,7 +59,7 @@ Zralé nápady se přesouvají do TODO.md jako konkrétní úkoly.
     - HP = jednotná míra "zdraví" čehokoliv: čerstvost rajčete, energie baterie, víra anděla, platnost důkazu, kondice šachové figury
     - Co HP ničí a léčí je výhradně v BEHAVIOR relacích + TYPE_OF kaskádě — žádný hardcode v enginu
     - Survival brain CHARu nepotřebuje vědět nic o konkrétním světě: hledá ENVI s léčivým BEHAVIOR pro svoji kategorii
-    - Pěšec → HOME_BASE; Iris → jídlo; Felix → nic (záměr); √2 → správné ENVI v Math Universe
+    - Pěšec → HOME_BASE; Harold → jídlo; Felix → nic (záměr); √2 → správné ENVI v Math Universe
     - Stejný kód, jiná data = jiná fyzika světa. To je pointa celé architektury.
 
 ## Side Projects

@@ -149,10 +149,9 @@ Krátké zkratky — Claude vypíše příkaz do chatu, uživatel ho spustí ve 
 
 | Znak | Příkaz |
 |------|--------|
-| `CHESS!` | `python console.py worlds/royal_chess.json --full --ticks 20 --delay 0.5` |
-| `POLAR!` | `python console.py worlds/polar_night.json --full --ticks 20 --delay 0.5` |
-| `MARS!` | `python console.py worlds/martian_saga.json --full --ticks 20 --delay 0.5` |
-| `MATH!` | `python console.py worlds/math_universe.json --full --ticks 20 --delay 0.5` |
+| `CHESS!` | `python console.py worlds/chess.json --full --ticks 20 --delay 0.5` |
+| `NORD!` | `python console.py worlds/nord.json --full --ticks 20 --delay 0.5` |
+| `MATH!` | `python console.py worlds/math.json --full --ticks 20 --delay 0.5` |
 | `GENESIS!` | `python console.py worlds/genesis.json --full --ticks 30 --delay 0.3` |
 
 *Soubor průběžně rozšiřován.*

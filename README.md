@@ -21,6 +21,7 @@ The project is strictly layered:
    - Console (Python `rich` library)
    - Web browser (Three.js)
    - Game engine (Godot / Unity / Unreal — future)
+   - Data-Driven solution
 
 ## Tech Stack
 

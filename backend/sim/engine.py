@@ -428,6 +428,41 @@ def _survival_brain(world: World, entity: Entity) -> list[Intent]:
     return []
 
 
+def _rand_brain(world: World, entity: Entity) -> list[Intent]:
+    """Generate a random MOVE intent to any reachable ENVI.
+
+    Picks uniformly at random from all ENVIs accessible via EDGE from the
+    actor's current location (respecting one_way and deny).  Returns [] if
+    the actor has no current location or no reachable neighbours.
+    """
+    current_loc = world.location_of(entity.id)
+    if current_loc is None or current_loc.type != EntityType.ENVI:
+        return []
+
+    actor_cats = _actor_categories(world, entity.id)
+    neighbours: list[str] = []
+    for r in world.relations.values():
+        if r.type != RelationType.EDGE:
+            continue
+        if r.ent1 == current_loc.id:
+            target_id = r.ent2
+        elif r.ent2 == current_loc.id and not r.one_way:
+            target_id = r.ent1
+        else:
+            continue
+        if r.deny is not None and r.deny in actor_cats:
+            continue
+        if target_id is None:
+            continue
+        candidate = world.get(target_id)
+        if candidate is not None and candidate.type == EntityType.ENVI:
+            neighbours.append(target_id)
+
+    if not neighbours:
+        return []
+    return [Intent(actor_id=entity.id, action="MOVE", target_id=random.choice(neighbours))]
+
+
 def _collect_intents(world: World) -> list[Intent]:
     """Ask every active CHAR for its intent this tick."""
     intents: list[Intent] = []
@@ -437,7 +472,9 @@ def _collect_intents(world: World) -> list[Intent]:
         match entity.control:
             case "survival":
                 intents.extend(_survival_brain(world, entity))
-            case "player" | "rand" | _:
+            case "rand":
+                intents.extend(_rand_brain(world, entity))
+            case "player" | _:
                 pass   # stubs — future iterations
     return intents
 

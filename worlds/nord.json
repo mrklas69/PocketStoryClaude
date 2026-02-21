@@ -64,7 +64,8 @@
       "type": "CHAR",
       "description": "Wise beyond her years. Knows three languages, six poisons, and one forbidden spell.",
       "hp": 75,
-      "hp_max": 100
+      "hp_max": 100,
+      "control": "rand"
     },
     {
       "id": "FREYA",
@@ -72,7 +73,8 @@
       "type": "CHAR",
       "description": "Seventeen, heir to the throne, currently missing from court. Probably on purpose.",
       "hp": 100,
-      "hp_max": 100
+      "hp_max": 100,
+      "control": "rand"
     },
     {
       "id": "BYGUL",
@@ -80,7 +82,8 @@
       "type": "CHAR",
       "description": "Freya's kitten — named after the bee-gold of old Norse lore. Uncommonly calm for a creature raised among warriors. Its amber eyes hold no judgment, only warmth.",
       "hp": 20,
-      "hp_max": 20
+      "hp_max": 20,
+      "control": "rand"
     },
     {
       "id": "CROWN_IRON",

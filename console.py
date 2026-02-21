@@ -188,7 +188,7 @@ def build_display(world: World, tick_num: int, log: deque, full: bool) -> Group:
 
 def parse_args() -> tuple[Path, int, float, bool]:
     """Returns (world_path, ticks, delay_seconds, full_mode)."""
-    path  = Path("worlds/polar_night.json")
+    path  = Path("worlds/nord.json")
     ticks = 0
     delay = 0.8
     full  = False
@@ -226,5 +226,5 @@ if __name__ == "__main__":
                 time.sleep(delay)
                 events = tick(world)
                 for msg in events:
-                    log.append(f"[tick {t:>3}] {msg}")
+                    log.append(f"[t{t:>3}] {msg}")
                 live.update(build_display(world, t, log, full))

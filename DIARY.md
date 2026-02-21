@@ -650,9 +650,9 @@ Organizační práce + první implementace Intent systému.
 
 | Svět | Změna |
 |---|---|
-| `polar_night.json` | PASSAGE → EDGE (`number=0`); topologie nezměněna |
-| `royal_chess.json` | **210 EDGE relací** (king-move sousedství všech 64 políček; IDs 1000–1209) |
-| `math_universe.json` | **5 EDGE relací**: N↔Z↔Q↔R↔C↔MATH_UNIVERSE |
+| `nord.json` | PASSAGE → EDGE (`number=0`); topologie nezměněna |
+| `chess.json` | **210 EDGE relací** (king-move sousedství všech 64 políček; IDs 1000–1209) |
+| `math.json` | **5 EDGE relací**: N↔Z↔Q↔R↔C↔MATH_UNIVERSE |
 | `genesis.json` | `EDGE(HEAVEN, EARTH, deny="FallenAngels")` — Bůh prochází, Felix ne |
 
 ### Architektonické rozhodnutí: LOCATION ≠ EDGE
